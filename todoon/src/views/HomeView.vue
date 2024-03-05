@@ -2,6 +2,7 @@
   <HeaderComponent/>
   <InfoAccueil/>
   <StatsAcceuil/>
+  <LoginPage/>
 </template>
 
 <script>

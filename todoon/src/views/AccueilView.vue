@@ -1,8 +1,8 @@
 <template>
   <div class="flex ">
-    <aside class="w-1/5">
+    <aside class="w-1/5 bg-gray-200 ">
       <MenuHomeComponent/>
-    </aside>
+  </aside>
     <main class="w-4/5">
       <HeaderHomeComponent/>
     </main>
