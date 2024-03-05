@@ -3,7 +3,7 @@
         <div class="2/5 px-2">
             <SearchBarComponent/>
         </div>
-        <div class="flex-grow flex justify-end">
+        <div class="flex-grow flex justify-end p-3">
             <NotificationIconComponent/>
             <AddTaskComponent/>
             <ProfilIconComponent/>
