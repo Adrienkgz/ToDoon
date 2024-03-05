@@ -15,8 +15,8 @@
   }
 </style>
 <script>
-import MenuHomeComponent from '@/components/MenuHomeComponent.vue'
-import HeaderHomeComponent from '@/components/HeaderHomeComponent.vue'
+import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
+import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
 
 export default {
   components: {

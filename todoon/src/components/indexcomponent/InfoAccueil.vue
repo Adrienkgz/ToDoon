@@ -8,11 +8,11 @@
                 <p class="mt-2 sm:text-sm md:text-2xl pr-20">TaskMaster is a task management website — the best way to organize, prioritize, and track your tasks efficiently.</p>
                 <swipe-button :infoButton="'Start Using'" @click="openPopup" class="mt-3"/>
             </div>
-            <img class="w-1/3 h-1/3 rounded-lg" src="../assets/img/firstImg.jpeg" alt="Task">
+            <img class="w-1/3 h-1/3 rounded-lg" src="../../assets/img/firstImg.jpeg" alt="Task">
         </div>
         <div class="flex justify-center mt-4">
             <button @click="scrollToTop" class="image-button" id="buttonToDown">
-                <img src="../assets/img/chevron_down.svg" alt="Button Image" class="h-6">
+                <img src="../../assets/img/chevron_down.svg" alt="Button Image" class="h-6">
             </button>
         </div>
     </div>
@@ -21,8 +21,8 @@
     </Teleport>
 </template>
 <script>
-import SwipeButton from './button/SwipeButton.vue'
-import Modal from './PopUp.vue'
+import SwipeButton from '../button/SwipeButton.vue'
+import Modal from '../indexcomponent/PopUp.vue'
 import { ref } from 'vue'
 
 export default {

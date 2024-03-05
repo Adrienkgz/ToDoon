@@ -6,8 +6,8 @@
     <smallLine/>
 </template>
 <script>
-import smallLine from './line/smallLine.vue'
-import carousel from './carousel/carouselAccueil.vue'
+import smallLine from '../line/smallLine.vue'
+import carousel from '../carousel/carouselAccueil.vue'
 
 export default {
   components: {

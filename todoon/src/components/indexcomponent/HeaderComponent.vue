@@ -1,6 +1,6 @@
 <template>
     <header class="flex items-center justify-between py-2 px-5">
-        <img src="../assets/img/logo-pasteque-bg-removed.png" alt="Logo" class="w-151 h-104">
+        <img src="../../assets/img/logo-pasteque-bg-removed.png" alt="Logo" class="w-151 h-104">
         <nav class="hidden md:flex space-x-20">
             <a href="#" class="font-black hover:text-gray-600">What</a>
             <a href="#" class="font-black hover:text-gray-600">Why</a>
