@@ -4,6 +4,7 @@
       <MenuHomeComponent/>
   </aside>
     <main class="w-4/5">
+      <HeaderHomeComponent/>
     </main>
   </div>
 </template>
@@ -15,10 +16,12 @@
 </style>
 <script>
 import MenuHomeComponent from '../components/MenuHomeComponent.vue'
+import HeaderHomeComponent from '../components/HeaderHomeComponent.vue'
 
 export default {
   components: {
-    MenuHomeComponent
+    MenuHomeComponent,
+    HeaderHomeComponent
   }
 }
 </script>
