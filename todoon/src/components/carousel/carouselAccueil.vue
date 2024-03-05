@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel carousel-center rounded-box">
+  <div class="carousel carousel-center rounded-box p-10">
     <div class="carousel-item">
         <Card/>
     </div>

@@ -17,8 +17,8 @@
 <style>
 .myCard {
   background-color: transparent;
-  width: 190px;
-  height: 254px;
+  width: 278px;
+  height: 467px;
   perspective: 1000px;
 }
 
@@ -86,7 +86,7 @@
   position: absolute;
   z-index: -1;
   border-radius: 1em;
-  filter: blur(20px);
+  filter: blur(10px);
   animation: animate 5s linear infinite;
 }
 
