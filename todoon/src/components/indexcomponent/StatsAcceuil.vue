@@ -1,5 +1,5 @@
 <template>
-<div class="flex relative py-12">
+<div class="flex relative py-10">
   <StatComponent statType="Actifs Users" :statNumber="'3000 users'"/>
   <StatComponent statType="Task Numbers" :statNumber="'3928 Tasks Created'"/>
   <StatComponent statType="Tasks Completed" :statNumber="'245 Tasks Completed'"/>
