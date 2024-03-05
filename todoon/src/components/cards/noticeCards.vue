@@ -24,22 +24,22 @@ export default {
 </script>
 <style>
 .card {
-  width: 190px;
-  height: 254px;
+  width: 240px;
+  height: 350px;
   background-image: linear-gradient(163deg, #FF4785 0%, #FF4785 100%);
   border-radius: 20px;
 
-  transition: all .3s;
+  transition: all .2s;
 }
 
 .card2 {
-  width: 190px;
-  height: 254px;
+  width: 240px;
+  height: 350px;
   background-color: #ffffff;
   border-radius: 10px;
   border-width: 2px;
   border-color: #FF4785;
-  transition: all .2s;
+  transition: all .1s;
 }
 
 .card2:hover {
