@@ -6,7 +6,6 @@
         <div class="w-4/5">
             <NotificationIconComponent/>
             <AddTaskComponent/>
-            <
         </div>
     </div>
 </template>
