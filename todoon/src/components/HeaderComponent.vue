@@ -6,7 +6,6 @@
             <a href="#" class="font-black hover:text-gray-600">Why</a>
             <a href="#" class="font-black hover:text-gray-600">About</a>
             <a href="#" class="font-black hover:text-gray-600">Contact</a>
-            <router-link to="/" class="font-black">Page 1(temp)</router-link>
             <router-link to="/accueil" class="font-black">Page 2(temp)</router-link>
         </nav>
         <div class="flex justify-end flex-grow space-x-4 ">

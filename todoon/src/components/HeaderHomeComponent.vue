@@ -1,5 +1,5 @@
 <template>
-    <div class="flex bg-blue-500">
+    <div class="flex">
         <div class="2/5 px-2">
             <SearchBarComponent/>
         </div>

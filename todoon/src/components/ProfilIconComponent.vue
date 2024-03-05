@@ -1,6 +1,6 @@
 <template>
     <a>
-        <img src="../assets/img/userImage.jpeg" alt="profil" class="w-10 h-10 rounded-4xl">
+        <img src="../assets/img/userImage.jpeg" alt="profil" class="w-12 h-12 rounded-full">
     </a>
 </template>
 
@@ -8,6 +8,8 @@
 a {
     cursor: pointer;
 }
+</style>
+
 <script>
 export default {
   name: 'ProfilIconComponent',
