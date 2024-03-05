@@ -5,7 +5,7 @@
         <h1 class="w-2/3 text-4xl font-bold text-right px-8">ToDOON</h1>
     </div>
     <!--Menu Part-->
-    <div class="flex flex-col bg-pink-500">
+    <div class="flex flex-col">
         <div>
             <div class="p-2">
                 hdhhd
