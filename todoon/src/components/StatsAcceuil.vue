@@ -5,7 +5,6 @@
   <StatComponent statType="Tasks Completed" :statNumber="'245 Tasks Completed'"/>
   <StatComponent statType="Actifs Users" :statNumber="'259 Active Users'"/>
 </div>
-
 </template>
 
 <script>
