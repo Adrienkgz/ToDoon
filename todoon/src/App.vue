@@ -1,19 +1,13 @@
-
 <template>
-  <HeaderComponent/>
-  <InfoAccueil/>
-  <StatsAcceuil/>
+  <HomeView/>
 </template>
 
 <script>
-import HeaderComponent from './components/header.vue'
-import InfoAccueil from './components/InfoAccueil.vue'
-import StatsAcceuil from './components/StatsAcceuil.vue'
+import HomeView from './views/HomeView.vue'
+
 export default {
   components: {
-    HeaderComponent,
-    InfoAccueil,
-    StatsAcceuil
+    HomeView
   }
 }
 </script>
