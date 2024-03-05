@@ -7,12 +7,7 @@
 </div>
 
 </template>
-<style>
-  div {
-    font-size: 20px;
-    font-family: 'inter', sans-serif;
-  }
-</style>
+
 
 <script>
 import StatComponent from './StatComponent.vue'
