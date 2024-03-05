@@ -1,25 +1,27 @@
 <template>
-  <HeaderComponent/>
-  <InfoAccueil/>
-  <StatsAcceuil/>
-  <LoginPage/>
-  <noticeAccueil/>
-  <MainFooter/>
+  <div class="flex ">
+    <aside class="w-1/5 bg-gray-200 ">
+      <MenuHomeComponent/>
+  </aside>
+    <main class="w-4/5">
+      <HeaderHomeComponent/>
+    </main>
+  </div>
 </template>
+
+<style>
+  aside {
+    background-color: #D9D9D9;
+  }
+</style>
 <script>
-import InfoAccueil from '../components/InfoAccueil.vue'
-import StatsAcceuil from '../components/StatsAcceuil.vue'
-import noticeAccueil from '../components/NoticeAccueil.vue'
-import MainFooter from '../components/MainFooter.vue'
-import HeaderComponent from '../components/HeaderComponent.vue'
+import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
+import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
 
 export default {
   components: {
-    HeaderComponent,
-    InfoAccueil,
-    StatsAcceuil,
-    noticeAccueil,
-    MainFooter
+    MenuHomeComponent,
+    HeaderHomeComponent
   }
 }
 </script>

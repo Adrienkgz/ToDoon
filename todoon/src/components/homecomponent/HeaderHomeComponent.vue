@@ -13,7 +13,7 @@
 
 <script>
 
-import SearchBarComponent from './search/SearchBarComponent.vue'
+import SearchBarComponent from '../search/SearchBarComponent.vue'
 import NotificationIconComponent from './NotificationIconComponent.vue'
 import AddTaskComponent from './AddTaskComponent.vue'
 import ProfilIconComponent from './ProfilIconComponent.vue'
