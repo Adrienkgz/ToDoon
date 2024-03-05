@@ -1,5 +1,5 @@
 <template>
-    <button class="group cursor-pointer outline-none hover:rotate-90 duration-300" title="Add New">
+    <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3" title="Add New">
   <svg
     class="stroke-pink-600 fill-none group-hover:fill-pink-100 group-active:stroke-pink-300 group-active:fill-pink-500 group-active:duration-0 duration-300"
     viewBox="0 0 24 24"

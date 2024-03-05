@@ -1,6 +1,6 @@
 <template>
     <a>
-        <img src="../assets/img/logo-notifications.png" alt="notification" class="w-10 h-10">
+        <img src="../assets/img/logo-notifications.png" alt="notification" class="w-20 h-12 px-4">
     </a>
 </template>
 

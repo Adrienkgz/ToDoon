@@ -15,10 +15,11 @@
   }
 </style>
 <script>
-import MenuHomeComponent from '../components/MenuHomeComponent.vue'
-import HeaderHomeComponent from '../components/HeaderHomeComponent.vue'
+import MenuHomeComponent from '@/components/MenuHomeComponent.vue'
+import HeaderHomeComponent from '@/components/HeaderHomeComponent.vue'
 
 export default {
+  name: 'AccueilView',
   components: {
     MenuHomeComponent,
     HeaderHomeComponent
