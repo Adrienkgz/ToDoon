@@ -1,8 +1,8 @@
 <template>
-    <div class="w-[274px] h-[107px] flex-col justify-center items-start inline-flex">
-        <h3 class="">{{ statType }}</h3>
-        <h6>{{ statNumber }}</h6>
-    </div>
+  <div class="flex flex-col justify-center items-center flex-1 py-5">
+    <div class="text-black text-xl font-bold py-5">{{statType}}</div>
+    <div class="text-black text-xl font-medium ">{{ statNumber }}</div>
+  </div>
 </template>
 
 <script>
