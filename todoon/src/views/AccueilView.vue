@@ -1,13 +1,24 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="flex ">
+    <aside class="w-1/5">
+      <MenuHomeComponent/>
+    </aside>
+    <main class="w-4/5">
+    </main>
   </div>
 </template>
 
+<style>
+  aside {
+    background-color: #D9D9D9;
+  }
+</style>
 <script>
+import MenuHomeComponent from '../components/MenuHomeComponent.vue'
 
 export default {
   components: {
+    MenuHomeComponent
   }
 }
 </script>
