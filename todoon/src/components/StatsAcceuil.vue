@@ -8,7 +8,6 @@
 
 </template>
 
-
 <script>
 import StatComponent from './StatComponent.vue'
 
