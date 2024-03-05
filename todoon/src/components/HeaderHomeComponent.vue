@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <div class="1/5">
+        <div class="1/5 px-2">
             <SearchBarComponent/>
         </div>
         <div class="w-4/5">
