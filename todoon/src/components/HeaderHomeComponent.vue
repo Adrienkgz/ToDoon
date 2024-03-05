@@ -1,11 +1,12 @@
 <template>
     <div class="flex">
-        <div class="1/5 px-2">
+        <div class="2/5 px-2">
             <SearchBarComponent/>
         </div>
-        <div class="w-4/5">
+        <div class="flex-grow flex justify-end">
             <NotificationIconComponent/>
             <AddTaskComponent/>
+            <ProfilIconComponent/>
         </div>
     </div>
 </template>
@@ -13,10 +14,16 @@
 <script>
 
 import SearchBarComponent from './search/SearchBarComponent.vue'
+import NotificationIconComponent from './NotificationIconComponent.vue'
+import AddTaskComponent from './AddTaskComponent.vue'
+import ProfilIconComponent from './ProfilIconComponent.vue'
 
 export default {
   components: {
-    SearchBarComponent
+    SearchBarComponent,
+    NotificationIconComponent,
+    AddTaskComponent,
+    ProfilIconComponent
   }
 }
 </script>
