@@ -1,5 +1,5 @@
 <template>
-    <Splide :options="options" aria-label="My Favorite Images">
+    <Splide ref="splide" :options="options" aria-label="My Favorite Images">
         <SplideSlide>
         <Card/>
       </SplideSlide>
@@ -59,9 +59,12 @@
   <style>
   @import '@splidejs/splide/css';
   </style>
+
 <script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
+
 import Card from '../cards/noticeCards.vue'
+
 export default {
   name: 'Carousel2Component',
   components: {
@@ -72,8 +75,12 @@ export default {
   data () {
     return {
       options: {
+        type: 'loop',
         perPage: 5,
-        rewind: true
+        autoScroll: {
+          autoplay: true,
+          interval: 2000
+        }
       }
     }
   }
