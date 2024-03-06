@@ -21,7 +21,7 @@
           <div class="flex justify-center">
             <h3 class="font-bold text-xl">Create A Task!</h3>
           </div>
-          <div class="flex space-x-5">
+          <div class="flex space-x-5 mt-5">
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text text-xl">Name Task</span>
@@ -70,10 +70,11 @@
           </label>
           <div class="flex justify-end mt-5 space-x-5">
             <form method="dialog">
-                  <!-- if there is a button, it will close the modal -->
                     <button class="btn">Close</button>
             </form>
-            <button class="btn bg-secondary hover:bg-secondary">Add Task</button>
+            <form method="dialog">
+                  <button class="btn bg-secondary hover:bg-secondary">Add Task</button>
+            </form>
           </div>
       </div>
       <form method="dialog" class="modal-backdrop">
