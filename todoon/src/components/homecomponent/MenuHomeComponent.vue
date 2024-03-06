@@ -6,7 +6,7 @@
         </router-link>
         <h1 class="w-2/3 text-4xl font-bold text-right px-8" style="font-size: 2vw;">ToDOON</h1>
     </div>
-    <div class="flex-colomn justify-items-center mt-5 space-y-10">
+    <div class="flex-col justify-center text-center mt-5 space-y-10">
         <ul class="menu bg-base-200 w-56 rounded-box text-xl">
             <li>
                 <a>
