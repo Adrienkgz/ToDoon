@@ -6,7 +6,7 @@
         </router-link>
         <h1 class="w-2/3 text-4xl font-bold text-right px-8" style="font-size: 2vw;">ToDOON</h1>
     </div>
-    <div class="flex justify-center  items-center mt-5">
+    <div class="flex-col justify-center text-center mt-5 space-y-10">
         <ul class="menu bg-base-200 w-56 rounded-box text-xl">
             <li>
                 <a>
@@ -38,6 +38,28 @@
                 Done
                 </a>
             </li>
+        </ul>
+        <ul class="menu bg-base-200 w-56 rounded-box">
+            <li><a>Item 1</a></li>
+            <li>
+                <details close>
+                <summary>Parent</summary>
+                <ul>
+                    <li><a>Submenu 1</a></li>
+                    <li><a>Submenu 2</a></li>
+                    <li>
+                    <details close>
+                        <summary>Parent</summary>
+                        <ul>
+                        <li><a>Submenu 1</a></li>
+                        <li><a>Submenu 2</a></li>
+                        </ul>
+                    </details>
+                    </li>
+                </ul>
+                </details>
+            </li>
+            <li><a>Item 3</a></li>
         </ul>
     </div>
 </template>
