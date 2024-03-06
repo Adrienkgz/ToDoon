@@ -53,7 +53,7 @@
             <div class="label">
               <span class="label-text text-xl">Priority Level</span>
             </div>
-            <input type="range" min="0" max="100" value="25" class="range range-secondary" step="25" />
+            <input type="range" min="0" max="100" value="25" class="range" step="25" />
             <div class="w-full flex justify-between text-xs px-2">
               <span>|</span>
               <span>|</span>

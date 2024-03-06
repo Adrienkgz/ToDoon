@@ -3,17 +3,35 @@
     <div class="myCard">
       <div class="innerCard">
           <div class="frontSide">
-              <p class="title">FRONT SIDE</p>
-              <p>Hover Me</p>
+              <p class="title">{{name}}</p>
+              <p>My Feedback</p>
           </div>
           <div class="backSide">
-              <p class="title">BACK SIDE</p>
-              <p>Leave Me</p>
+              <div class="flex">
+                <img :src="image" alt="userImg">
+                <p class="title">{{name}}</p>
+              </div>
+              <p style="font-size: 0.5vw;">{{feedback}}</p>
           </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: 'noticeCard',
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    feedback: {
+      type: Number,
+      required: true
+    }
+  }
+}
+</script>
 <style>
 .myCard {
   background-color: transparent;
