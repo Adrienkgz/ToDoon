@@ -1,60 +1,66 @@
 <template>
     <!--Logo Part-->
-    <div class="flex justify-center bg-gray-200  items-center">
+    <div class="flex justify-center  items-center">
         <router-link to="/">
             <img src="../../assets/img/logo-pasteque-bg-removed.png">
         </router-link>
         <h1 class="w-2/3 text-4xl font-bold text-right px-8" style="font-size: 2vw;">ToDOON</h1>
     </div>
-
-    <!-- Sidebar -->
-    <div class="w-64 bg-gray-200 ">
-        <!-- Menu items -->
-        <nav class="flex flex-col p-4 space-y-1">
-            <!-- High Priority -->
-            <a href="#" class="flex items-center px-4 py-2 text-red-500 hover:bg-gray-200 hover:border-red-300 hover:border-l-2">
-                <img src="../../assets/img/image 8.png" alt="High Priority" class="h-6 w-6">
-                <span class="ml-2">High Priority</span>
-            </a>
-
-            <!-- Today -->
-            <a href="#" class="flex items-center px-4 py-2 hover:border-gray-300 hover:border-l-2">
-                <img src="../../assets/img/image 2.png" alt="Today" class="h-6 w-6">
-                <span class="ml-2">Today</span>
-            </a>
-
-            <!-- To do -->
-            <a href="#" class="flex items-center px-4 py-2 hover:border-gray-300 hover:border-l-2">
-                <img src="../../assets/img/image 3.png" alt="To do" class="h-6 w-6">
-                <span class="ml-2">To do</span>
-            </a>
-
-            <!-- Doing -->
-            <a href="#" class="flex items-center px-4 py-2 hover:border-gray-300 hover:border-l-2">
-                <img src="../../assets/img/image 4.png" alt="Doing" class="h-6 w-6">
-                <span class="ml-2">Doing</span>
-            </a>
-
-            <!-- Done -->
-            <a href="#" class="flex items-center px-4 py-2 hover:border-gray-300 hover:border-l-2">
-                <img src="../../assets/img/image 5.png" alt="Done" class="h-6 w-6">
-                <span class="ml-2">Done</span>
-            </a>
-        </nav>
-
-        <!-- Separator -->
-        <div class="border-t border-gray-300 my-4"></div>
-
-        <!-- Work -->
-        <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-300">
-            <img src="../../assets/img/image 7.png" alt="Work" class="h-6 w-6"> <!-- Remplacez avec le chemin de votre icône -->
-            <span class="font-medium">Work</span>
-            <img src="../../assets/img/image 6.png" alt="Expand" class="h-6 w-6"> <!-- Remplacez avec le chemin de votre icône -->
-        </a>
-    </div>
-    <!-- Content area -->
-    <div class="flex-1 p-4">
-          <!-- Le contenu de votre page ici -->
+    <div class="flex-colomn justify-items-center mt-5 space-y-10">
+        <ul class="menu bg-base-200 w-56 rounded-box text-xl">
+            <li>
+                <a>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="red"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                High Priority
+                </a>
+            </li>
+            <li>
+                <a>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Today
+                </a>
+            </li>
+            <li>
+                <a>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                To Do
+                </a>
+            </li>
+            <li>
+                <a>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                Doing
+                </a>
+            </li>
+            <li>
+                <a>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                Done
+                </a>
+            </li>
+        </ul>
+        <ul class="menu bg-base-200 w-56 rounded-box">
+            <li><a>Item 1</a></li>
+            <li>
+                <details close>
+                <summary>Parent</summary>
+                <ul>
+                    <li><a>Submenu 1</a></li>
+                    <li><a>Submenu 2</a></li>
+                    <li>
+                    <details close>
+                        <summary>Parent</summary>
+                        <ul>
+                        <li><a>Submenu 1</a></li>
+                        <li><a>Submenu 2</a></li>
+                        </ul>
+                    </details>
+                    </li>
+                </ul>
+                </details>
+            </li>
+            <li><a>Item 3</a></li>
+        </ul>
     </div>
 </template>
 

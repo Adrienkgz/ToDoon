@@ -1,7 +1,18 @@
 <template>
-    <a>
-        <img src="../../assets/img/userImage.jpeg" alt="profil" class="w-18 h-12 rounded-full px-3">
-    </a>
+
+    <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="avatar m-1">
+            <div class="w-12 h-12 rounded-full ring ring-primary hover:ring-pink-600 ring-offset-base-100 ring-offset-2">
+                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a>Profile</a></li>
+            <li><a>Settings</a></li>
+            <li><a class="hover:underline">Deconnexion</a></li>
+        </ul>
+    </div>
+
 </template>
 
 <style>

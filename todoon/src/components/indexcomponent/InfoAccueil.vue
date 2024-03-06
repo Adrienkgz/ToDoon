@@ -6,7 +6,7 @@
                 <p class="sm:text-lg md:text-6xl font-black py-4">Ultimate task</p>
                 <p class="sm:text-lg md:text-6xl font-black">Management tool</p>
                 <p class="mt-2 sm:text-sm md:text-2xl pr-20">TaskMaster is a task management website — the best way to organize, prioritize, and track your tasks efficiently.</p>
-                <swipe-button :infoButton="'Start Using'" @click="openPopup" class="mt-3"/>
+                <swipe-button :infoButton="'Start Using'" @click="openPopup" class="sm:5 md:mt-10"/>
             </div>
             <img class="w-1/3 h-1/3 rounded-lg" src="../../assets/img/firstImg.jpeg" alt="Task">
         </div>
