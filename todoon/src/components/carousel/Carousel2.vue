@@ -1,58 +1,62 @@
 <template>
     <Splide ref="splide" :options="options" aria-label="My Favorite Images">
         <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
+      </SplideSlide><SplideSlide>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
+      </SplideSlide><SplideSlide>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
       <SplideSlide>
-        <Card/>
+        <WhiteCardTask/>
       </SplideSlide>
     </Splide>
   </template>
@@ -63,24 +67,23 @@
 <script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
 
-import Card from '../cards/noticeCards.vue'
+import WhiteCardTask from '../cards/WhiteCardTask.vue'
 
 export default {
   name: 'Carousel2Component',
   components: {
     Splide,
     SplideSlide,
-    Card
+    WhiteCardTask
   },
   data () {
     return {
       options: {
         type: 'loop',
-        perPage: 5,
-        autoScroll: {
-          autoplay: true,
-          interval: 2000
-        }
+        perPage: 4,
+        perMove: 1,
+        gap: '1rem',
+        pagination: false
       }
     }
   }
