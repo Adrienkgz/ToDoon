@@ -1,5 +1,5 @@
 <template>
-  <div class="flex ">
+  <div class="flex">
     <aside class="w-1/5">
       <MenuHomeComponent/>
   </aside>

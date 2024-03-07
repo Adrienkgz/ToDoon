@@ -5,7 +5,11 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'pinky': '#FF4785',
+      }
+    },
   },
   daisyui: {
     themes: [

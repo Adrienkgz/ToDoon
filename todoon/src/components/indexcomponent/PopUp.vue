@@ -2,7 +2,13 @@
   <transition name="modal-fade">
     <div v-if="showModal" class="modal-mask">
       <div class=" max-w-md z-50 flex-col p-4 rounded-lg text-black bg-white h-30% w-1/2 md:mx-auto md:mt-10 md:mb-auto sm:mx-auto sm:mt-10 sm:mb-auto min-w-48">
-        <div class="text-2xl font-bold mb-2 text-[#1e0e4b] text-center">Welcome to <span class="text-[#FF4785]">ToDOON</span><button @click="closeModal" class="ml-5"><img class="h-5 w-5 bg-pink" src="../../assets/img/xmark.svg" alt="xmark"></button></div>
+        <div class="flex text-2xl justify-center">
+          <div class="grow"></div>
+          <p class=" grow-0 font-bold mb-2 text-[#1e0e4b]"> Welcome to</p>
+          <span class=" grow-0 text-[#FF4785]">ToDOON</span>
+          <div class="grow"></div>
+          <p @click="closeModal" class=" grow-0 mt-1 w-5 h-5"><img class="h-5 w-5 bg-pink" src="../../assets/img/xmark.svg" alt="xmark"></p>
+        </div>
         <div class="text-sm font-normal mb-4 text-center text-[#1e0e4b]">Log in to your account</div>
         <form class="flex flex-col gap-3">
         <div class="block relative">

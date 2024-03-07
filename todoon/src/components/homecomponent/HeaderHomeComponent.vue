@@ -1,10 +1,9 @@
 <template>
-    <div class="flex">
+    <div class="flex items-center">
         <div class="2/5 px-5">
             <SearchBarComponent/>
         </div>
         <div class="flex-grow flex justify-end p-5">
-            <NotificationIconComponent/>
             <AddTaskComponent/>
             <ProfilIconComponent/>
         </div>

@@ -2,7 +2,7 @@
     <!-- You can open the modal using ID.showModal() method -->
     <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3" onclick="my_modal_4.showModal()" title="Add New">
       <svg
-        class="stroke-pink-600 fill-none group-hover:fill-pink-100 group-active:stroke-pink-300 group-active:fill-pink-500 group-active:duration-0 duration-300"
+        class="stroke-pinky fill-none group-hover:fill-pinky-100 group-active:stroke-pink-300 group-active:fill-pink-500 group-active:duration-0 duration-300"
         viewBox="0 0 24 24"
         height="50px"
         width="100%"
@@ -19,7 +19,7 @@
     <dialog id="my_modal_4" class="modal">
       <div class="modal-box w-11/12 max-w-5xl">
           <div class="flex justify-center">
-            <h3 class="font-bold text-xl">Create A Task!</h3>
+            <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Task !</span></h3>
           </div>
           <div class="flex space-x-5 mt-5">
             <label class="form-control w-full max-w-xs">
