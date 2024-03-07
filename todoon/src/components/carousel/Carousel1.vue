@@ -4,7 +4,6 @@
    <div class="hideLeft">
     <img src="https://i1.sndcdn.com/artworks-000165384395-rhrjdn-t500x500.jpg">
   </div>
-
   <div class="prevLeftSecond">
     <img src="https://i1.sndcdn.com/artworks-000185743981-tuesoj-t500x500.jpg">
   </div>
@@ -32,7 +31,7 @@
 </div>
 
 <div class="buttons">
-  <button id="prev">Prev</button>
+  <button id="prec">Prec</button>
   <button id="next">Next</button>
 </div>
 </template>
@@ -130,84 +129,60 @@ html, body, main {
 </style>
 
 <script>
+function moveToSelected(element) {
 
-export default {
-  name: 'Carousel1Component',
-  mounted () {
-    function moveToSelected (element) {
-      let selected
-      if (element === 'next') {
-        selected = this.$el.querySelector('.selected')
-        if (selected && selected.nextElementSibling) {
-          selected = selected.nextElementSibling
-        } else {
-          // Gérer le cas où il n'y a pas d'élément suivant
-          return
-        }
-      } else if (element === 'prev') {
-        selected = this.$el.querySelector('.selected')
-        if (selected && selected.previousElementSibling) {
-          selected = selected.previousElementSibling
-        } else {
-          // Gérer le cas où il n'y a pas d'élément précédent
-          return
-        }
-      } else {
-        selected = element
-      }
-
-      const next = selected.nextElementSibling
-      const prev = selected.previousElementSibling
-      const prevSecond = prev.previousElementSibling
-      const nextSecond = next.nextElementSibling
-
-      selected.classList.remove('prev', 'next', 'hideLeft', 'hideRight')
-      selected.classList.add('selected')
-
-      prev.classList.remove('prevLeftSecond')
-      prev.classList.add('prev')
-      next.classList.remove('nextRightSecond')
-      next.classList.add('next')
-
-      nextSecond.classList.remove('hideRight')
-      nextSecond.classList.add('nextRightSecond')
-
-      prevSecond.classList.remove('hideLeft')
-      prevSecond.classList.add('prevLeftSecond')
-    }
-
-    document.addEventListener('keydown', function (e) {
-      switch (e.which) {
-        case 37: // left
-          moveToSelected('prev')
-          break
-
-        case 39: // right
-          moveToSelected('next')
-          break
-
-        default:
-          return
-      }
-      e.preventDefault()
-    })
-
-    const carouselDivs = this.$el.querySelectorAll('#carousel div')
-    carouselDivs.forEach(function (div) {
-      div.addEventListener('click', function () {
-        moveToSelected(div)
-      })
-    })
-
-    const prevButton = this.$el.querySelector('#prev')
-    prevButton.addEventListener('click', function () {
-      moveToSelected('prev')
-    })
-
-    const nextButton = this.$el.querySelector('#next')
-    nextButton.addEventListener('click', function () {
-      moveToSelected('next')
-    })
-  }
+if (element == "next") {
+  var selected = $(".selected").next()
+} else if (element == "prev") {
+  var selected = $(".selected").prev()
+} else {
+  var selected = element
 }
+
+var next = $(selected).next()
+var prev = $(selected).prev()
+var prevSecond = $(prev).prev()
+var nextSecond = $(next).next()
+
+$(selected).removeClass().addClass("selected")
+
+$(prev).removeClass().addClass("prev")
+$(next).removeClass().addClass("next")
+
+$(nextSecond).removeClass().addClass("nextRightSecond")
+$(prevSecond).removeClass().addClass("prevLeftSecond")
+
+$(nextSecond).nextAll().removeClass().addClass('hideRight')
+$(prevSecond).prevAll().removeClass().addClass('hideLeft')
+
+}
+
+// Eventos teclado
+$(document).keydown(function(e) {
+  switch(e.which) {
+      case 37: // left
+      moveToSelected('prev')
+      break
+
+      case 39: // right
+      moveToSelected('next')
+      break
+
+      default: return
+  }
+  e.preventDefault()
+})
+
+$('#carousel div').click(function() {
+  moveToSelected($(this))
+})
+
+$('#prev').click(function() {
+  moveToSelected('prev')
+})
+
+$('#next').click(function () {
+  moveToSelected('next')
+})
+
 </script>

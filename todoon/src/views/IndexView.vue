@@ -6,6 +6,7 @@
   <noticeAccueil/>
   <MainFooter/>
 </template>
+
 <script>
 import InfoAccueil from '../components/indexcomponent/InfoAccueil.vue'
 import StatsAcceuil from '../components/indexcomponent/StatsAcceuil.vue'
