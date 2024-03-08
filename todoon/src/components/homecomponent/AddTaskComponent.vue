@@ -70,8 +70,8 @@
             <textarea class="textarea textarea-bordered resize-none" placeholder="Description" id='description' v-model="task.taskdescription"></textarea>
           </label>
           <div class="flex justify-end mt-5 space-x-5">
-            <form method="dialog">
-                    <button class="btn">Close</button>
+            <form method="dialog" ref="closeform">
+                    <button class="btn" id="closebutton">Close</button>
             </form>
                   <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
           </div>
@@ -126,6 +126,10 @@ export default {
           alert('Task added successfully!')
           console.log(this.tasks)
           this.$refs.form.reset()
+          window.location.reload()
+          setTimeout(() => {
+            this.$refs.closeform.querySelector('#closebutton').click()
+          }, 100)
         })
         .catch(e => {
           console.log(e)
