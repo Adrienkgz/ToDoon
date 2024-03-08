@@ -2,23 +2,23 @@ import http from './http-common'
 
 class TasksDataService {
   getAll () {
-    return http.get('/product')
+    return http.get('/products')
   }
 
   create (data) {
-    return http.post('/product', data)
+    return http.post('/tasks', data)
   }
 
   get (id) {
-    return http.get(`/product/${id}`)
+    return http.get(`/tasks/${id}`)
   }
 
   update (id, data) {
-    return http.put(`/product/${id}`, data)
+    return http.put(`/tasks/${id}`, data)
   }
 
   delete (id) {
-    return http.delete(`/product/${id}`)
+    return http.delete(`/tasks/${id}`)
   }
 }
 export default new TasksDataService()

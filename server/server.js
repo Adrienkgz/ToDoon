@@ -22,5 +22,6 @@ app.listen(PORT, () => {
 const db = require('./app/models')
 db.connex.sync()
 
-require('./app/routes/product.route')(app)
+require('./app/routes/task.route')(app)
+
 
