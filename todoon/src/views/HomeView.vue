@@ -9,6 +9,7 @@
       <appleCarousel/>
     </main>
   </div>
+  <MainFooter/>
 </template>
 <style>
 template {
@@ -20,13 +21,15 @@ import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue
 import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
 import Carousel2 from '@/components/carousel/Carousel2.vue'
 import appleCarousel from '../components/carousel/appleCarousel.vue'
+import MainFooter from '../components/MainFooter.vue'
 
 export default {
   components: {
     MenuHomeComponent,
     HeaderHomeComponent,
     Carousel2,
-    appleCarousel
+    appleCarousel,
+    MainFooter
   }
 }
 </script>
