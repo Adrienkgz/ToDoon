@@ -128,7 +128,6 @@ export default {
 }
 
 .card:hover {
-  border: 1px solid black;
   transform: scale(1.05);
 }
 

@@ -21,18 +21,6 @@ export default {
     SplideSlide,
     smallTaskCard
   },
-  data () {
-    return {
-      options: {
-        type: 'loop',
-        perPage: 4,
-        perMove: 1,
-        gap: '1rem',
-        pagination: false
-      },
-      tasks: []
-    }
-  },
   mounted () {
     // Read the data
     TasksDataService.getAll()

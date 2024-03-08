@@ -1,7 +1,7 @@
 module.exports = {
     HOST: 'localhost',
     USER: 'root',
-    PASSWORD: 'Adrien',
+    PASSWORD: 'admin',
     DB: 'todoon',
     dialect: 'mysql'
 }
