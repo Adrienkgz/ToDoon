@@ -10,15 +10,15 @@ class TasksDataService {
   }
 
   get (id) {
-    return http.get(`/tasks/${id}`)
+    return http.get(`/task/${id}`)
   }
 
   update (id, data) {
-    return http.put(`/tasks/${id}`, data)
+    return http.put(`/task/${id}`, data)
   }
 
   delete (id) {
-    return http.delete(`/tasks/${id}`)
+    return http.delete(`/task/${id}`)
   }
 }
 export default new TasksDataService()

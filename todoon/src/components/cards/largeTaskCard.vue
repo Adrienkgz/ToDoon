@@ -27,18 +27,18 @@
             </div>
             <div class="flex">
                 <ul class="menu justify-center space-x-1 bg-gray-300 rounded-box">
-                    <li>
-                        <a @click="toggleActive($event)" :class="{ 'todo': task.taskstatus === 0 }">
+                    <li id="status0">
+                        <a @click="toggleActive($event)" :class="{ 'todo': status === 0 }">
                         <img src="../../assets/img/toDoPasteque.png" />
                         </a>
                     </li>
-                    <li>
-                        <a @click="toggleActive($event)" :class="{ 'doing': task.taskstatus === 1 }">
+                    <li id="status1">
+                        <a @click="toggleActive($event)" :class="{ 'doing': status === 1 }">
                         <img src="../../assets/img/doingPasteque.png" />
                         </a>
                     </li>
-                    <li>
-                        <a @click="toggleActive($event)" :class="{ 'done': task.taskstatus === 2 }">
+                    <li id="status2">
+                        <a @click="toggleActive($event)" :class="{ 'done': status === 2 }">
                         <img src="../../assets/img/donePasteque.png" alt="">
                         </a>
                     </li>
@@ -48,6 +48,8 @@
     </div>
 </template>
 <script>
+import TasksDataService from '../../TasksDataService'
+
 export default {
   name: 'smallTaskCard',
   props: {
@@ -56,23 +58,25 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      mutableTask: null,
+      status: this.task.taskstatus
+    }
+  },
   mounted () {
-    const dateString = this.task.taskenddate // format "jour:heure:min:sec"
+    this.mutableTask = { ...this.task } // Create a mutable copy of the task object
+    const dateString = this.mutableTask.taskenddate // format "jour:heure:min:sec"
     const dateParts = dateString.split(':')
     const day = dateParts[0].split('-')[0]
-    const month = dateParts[0].split('-')[1] - 1// les mois en JavaScript sont indexés à partir de 0
+    const month = dateParts[0].split('-')[1] - 1 // les mois en JavaScript sont indexés à partir de 0
     const year = dateParts[0].split('-')[2]
     const hour = dateParts[1]
     const minute = dateParts[2]
     const second = dateParts[3]
     const dateObject = new Date(year, month, day, hour, minute, second)
-    // const today = new Date()
-    // console.log(today) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
-    // console.log(dateObject) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
-    // console.log('smallTaskCard mounted')
-    // console.log(this.targetDate)
+
     this.updateCountdown(dateObject)
-    // console.log('smallTaskCard updated')
     this.intervalId = setInterval(() => this.updateCountdown(dateObject), 1000)
   },
   beforeUnmount () {
@@ -93,13 +97,32 @@ export default {
       this.$refs.seconds.style.setProperty('--value', diffSeconds)
     },
     toggleActive (event) {
-      // Supprimer la classe active de tous les éléments de menu
       const menuItems = document.querySelectorAll('.menu li')
       menuItems.forEach(item => item.classList.remove('active'))
 
-      // Ajouter la classe active à l'élément cliqué
       const parentLi = event.target.closest('li')
-      parentLi.classList.add('active')
+      for (const li of menuItems) {
+        li.querySelector('a').classList.remove('todo', 'doing', 'done')
+      }
+      const newstatus = parseInt(parentLi.id[parentLi.id.length - 1])
+      this.mutableTask.taskstatus = newstatus
+      TasksDataService.update(this.mutableTask.id, this.mutableTask)
+        .then(response => {
+          console.log(response.data)
+          this.status = newstatus
+          if (this.status === 0) {
+            parentLi.querySelector('a').classList.add('todo')
+          } else {
+            if (this.status === 1) {
+              parentLi.querySelector('a').classList.add('doing')
+            } else {
+              parentLi.querySelector('a').classList.add('done')
+            }
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
