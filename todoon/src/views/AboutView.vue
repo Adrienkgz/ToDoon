@@ -10,7 +10,7 @@
 import HeaderComponent from '../components/indexcomponent/HeaderComponent.vue'
 import MainFooter from '../components/MainFooter.vue'
 import smallTaskCard from '../components/cards/smallTaskCard.vue'
-
+import TasksDataService from '../TasksDataService'
 export default {
   components: {
     HeaderComponent,
@@ -24,11 +24,13 @@ export default {
   },
   mounted () {
     // Read the data
-    fetch('')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        this.tasks = data
+    TasksDataService.getAll()
+      .then(response => {
+        this.tasks = response.data
+        console.log(response.data)
+      })
+      .catch(e => {
+        console.log(e)
       })
   }
 }

@@ -1,8 +1,8 @@
 <template>
     <Splide ref="splide" :options="options" aria-label="My Favorite Images">
         <SplideSlide>
-        <WhiteCardTask/>
-      </SplideSlide>
+          <WhiteCardTask/>
+        </SplideSlide>
       <SplideSlide>
         <WhiteCardTask/>
       </SplideSlide>

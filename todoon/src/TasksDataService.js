@@ -2,7 +2,7 @@ import http from './http-common'
 
 class TasksDataService {
   getAll () {
-    return http.get('/products')
+    return http.get('/task')
   }
 
   create (data) {
