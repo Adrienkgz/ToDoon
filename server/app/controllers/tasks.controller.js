@@ -1,7 +1,6 @@
 const db = require('../models') 
 const Task = db.Tasks
 
-console.log(Task)
 exports.findAll = (req, res) => {
    Task.findAll()
    .then(data => {
@@ -16,7 +15,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.create = (req, res) => {
-   if(!req.body.name) {
+   if(!req.body.taskname) {
        res.status(400).send({
            message: 'The name is mandatory'
        })

@@ -6,7 +6,7 @@ class TasksDataService {
   }
 
   create (data) {
-    return http.post('/tasks', data)
+    return http.post('/task', data)
   }
 
   get (id) {

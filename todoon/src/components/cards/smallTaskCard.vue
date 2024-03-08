@@ -52,13 +52,13 @@ export default {
     const minute = dateParts[2]
     const second = dateParts[3]
     const dateObject = new Date(year, month, day, hour, minute, second)
-    const today = new Date()
-    console.log(today) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
-    console.log(dateObject) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
-    console.log('smallTaskCard mounted')
-    console.log(this.targetDate)
+    // const today = new Date()
+    // console.log(today) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
+    // console.log(dateObject) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
+    // console.log('smallTaskCard mounted')
+    // console.log(this.targetDate)
     this.updateCountdown(dateObject)
-    console.log('smallTaskCard updated')
+    // console.log('smallTaskCard updated')
     this.intervalId = setInterval(() => this.updateCountdown(dateObject), 1000)
   },
   beforeUnmount () {
