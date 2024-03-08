@@ -23,3 +23,4 @@ const db = require('./app/models')
 db.connex.sync()
 
 require('./app/routes/product.route')(app)
+

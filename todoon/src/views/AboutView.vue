@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderComponent/>
-    <smallTaskCard :task="{ name:'Plier le linge', description:'Je dois plier le linge et ca rentre pas de le cadre', status:2, targetDate:'29-03-2024:14:30:00' }"/>
+      <smallTaskCard v-for="task in tasks" :key="task.name" :task="task"/>
     <MainFooter/>
   </div>
 </template>
@@ -16,6 +16,20 @@ export default {
     HeaderComponent,
     smallTaskCard,
     MainFooter
+  },
+  data () {
+    return {
+      tasks: []
+    }
+  },
+  mounted () {
+    // Read the data
+    fetch('')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.tasks = data
+      })
   }
 }
 </script>

@@ -17,21 +17,7 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'noticeCard',
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    feedback: {
-      type: Number,
-      required: true
-    }
-  }
-}
-</script>
+
 <style>
 .myCard {
   background-color: transparent;
@@ -122,3 +108,19 @@ export default {
   }
 }
 </style>
+
+<script>
+export default {
+  name: 'noticeCard',
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    feedback: {
+      type: Number,
+      required: true
+    }
+  }
+}
+</script>
