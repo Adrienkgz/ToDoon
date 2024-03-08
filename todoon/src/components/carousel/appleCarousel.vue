@@ -4,7 +4,7 @@
       :grabCursor="true"
       :centeredSlides="true"
       :slidesPerView="4"
-      :autoplay="true"
+      :autoplay="false"
       :mousewheel-force-to-axis="true"
       :coverflowEffect="{
         rotate: 0,
@@ -15,15 +15,12 @@
       }"
       :pagination="true"
       :modules="modules"
-      :loop="true"
+      :loop="false"
       class="mySwiper"
     >
-      <swiper-slide><largeTaskCard/></swiper-slide>
-      <swiper-slide><largeTaskCard/></swiper-slide>
-      <swiper-slide><largeTaskCard/></swiper-slide>
-      <swiper-slide><largeTaskCard/></swiper-slide>
-      <swiper-slide><largeTaskCard/></swiper-slide>
-      <swiper-slide><largeTaskCard/></swiper-slide>
+      <swiper-slide v-for="task in tasks" :key="task.name">
+        <largeTaskCard :task="task"/>
+      </swiper-slide>
     </swiper>
   </template>
 <script>
@@ -32,9 +29,11 @@ import largeTaskCard from '../cards/largeTaskCard.vue'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
+import TasksDataService from '../../TasksDataService'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
+  name: 'appleCarousel',
   components: {
     largeTaskCard,
     Swiper,
@@ -44,6 +43,22 @@ export default {
     return {
       modules: [EffectCoverflow, Pagination]
     }
+  },
+  data () {
+    return {
+      tasks: []
+    }
+  },
+  mounted () {
+    // Read the data
+    TasksDataService.getAll()
+      .then(response => {
+        this.tasks = response.data
+        console.log(response.data)
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }
 </script>
