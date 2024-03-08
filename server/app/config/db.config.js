@@ -2,6 +2,6 @@ module.exports = {
     HOST: 'localhost',
     USER: 'root',
     PASSWORD: 'admin',
-    DB: 'db_product',
+    DB: 'todoon',
     dialect: 'mysql'
 }

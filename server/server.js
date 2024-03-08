@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended:true }))
 //test
 app.get('/', (req, res) => {
     res.json({message: 'Welcome'})
+    console.log(products);
 })
 
 const PORT =  8080
