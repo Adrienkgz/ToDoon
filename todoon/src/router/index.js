@@ -4,6 +4,9 @@ import HomeView from '../views/HomeView.vue'
 import WhatView from '../views/WhatView.vue'
 import AboutView from '../views/AboutView.vue'
 import ContactView from '../views/ContactView.vue'
+import ToDoView from '../views/ToDoView.vue'
+import DoingView from '../views/DoingView.vue'
+import DoneView from '../views/DoneView.vue'
 
 const routes = [
   {
@@ -30,6 +33,21 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: ContactView
+  },
+  {
+    path: '/home/todo',
+    name: 'todo',
+    component: ToDoView
+  },
+  {
+    path: '/home/doing',
+    name: 'doing',
+    component: DoingView
+  },
+  {
+    path: '/home/done',
+    name: 'done',
+    component: DoneView
   }
 ]
 
