@@ -101,8 +101,8 @@ export default {
       menuItems.forEach(item => item.classList.remove('active'))
 
       const parentLi = event.target.closest('li')
-      for (const li of menuItems) {
-        li.querySelector('a').classList.remove('todo', 'doing', 'done')
+      for (const a of parentLi.querySelectorAll('a')) {
+        a.classList.remove('todo', 'doing', 'done')
       }
       const newstatus = parseInt(parentLi.id[parentLi.id.length - 1])
       this.mutableTask.taskstatus = newstatus
