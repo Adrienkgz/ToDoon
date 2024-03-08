@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="flex flex-col">
-            <h1 class="text-pinky text-2xl">{{ task.name }}</h1>
+            <h1 class="text-pinky text-2xl">{{ task.taskname }}</h1>
             <div class="grid grid-flow-col justify-center gap-5 text-center auto-cols-max mt-4">
                 <span class="countdown font-mono text-xl">
                     <span ref="days"></span>:
@@ -11,21 +11,21 @@
                 </span>
             </div>
             <div class="w-full h-1/2 flex items-center justify-center text-center bg-gray-200 p-2">
-                <p>{{ task.description }}</p>
+                <p>{{ task.taskdescription }}</p>
             </div>
             <ul class="menu menu-horizontal justify-center space-x-1 bg-gray-300 rounded-box">
                 <li>
-                    <a @click="toggleActive($event)" :class="{ 'todo': task.status === 0 }">
+                    <a @click="toggleActive($event)" :class="{ 'todo': task.taskstatus === 0 }">
                     <img src="../../assets/img/toDoPasteque.png" />
                     </a>
                 </li>
                 <li>
-                    <a @click="toggleActive($event)" :class="{ 'doing': task.status === 1 }">
+                    <a @click="toggleActive($event)" :class="{ 'doing': task.taskstatus === 1 }">
                     <img src="../../assets/img/doingPasteque.png" />
                     </a>
                 </li>
                 <li>
-                    <a @click="toggleActive($event)" :class="{ 'done': task.status === 2 }">
+                    <a @click="toggleActive($event)" :class="{ 'done': task.taskstatus === 2 }">
                     <img src="../../assets/img/donePasteque.png" alt="">
                     </a>
                 </li>
@@ -43,7 +43,7 @@ export default {
     }
   },
   mounted () {
-    const dateString = this.task.targetDate // format "jour:heure:min:sec"
+    const dateString = this.task.taskenddate // format "jour:heure:min:sec"
     const dateParts = dateString.split(':')
     const day = dateParts[0].split('-')[0]
     const month = dateParts[0].split('-')[1] - 1// les mois en JavaScript sont indexés à partir de 0
@@ -52,13 +52,13 @@ export default {
     const minute = dateParts[2]
     const second = dateParts[3]
     const dateObject = new Date(year, month, day, hour, minute, second)
-    const today = new Date()
-    console.log(today) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
-    console.log(dateObject) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
-    console.log('smallTaskCard mounted')
-    console.log(this.targetDate)
+    // const today = new Date()
+    // console.log(today) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
+    // console.log(dateObject) // Wed Mar 29 2023 14:30:00 GMT+0200 (heure d’été d’Europe centrale)
+    // console.log('smallTaskCard mounted')
+    // console.log(this.targetDate)
     this.updateCountdown(dateObject)
-    console.log('smallTaskCard updated')
+    // console.log('smallTaskCard updated')
     this.intervalId = setInterval(() => this.updateCountdown(dateObject), 1000)
   },
   beforeUnmount () {

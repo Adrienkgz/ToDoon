@@ -1,4 +1,5 @@
 <template>
+  <form @submit.prevent="addTask" ref="form">
     <!-- You can open the modal using ID.showModal() method -->
     <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3" onclick="my_modal_4.showModal()" title="Add New">
       <svg
@@ -26,13 +27,13 @@
               <div class="label">
                 <span class="label-text text-xl">Name Task</span>
               </div>
-              <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+              <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id = 'name' v-model="task.taskname" required/>
             </label>
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text text-xl">Date Task</span>
               </div>
-              <input type="date" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+              <input type="date" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="task.taskenddate" required/>
             </label>
             <label class="form-control w-full max-w-xs">
               <div class="label">
@@ -66,21 +67,18 @@
             <div class="label">
               <span class="label-text text-xl">Task Description</span>
             </div>
-            <textarea class="textarea textarea-bordered resize-none" placeholder="Description"></textarea>
+            <textarea class="textarea textarea-bordered resize-none" placeholder="Description" id='description' v-model="task.taskdescription"></textarea>
           </label>
           <div class="flex justify-end mt-5 space-x-5">
             <form method="dialog">
                     <button class="btn">Close</button>
             </form>
-            <form method="dialog">
-                  <button class="btn bg-secondary hover:bg-secondary">Add Task</button>
-            </form>
+                  <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
           </div>
       </div>
-      <form method="dialog" class="modal-backdrop">
         <button>close</button>
-      </form>
       </dialog>
+  </form>
 </template>
 
 <style>
@@ -90,29 +88,36 @@ button {
 }
 </style>
 <script>
+import TasksDataService from '../../TasksDataService'
+
 export default {
   name: 'AddTaskComponent',
   props: {
   },
   data () {
     return {
-      tasks: [],
-      newTask: {
-        name: '',
-        date: '',
-        priority: 0,
-        description: ''
+      task: {
+        taskname: '',
+        taskdescription: '',
+        taskstatus: 0,
+        taskenddate: ''
       }
     }
   },
-  addTask () {
-    this.tasks.push(this.newTask)
-    this.saveTasks()
-    this.newTask = {
-      name: '',
-      date: '',
-      priority: 0,
-      description: ''
+  methods: {
+    addTask () {
+      // format the input (temp )
+      console.log(this.task)
+      this.task.taskenddate = new Date(this.task.taskenddate).toISOString()
+      TasksDataService.create(this.task)
+        .then(response => {
+          alert('Task added successfully!')
+          console.log(this.tasks)
+          this.$refs.form.reset()
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
