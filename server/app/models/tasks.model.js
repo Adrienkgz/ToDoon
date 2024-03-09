@@ -11,6 +11,9 @@ module.exports = (connex, Sequelize) => {
         },
         taskenddate: {
             type: Sequelize.TEXT
+        },
+        iduser: {
+            type: Sequelize.INTEGER
         }
     })
     return Tasks

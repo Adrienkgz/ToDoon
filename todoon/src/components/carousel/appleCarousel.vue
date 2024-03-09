@@ -51,6 +51,8 @@ export default {
   },
   mounted () {
     // Read the data
+    const token = localStorage.getItem('token')
+    console.log('token:', token)
     TasksDataService.getAll()
       .then(response => {
         this.tasks = response.data

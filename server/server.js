@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const dotenv = require('dotenv')
 const app = express()
 const corsOption = {
     origin: 'http://localhost:8081'
@@ -24,5 +25,6 @@ const db = require('./app/models')
 db.connex.sync()
 
 require('./app/routes/task.route')(app)
+require('./app/routes/user.route')(app)
 
 

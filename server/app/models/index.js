@@ -10,4 +10,5 @@ const db = {}
 db.Sequelize = Sequelize
 db.connex = connex
 db.Tasks = require('./tasks.model.js')(connex, Sequelize)
+db.Users = require('./user.model.js')(connex, Sequelize)
 module.exports = db

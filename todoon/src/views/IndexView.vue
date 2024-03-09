@@ -13,6 +13,7 @@ import StatsAcceuil from '../components/indexcomponent/StatsAcceuil.vue'
 import noticeAccueil from '../components/indexcomponent/NoticeAccueil.vue'
 import MainFooter from '../components/MainFooter.vue'
 import HeaderComponent from '../components/indexcomponent/HeaderComponent.vue'
+import LoginPage from '../components/indexcomponent/LoginPopUp.vue'
 
 export default {
   components: {
@@ -20,7 +21,8 @@ export default {
     InfoAccueil,
     StatsAcceuil,
     noticeAccueil,
-    MainFooter
+    MainFooter,
+    LoginPage
   }
 }
 </script>

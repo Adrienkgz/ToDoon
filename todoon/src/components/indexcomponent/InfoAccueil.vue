@@ -22,7 +22,7 @@
 </template>
 <script>
 import SwipeButton from '../button/SwipeButton.vue'
-import Modal from '../indexcomponent/PopUp.vue'
+import Modal from '../indexcomponent/LoginPopUp.vue'
 import { ref } from 'vue'
 
 export default {
