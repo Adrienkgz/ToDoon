@@ -1,5 +1,5 @@
 <template>
-        <smallTaskCard v-for="task in tasks" :key="task.name" :task="task"/>
+        <smallTaskCard v-for="task in tasks" :key="task.name" :task="task" @delete-item="handleDeleteItem"/>
 </template>
 
 <script>
@@ -31,6 +31,15 @@ export default {
       .catch(e => {
         console.log(e)
       })
-  }
+  },
+  methods: {
+    handleDeleteItem(taskId) {
+    console.log('b');
+    console.log(this.tasks);
+    console.log(taskId);
+    this.tasks = this.tasks.filter((task_list) => task_list.id !== taskId);
+    console.log(this.tasks);
+  },
+  },
 }
 </script>

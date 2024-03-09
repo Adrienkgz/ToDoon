@@ -14,18 +14,18 @@
                 <p>{{ task.taskdescription }}</p>
             </div>
             <ul class="menu menu-horizontal justify-center space-x-1 bg-gray-300 rounded-box">
-                <li>
-                    <a @click="toggleActive($event)" :class="{ 'todo': task.taskstatus === 0 }">
+                <li id="status0">
+                    <a @click="toggleActive($event)" :class="{ 'todo': this.status === 0 }">
                     <img src="../../assets/img/toDoPasteque.png" />
                     </a>
                 </li>
-                <li>
-                    <a @click="toggleActive($event)" :class="{ 'doing': task.taskstatus === 1 }">
+                <li id="status1">
+                    <a @click="toggleActive($event)" :class="{ 'doing': this.status === 1 }">
                     <img src="../../assets/img/doingPasteque.png" />
                     </a>
                 </li>
-                <li>
-                    <a @click="toggleActive($event)" :class="{ 'done': task.taskstatus === 2 }">
+                <li id="status2">
+                    <a @click="toggleActive($event)" :class="{ 'done': this.status === 2 }">
                     <img src="../../assets/img/donePasteque.png" alt="">
                     </a>
                 </li>
@@ -34,6 +34,7 @@
     </div>
 </template>
 <script>
+import TasksDataService from '@/TasksDataService'
 export default {
   name: 'smallTaskCard',
   props: {
@@ -43,6 +44,7 @@ export default {
     }
   },
   mounted () {
+    this.mutableTask = { ...this.task }// Create a mutable copy of the task object
     const dateString = this.task.taskenddate // format "jour:heure:min:sec"
     const dateParts = dateString.split(':')
     const day = dateParts[0].split('-')[0]
@@ -64,7 +66,16 @@ export default {
   beforeUnmount () {
     clearInterval(this.intervalId)
   },
+  data () {
+    return {
+      mutableTask: null,
+      status: this.task.taskstatus
+    }
+  },
   methods: {
+    emitDeleteEvent (taskId) {
+      this.$emit('delete-item', taskId)
+    },
     updateCountdown (targetDate) {
       const currentDate = new Date()
       const diffMs = targetDate - currentDate
@@ -79,13 +90,37 @@ export default {
       this.$refs.seconds.style.setProperty('--value', diffSeconds)
     },
     toggleActive (event) {
-      // Supprimer la classe active de tous les éléments de menu
       const menuItems = document.querySelectorAll('.menu li')
       menuItems.forEach(item => item.classList.remove('active'))
 
-      // Ajouter la classe active à l'élément cliqué
       const parentLi = event.target.closest('li')
-      parentLi.classList.add('active')
+      for (const a of parentLi.querySelectorAll('a')) {
+        a.classList.remove('todo', 'doing', 'done')
+      }
+      const newstatus = parseInt(parentLi.id[parentLi.id.length - 1])
+      this.mutableTask.taskstatus = newstatus
+      TasksDataService.update(this.mutableTask.id, this.mutableTask)
+        .then(response => {
+          console.log(response.data)
+          this.status = newstatus
+          if (this.status === 0) {
+            parentLi.querySelector('a').classList.add('todo')
+          } else {
+            if (this.status === 1) {
+              parentLi.querySelector('a').classList.add('doing')
+            } else {
+              parentLi.querySelector('a').classList.add('done')
+            }
+          }
+          console.log(this.task.id)
+          if (newstatus !== this.task.taskstatus) {
+            console.log('no change')
+            this.emitDeleteEvent(this.task.id)
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
