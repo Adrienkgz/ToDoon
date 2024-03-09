@@ -130,6 +130,7 @@ export default {
       TasksDataService.create(this.task)
         .then(response => {
           console.log(this.tasks)
+          this.$emit('task-added', response.data)
           this.$refs.form.reset()
           this.$refs.closeform.querySelector('#closebutton').click()
           modal.showModal()
@@ -139,7 +140,9 @@ export default {
           setTimeout(function () {
             modal.close()
           }, 2000)
-          window.location.reload()
+          setTimeout(function () {
+            // window.location.reload()
+          }, 2000)
         })
         .catch(e => {
           console.log(e)

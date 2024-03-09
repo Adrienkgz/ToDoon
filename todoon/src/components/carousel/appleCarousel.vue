@@ -1,9 +1,11 @@
 <template>
+  <div v-if="loaded && tasks.length">
+    <div class="pt-2">Today's Task</div>
     <swiper
       :effect="'coverflow'"
       :grabCursor="true"
       :centeredSlides="true"
-      :slidesPerView="4"
+      :slidesPerView=4
       :autoplay="false"
       :mousewheel-force-to-axis="true"
       :coverflowEffect="{
@@ -22,7 +24,11 @@
         <largeTaskCard :task="task"/>
       </swiper-slide>
     </swiper>
-  </template>
+  </div>
+  <div v-if="loaded && !tasks.length">
+    <hamsterWheel/>
+  </div>
+</template>
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import largeTaskCard from '../cards/largeTaskCard.vue'
@@ -30,6 +36,7 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import TasksDataService from '../../TasksDataService'
+import hamsterWheel from '../animation/hamsterWheel.vue'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
@@ -37,7 +44,8 @@ export default {
   components: {
     largeTaskCard,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    hamsterWheel
   },
   setup () {
     return {
@@ -46,7 +54,9 @@ export default {
   },
   data () {
     return {
-      tasks: []
+      tasks: [],
+      loaded: false,
+      tasksKey: 0
     }
   },
   mounted () {
@@ -61,6 +71,9 @@ export default {
       .catch(e => {
         console.log(e)
       })
+    setTimeout(() => {
+      this.loaded = true
+    }, 200)
   }
 }
 </script>
