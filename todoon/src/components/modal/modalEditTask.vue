@@ -12,3 +12,18 @@
     </div>
     </dialog>
 </template>
+<script>
+export default {
+  name: 'modalEditButton',
+  props: {
+    task: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    mounted () {
+        console.log('mounted')
+    }
+  }
+}</script>

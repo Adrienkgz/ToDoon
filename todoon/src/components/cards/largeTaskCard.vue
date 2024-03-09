@@ -58,15 +58,26 @@
             </div>
         </div>
     </div>
-    <modalEditTask/>
+    <modalEditTask :task="task"/>
 </template>
 <script>
+import modalEditTask from '../modal/modalEditTask.vue'
+import TasksDataService from '../../TasksDataService'
 export default {
   name: 'smallTaskCard',
   props: {
     task: {
       type: Object,
       required: true
+    }
+  },
+  components: {
+    modalEditTask
+  },
+  data () {
+    return {
+      mutableTask: null,
+      status: this.task.taskstatus
     }
   },
   mounted () {
@@ -106,7 +117,28 @@ export default {
       menuItems.forEach(item => item.classList.remove('active'))
 
       const parentLi = event.target.closest('li')
-      parentLi.classList.add('active')
+      for (const a of parentLi.querySelectorAll('a')) {
+        a.classList.remove('todo', 'doing', 'done')
+      }
+      const newstatus = parseInt(parentLi.id[parentLi.id.length - 1])
+      this.mutableTask.taskstatus = newstatus
+      TasksDataService.update(this.mutableTask.id, this.mutableTask)
+        .then(response => {
+          console.log(response.data)
+          this.status = newstatus
+          if (this.status === 0) {
+            parentLi.querySelector('a').classList.add('todo')
+          } else {
+            if (this.status === 1) {
+              parentLi.querySelector('a').classList.add('doing')
+            } else {
+              parentLi.querySelector('a').classList.add('done')
+            }
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
