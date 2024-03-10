@@ -7,7 +7,7 @@
             <div class="flex flex-col flex-grow items-start">
                 <div class="align-start">
                     <span class="countdown font-mono text-xl">
-                        <span ref="days"></span>:
+                        <span ref="days"></span>D-
                         <span ref="hours"></span>:
                         <span ref="minutes"></span>:
                         <span ref="seconds"></span>
@@ -65,16 +65,10 @@ export default {
   },
   mounted () {
     this.mutableTask = { ...this.task } // Create a mutable copy of the task object
-    const dateString = this.mutableTask.taskenddate // format "jour:heure:min:sec"
-    const dateParts = dateString.split(':')
-    const day = dateParts[0].split('-')[0]
-    const month = dateParts[0].split('-')[1] - 1 // les mois en JavaScript sont indexés à partir de 0
-    const year = dateParts[0].split('-')[2]
-    const hour = dateParts[1]
-    const minute = dateParts[2]
-    const second = dateParts[3]
-    const dateObject = new Date(year, month, day, hour, minute, second)
-
+    const dateString = this.mutableTask.taskenddate // format "année-mois-jour:heure:min:sec"
+    console.log('dateString', dateString)
+    const dateObject = Date.parse(dateString)
+    console.log('dateObject', dateObject)
     this.updateCountdown(dateObject)
     this.intervalId = setInterval(() => this.updateCountdown(dateObject), 1000)
   },
@@ -83,9 +77,11 @@ export default {
   },
   methods: {
     updateCountdown (targetDate) {
+      console.log('targetDate', targetDate)
       const currentDate = new Date()
       const diffMs = targetDate - currentDate
       const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+      console.log('diffDays', diffDays)
       const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
       const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
       const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000)

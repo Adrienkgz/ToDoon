@@ -140,7 +140,7 @@ export default {
             modal.close()
           }, 2000)
           setTimeout(function () {
-            // window.location.reload()
+            window.location.reload()
           }, 2000)
         })
         .catch(e => {

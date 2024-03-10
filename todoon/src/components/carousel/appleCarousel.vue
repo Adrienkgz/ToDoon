@@ -1,32 +1,34 @@
 <template>
-  <div v-if="loaded && tasks.length">
-    <div class="pt-2">Today's Task</div>
-    <swiper
-      :effect="'coverflow'"
-      :grabCursor="true"
-      :centeredSlides="true"
-      :slidesPerView=4
-      :autoplay="false"
-      :mousewheel-force-to-axis="true"
-      :coverflowEffect="{
-        rotate: 0,
-        stretch: 0,
-        depth: 300,
-        modifier: 2,
-        slideShadows: false,
-      }"
-      :pagination="true"
-      :modules="modules"
-      :loop="false"
-      class="mySwiper"
-    >
-      <swiper-slide v-for="task in tasks" :key="task.name">
-        <largeTaskCard :task="task"/>
-      </swiper-slide>
-    </swiper>
-  </div>
-  <div v-if="loaded && !tasks.length">
-    <hamsterWheel/>
+  <div class="w-full h-300">
+    <div v-if="loaded && tasks.length">
+      <div class="pt-2">Today's Task</div>
+      <swiper
+        :effect="'coverflow'"
+        :grabCursor="true"
+        :centeredSlides="true"
+        :slidesPerView=4
+        :autoplay="false"
+        :mousewheel-force-to-axis="true"
+        :coverflowEffect="{
+          rotate: 0,
+          stretch: 0,
+          depth: 300,
+          modifier: 2,
+          slideShadows: false,
+        }"
+        :pagination="true"
+        :modules="modules"
+        :loop="false"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="task in tasks" :key="task.name">
+          <largeTaskCard :task="task"/>
+        </swiper-slide>
+      </swiper>
+    </div>
+    <div v-if="loaded && !tasks.length">
+      <hamsterWheel/>
+    </div>
   </div>
 </template>
 <script>

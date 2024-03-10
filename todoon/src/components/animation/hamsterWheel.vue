@@ -1,23 +1,21 @@
 <template>
-  <div class="h-168 w-168">
-    <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
-        <div class="wheel"></div>
-        <div class="hamster">
-            <div class="hamster__body">
-                <div class="hamster__head">
-                    <div class="hamster__ear"></div>
-                    <div class="hamster__eye"></div>
-                    <div class="hamster__nose"></div>
-                </div>
-                <div class="hamster__limb hamster__limb--fr"></div>
-                <div class="hamster__limb hamster__limb--fl"></div>
-                <div class="hamster__limb hamster__limb--br"></div>
-                <div class="hamster__limb hamster__limb--bl"></div>
-                <div class="hamster__tail"></div>
-            </div>
+  <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+    <div class="wheel"></div>
+    <div class="hamster">
+      <div class="hamster__body">
+        <div class="hamster__head">
+          <div class="hamster__ear"></div>
+          <div class="hamster__eye"></div>
+          <div class="hamster__nose"></div>
         </div>
-        <div class="spoke"></div>
+        <div class="hamster__limb hamster__limb--fr"></div>
+        <div class="hamster__limb hamster__limb--fl"></div>
+        <div class="hamster__limb hamster__limb--br"></div>
+        <div class="hamster__limb hamster__limb--bl"></div>
+        <div class="hamster__tail"></div>
+      </div>
     </div>
+    <div class="spoke"></div>
   </div>
 </template>
 <style>
@@ -56,8 +54,8 @@
   left: calc(50% - 3.5em);
   width: 7em;
   height: 3.75em;
-  transform: rotate(4deg) translate(-0.8em,10.85em);
-  transform-origin: 0;
+  transform: rotate(4deg) translate(-0.8em,1.85em);
+  transform-origin: 50% 0;
   z-index: 1;
 }
 
@@ -183,11 +181,11 @@
 /* Animations */
 @keyframes hamster {
   from, to {
-    transform: rotate(4deg) translate(-0.8em,3.85em);
+    transform: rotate(4deg) translate(-0.8em,1.85em);
   }
 
   50% {
-    transform: rotate(0) translate(-0.8em,3.85em);
+    transform: rotate(0) translate(-0.8em,1.85em);
   }
 }
 
