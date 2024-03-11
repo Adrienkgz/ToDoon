@@ -14,7 +14,7 @@
                         <span ref="seconds"></span>
                     </span>
                 </div>
-                <div class="align-center" v-else>Time' sUp !</div>
+                <div class="align-center" v-else>Time's Up !</div>
                 <div class="mt-2 h-1/2 max-w-56 break-words">
                     <div v-if="task.taskdescription" id="description">
                         <div class="text-sm font-normal">{{ task.taskdescription }}</div>
