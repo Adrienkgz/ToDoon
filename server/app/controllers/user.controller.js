@@ -50,18 +50,17 @@ exports.signup = (req, res) => {
   }
 }
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   try {
     const { email, password } = req.body
 
     // Vérifie si l'utilisateur existe
-    const user = User.findOne({ where: { email: email } })
+    const user = await User.findOne({ where: { email: email } })
     if (!user) {
       return res.status(404).send({ message: 'Utilisateur non trouvé' })
     }
-
     // Vérifie le mot de passe
-    const passwordIsValid = bcrypt.compareSync(password, user.password)
+    const passwordIsValid = await bcrypt.compareSync(password, user.password)
     if (!passwordIsValid) {
       return res.status(401).send({
         accessToken: null,
@@ -70,16 +69,20 @@ exports.login = (req, res) => {
     }
 
     // Crée un token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    const token = await jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: 86400 // 24 heures
     })
-
+    console.log(token)
     res.status(200).send({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      accessToken: token
+      message: { message: 'Utilisateur connecté avec succès'},
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        accessToken: token
+      },
+      token: token
     })
   } catch (e) {
     console.log(e)

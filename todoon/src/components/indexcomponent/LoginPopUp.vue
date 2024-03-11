@@ -10,14 +10,14 @@
           <p @click="closeModal" class=" grow-0 mt-1 w-5 h-5"><img class="h-5 w-5 bg-pink" src="../../assets/img/xmark.svg" alt="xmark" id="closebutton"></p>
         </div>
         <div class="text-sm font-normal mb-4 text-center text-[#1e0e4b]">Log in to your account</div>
-        <form class="flex flex-col gap-3">
+        <form class="flex flex-col gap-3" @submit.prevent="login" >
         <div class="block relative">
             <label for="email" class="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">Email</label>
-            <input type="text" id="email" aria-label="Email" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0">
+            <input type="text" id="email" v-model="email" aria-label="Email" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0">
         </div>
         <div class="block relative">
             <label for="password" class="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">Password</label>
-            <input type="password" id="password" aria-label="Password" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0">
+            <input type="password" id="password" v-model="password" aria-label="Password" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0">
         </div>
         <div>
             <a class="text-sm text-[#FF4785] hover:underline" href="#">Forgot your password?</a>
@@ -30,7 +30,15 @@
   </transition>
 </template>
 <script>
+import UsersDataService from '@/UsersDataService'
+
 export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
   props: {
     showModal: {
       type: Boolean,
@@ -39,6 +47,23 @@ export default {
     title: String
   },
   methods: {
+    login () {
+      console.log('bhdh')
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+      UsersDataService.login(user)
+        .then(response => {
+          localStorage.setItem('token', response.data.token)
+          this.$router.push('/home') // Redirection après avoir défini le token
+        })
+        .catch(e => {
+          console.log(e)
+          // Affiche message erreur
+          alert('Erreur lors de la connexion')
+        })
+    },
     closeModal () {
       console.log('close')
       this.$emit('close')
