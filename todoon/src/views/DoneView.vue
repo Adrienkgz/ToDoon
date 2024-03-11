@@ -7,7 +7,7 @@
           </aside>
           <main class="w-4/5">
               <HeaderHomeComponent @search="onSearch"/>
-              <smallTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task"/>
+              <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task"/>
           </main>
       </div>
       </div>
@@ -18,15 +18,15 @@
 <script>
 import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
 import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
-import smallTaskCard from '@/components/cards/smallTaskCard.vue'
 import TasksDataService from '../TasksDataService'
 import MainFooter from '@/components/MainFooter.vue'
+import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
 
 export default {
   components: {
     MenuHomeComponent,
     HeaderHomeComponent,
-    smallTaskCard,
+    wFullTaskCard,
     MainFooter
   },
   data () {
@@ -47,7 +47,7 @@ export default {
   },
   mounted () {
     // Read the data
-    TasksDataService.getAll()
+    TasksDataService.getAllByUser()
       .then(response => {
         const tasksfiltred = response.data.filter(task => task.taskstatus === 0)
         this.tasks = tasksfiltred

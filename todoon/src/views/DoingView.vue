@@ -47,7 +47,7 @@ export default {
   },
   mounted () {
     // Read the data
-    TasksDataService.getAll()
+    TasksDataService.getAllByUser()
       .then(response => {
         const tasksfiltred = response.data.filter(task => task.taskstatus === 1)
         this.tasks = tasksfiltred
