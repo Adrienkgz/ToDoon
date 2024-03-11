@@ -244,6 +244,28 @@ export default {
     },
     updateTaskDescription (event) {
       this.newTask.taskdescription = event.target.value
+    },
+    openModalEdit () {
+      const modal = document.querySelector('#my_modal_5_' + this.task.id)
+      modal.showModal()
+    },
+    deleteModalEdit () {
+      const modal = document.querySelector('#deleteModal_' + this.task.id)
+      modal.showModal()
+    },
+    deleteTask () {
+      console.log('deleteTask')
+      TasksDataService.delete(this.task.id)
+        .then(response => {
+          this.$emit('taskDeleted', this.task.id)
+          const modal = document.querySelector('#deleteModal_' + this.task.id)
+          modal.close()
+          console.log('Wesh reload')
+          window.location.reload()
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
