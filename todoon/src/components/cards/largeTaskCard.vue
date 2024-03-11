@@ -128,7 +128,7 @@
           <form method="dialog">
             <!-- if there is a button in form, it will close the modal -->
             <button class="btn">Cancel</button>
-            <button class="btn btn-error">Delete</button>
+            <button class="btn btn-error" @click="deleteTask()">Delete</button>
           </form>
         </div>
       </div>
@@ -250,6 +250,19 @@ export default {
     },
     updateTaskDescription (event) {
       this.newTask.taskdescription = event.target.value
+    },
+    deleteTask () {
+      console.log('deleteTask')
+      TasksDataService.delete(this.task.id)
+        .then(response => {
+          this.$emit('taskDeleted', this.task.id)
+          const modal = document.querySelector('#deleteModal')
+          modal.close()
+          window.location.reload()
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
