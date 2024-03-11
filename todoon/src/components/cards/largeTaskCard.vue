@@ -16,7 +16,7 @@
                 </div>
                 <div class="align-center" v-else>Time' sUp !</div>
                 <div class="mt-2 h-1/2 max-w-56 break-words">
-                    <div v-if="task.taskdescription">
+                    <div v-if="task.taskdescription" id="description">
                         <div class="text-sm font-normal">{{ task.taskdescription }}</div>
                     </div>
                     <div v-else>
@@ -29,18 +29,18 @@
             </div>
             <div class="flex">
                 <ul class="menu justify-center space-x-1 bg-gray-300 rounded-box">
-                    <li id="status0">
-                        <a @click="toggleActive($event)" :class="{ 'todo': status === 0 }">
+                    <li id="status0" class="hover:bg-[#ff0000] hover:rounded-lg">
+                        <a @click="toggleActive($event)" class="items" :class="{ 'todo': (status === 0) }">
                         <img src="../../assets/img/toDoPasteque.png" />
                         </a>
                     </li>
                     <li id="status1">
-                        <a @click="toggleActive($event)" :class="{ 'doing': status === 1 }">
+                        <a @click="toggleActive($event)" class="items" :class="{ 'doing': (status === 1) }">
                         <img src="../../assets/img/doingPasteque.png" />
                         </a>
                     </li>
                     <li id="status2">
-                        <a @click="toggleActive($event)" :class="{ 'done': status === 2 }">
+                        <a @click="toggleActive($event)" class="items" :class="{ 'done': (status === 2) }">
                         <img src="../../assets/img/donePasteque.png" alt="">
                         </a>
                     </li>
@@ -64,10 +64,12 @@ export default {
       mutableTask: null,
       status: this.task.taskstatus,
       timeUp: false,
-      timeLoaded: false
+      timeLoaded: false,
+      itemsHovered: false
     }
   },
   mounted () {
+    this.itemsIsHovered()
     this.mutableTask = { ...this.task }
     const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
     console.log('dateString', dateString)
@@ -81,25 +83,18 @@ export default {
   methods: {
     updateCountdown (targetDate) {
       this.countdownInterval = setInterval(() => {
-        console.log('TaskId', this.mutableTask.id)
-        console.log('targetDate', targetDate)
         const currentDate = new Date()
         const diffMs = targetDate - currentDate
-        console.log('diffMs', diffMs)
         const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-        console.log('diffDays', diffDays)
         const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
         const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
         const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000)
 
         if (diffMs <= 0 && diffDays <= 0 && diffHours <= 0 && diffMinutes <= 0 && diffSeconds <= 0) {
           this.timeUp = true
-          console.log('timeUp', this.timeUp)
           clearInterval(this.countdownInterval)
         } else {
           this.timeLoaded = true
-          console.log('timeLoaded', this.timeLoaded)
-
           this.$refs.days.style.setProperty('--value', diffDays)
           this.$refs.hours.style.setProperty('--value', diffHours)
           this.$refs.minutes.style.setProperty('--value', diffMinutes)
