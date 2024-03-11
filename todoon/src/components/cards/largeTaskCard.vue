@@ -77,11 +77,9 @@ export default {
   },
   methods: {
     updateCountdown (targetDate) {
-      console.log('targetDate', targetDate)
       const currentDate = new Date()
       const diffMs = targetDate - currentDate
       const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-      console.log('diffDays', diffDays)
       const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
       const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
       const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000)

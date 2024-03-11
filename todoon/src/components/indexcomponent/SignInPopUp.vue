@@ -7,7 +7,7 @@
             <p class=" grow-0 font-bold mb-2 text-[#1e0e4b]"> Welcome to</p>
             <span class=" grow-0 text-[#FF4785]">ToDOON</span>
             <div class="grow"></div>
-            <p @click="closeModal" class=" grow-0 mt-1 w-5 h-5"><img class="h-5 w-5 bg-pink" src="../../assets/img/xmark.svg" alt="xmark"></p>
+            <p @click="closeModal" class=" grow-0 mt-1 w-5 h-5"><img class="h-5 w-5 bg-pink" src="../../assets/img/xmark.svg" alt="xmark" id="closebutton"></p>
           </div>
           <div class="text-sm font-normal mb-4 text-center text-[#1e0e4b]">Log in to your account</div>
           <form @submit.prevent="signup" class="flex flex-col gap-3">
@@ -64,8 +64,7 @@ export default {
       UsersDataService.signup(newuser)
         .then(response => {
           localStorage.setItem('token', response.data.token)
-          // Redirige ver la page de réussite
-          alert('Inscription réussie')
+          this.$router.push('/home') // Redirection après avoir défini le token
         })
         .catch(e => {
           console.log(e)
@@ -104,5 +103,9 @@ export default {
   .modal-fade-enter-to,
   .modal-fade-leave-from {
     opacity: 1;
+  }
+
+  #closebutton {
+    cursor: pointer;
   }
   </style>

@@ -20,5 +20,9 @@ class TasksDataService {
   delete (id) {
     return http.delete(`/task/${id}`)
   }
+
+  getAllByUser (userId) {
+    return http.get(`/task/${userId}`)
+  }
 }
 export default new TasksDataService()
