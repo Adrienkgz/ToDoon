@@ -1,20 +1,20 @@
 <template>
-    <div class="card h-48 w-96 p-4">
+    <div class="card h-48 w-4/5 p-4 mx-5 mb-5">
         <div class="flex justify-start w-full">
-                <h1 class="flex text-pinky text-2xl mr-2">{{ task.taskname }}</h1>
+          <h1 class="flex text-pinky text-2xl mr-2">{{ task.taskname }}</h1>
+          <div class="align-start" v-if="!timeUp">
+            <span class="countdown font-mono text-xl">
+                <span ref="days"></span>D-
+                <span ref="hours"></span>:
+                <span ref="minutes"></span>:
+                <span ref="seconds"></span>
+            </span>
+          </div>
+          <div class="align-center" v-else>Time's Up !</div>
         </div>
         <div class="flex w-full">
           <div class="flex flex-col flex-grow items-start">
             <div class="h-30"></div>
-              <div class="align-start" v-if="!timeUp">
-                  <span class="countdown font-mono text-xl">
-                      <span ref="days"></span>D-
-                      <span ref="hours"></span>:
-                      <span ref="minutes"></span>:
-                      <span ref="seconds"></span>
-                  </span>
-              </div>
-              <div class="align-center" v-else>Time's Up !</div>
               <div class="mt-2 h-1/2 max-w-56 break-words">
                   <div v-if="task.taskdescription" id="description">
                       <div class="text-sm font-normal">{{ task.taskdescription }}</div>
@@ -284,8 +284,7 @@ export default {
 }
 .card {
   box-sizing: border-box;
-  width: 210px;
-  height: 350px;
+  height: 275;
   background: rgba(217, 217, 217, 0.58);
   border: 1px solid white;
   box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
