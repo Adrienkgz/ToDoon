@@ -38,7 +38,7 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import TasksDataService from '../../TasksDataService'
-import hamsterWheel from '../animation/hamsterWheel.vue'
+import hamsterWheel from '../animation/hamsterAnimation.vue'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
