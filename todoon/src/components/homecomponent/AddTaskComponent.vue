@@ -71,9 +71,9 @@
           </label>
           <div class="flex justify-end mt-5 space-x-5">
             <form method="dialog" ref="closeform">
-                    <button class="btn" id="closebutton">Close</button>
+              <button class="btn" id="closebutton">Close</button>
             </form>
-                  <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
+            <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
           </div>
       </div>
         <button>close</button>
