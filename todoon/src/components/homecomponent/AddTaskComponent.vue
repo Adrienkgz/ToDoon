@@ -71,9 +71,9 @@
           </label>
           <div class="flex justify-end mt-5 space-x-5">
             <form method="dialog" ref="closeform">
-              <button class="btn" id="closebutton">Close</button>
+                    <button class="btn" id="closebutton">Close</button>
             </form>
-            <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
+                  <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
           </div>
       </div>
         <button>close</button>
@@ -97,6 +97,7 @@
     </div>
   </dialog>
 </template>
+
 <style>
 button {
   position: relative;
@@ -122,13 +123,13 @@ export default {
   },
   methods: {
     addTask () {
-      // format the input (temp)
+      // format the input (temp )
+      console.log(this.task)
       this.task.taskenddate = new Date(this.task.taskenddate).toISOString()
       const modal = document.querySelector('#my_modal_1')
       TasksDataService.create(this.task)
         .then(response => {
           console.log(this.tasks)
-          this.$emit('task-added', response.data)
           this.$refs.form.reset()
           this.$refs.closeform.querySelector('#closebutton').click()
           modal.showModal()
