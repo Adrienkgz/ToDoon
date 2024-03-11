@@ -81,12 +81,13 @@ export default {
   },
   methods: {
     updateCountdown (targetDate) {
-      const currentDate = new Date()
-      const diffMs = targetDate - currentDate
-      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-      const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
-      const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000)
+      this.countdownInterval = setInterval(() => {
+        const currentDate = new Date()
+        const diffMs = targetDate - currentDate
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+        const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
+        const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000)
 
         if (diffMs <= 0 && diffDays <= 0 && diffHours <= 0 && diffMinutes <= 0 && diffSeconds <= 0) {
           this.timeUp = true
