@@ -12,30 +12,6 @@
     <div class="carousel-item">
         <Card :name="'Louis'"/>
     </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
-    <div class="carousel-item">
-        <Card :name="'Louis'"/>
-    </div>
 </div>
 </template>
 <script>

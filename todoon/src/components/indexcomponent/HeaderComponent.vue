@@ -1,9 +1,8 @@
 <template>
     <header class="flex items-center justify-between py-2 px-5">
         <img src="../../assets/img/logo-pasteque-bg-removed.png" alt="Logo" class="w-151 h-104">
-        <nav class="hidden md:flex space-x-20">
+        <nav class="hidden md:flex sm:space-x-10 md:space-x-20">
             <router-link to="/" class="font-black hover:text-gray-600">Home</router-link>
-            <router-link to="/what" class="font-black hover:text-gray-600">What</router-link>
             <router-link to="/about" class="font-black hover:text-gray-600">About</router-link>
             <router-link to="/contact" class="font-black hover:text-gray-600">Contact</router-link>
             <router-link to="/home" class="font-black">Page 2(temp)</router-link>

@@ -5,7 +5,8 @@
         </div>
         <div class="flex w-full">
             <div class="flex flex-col flex-grow items-start">
-                <div class="align-start">
+              <div class="h-30"></div>
+                <div class="align-start" v-if="!timeUp">
                     <span class="countdown font-mono text-xl">
                         <span ref="days"></span>D-
                         <span ref="hours"></span>:
@@ -13,8 +14,9 @@
                         <span ref="seconds"></span>
                     </span>
                 </div>
+                <div class="align-center" v-else>Time' sUp !</div>
                 <div class="mt-2 h-1/2 max-w-56 break-words">
-                    <div v-if="task.taskdescription">
+                    <div v-if="task.taskdescription" id="description">
                         <div class="text-sm font-normal">{{ task.taskdescription }}</div>
                     </div>
                     <div v-else>
@@ -27,18 +29,18 @@
             </div>
             <div class="flex">
                 <ul class="menu justify-center space-x-1 bg-gray-300 rounded-box">
-                    <li id="status0">
-                        <a @click="toggleActive($event)" :class="{ 'todo': status === 0 }">
+                    <li id="status0" class="hover:bg-[#ff0000] hover:rounded-lg">
+                        <a @click="toggleActive($event)" class="items" :class="{ 'todo': (status === 0) }">
                         <img src="../../assets/img/toDoPasteque.png" />
                         </a>
                     </li>
                     <li id="status1">
-                        <a @click="toggleActive($event)" :class="{ 'doing': status === 1 }">
+                        <a @click="toggleActive($event)" class="items" :class="{ 'doing': (status === 1) }">
                         <img src="../../assets/img/doingPasteque.png" />
                         </a>
                     </li>
                     <li id="status2">
-                        <a @click="toggleActive($event)" :class="{ 'done': status === 2 }">
+                        <a @click="toggleActive($event)" class="items" :class="{ 'done': (status === 2) }">
                         <img src="../../assets/img/donePasteque.png" alt="">
                         </a>
                     </li>
@@ -60,20 +62,23 @@ export default {
   data () {
     return {
       mutableTask: null,
-      status: this.task.taskstatus
+      status: this.task.taskstatus,
+      timeUp: false,
+      timeLoaded: false,
+      itemsHovered: false
     }
   },
   mounted () {
-    this.mutableTask = { ...this.task } // Create a mutable copy of the task object
-    const dateString = this.mutableTask.taskenddate // format "année-mois-jour:heure:min:sec"
+    this.itemsIsHovered()
+    this.mutableTask = { ...this.task }
+    const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
     console.log('dateString', dateString)
     const dateObject = Date.parse(dateString)
     console.log('dateObject', dateObject)
     this.updateCountdown(dateObject)
-    this.intervalId = setInterval(() => this.updateCountdown(dateObject), 1000)
   },
   beforeUnmount () {
-    clearInterval(this.intervalId)
+    clearInterval(this.countdownInterval)
   },
   methods: {
     updateCountdown (targetDate) {
@@ -84,10 +89,17 @@ export default {
       const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
       const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000)
 
-      this.$refs.days.style.setProperty('--value', diffDays)
-      this.$refs.hours.style.setProperty('--value', diffHours)
-      this.$refs.minutes.style.setProperty('--value', diffMinutes)
-      this.$refs.seconds.style.setProperty('--value', diffSeconds)
+        if (diffMs <= 0 && diffDays <= 0 && diffHours <= 0 && diffMinutes <= 0 && diffSeconds <= 0) {
+          this.timeUp = true
+          clearInterval(this.countdownInterval)
+        } else {
+          this.timeLoaded = true
+          this.$refs.days.style.setProperty('--value', diffDays)
+          this.$refs.hours.style.setProperty('--value', diffHours)
+          this.$refs.minutes.style.setProperty('--value', diffMinutes)
+          this.$refs.seconds.style.setProperty('--value', diffSeconds)
+        }
+      }, 1000)
     },
     toggleActive (event) {
       const menuItems = document.querySelectorAll('.menu li')

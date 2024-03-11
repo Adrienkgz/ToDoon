@@ -1,12 +1,17 @@
 <template>
-    <div class="flex">
-        <aside class="w-1/5">
-            <MenuHomeComponent/>
-        </aside>
-        <main class="w-4/5">
-            <HeaderHomeComponent @search="onSearch"/>
-            <smallTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task"/>
-        </main>
+    <div class="flex flex-col min-h-screen">
+      <div class="flex-grow">
+        <div class="flex">
+          <aside class="w-1/5">
+              <MenuHomeComponent/>
+          </aside>
+          <main class="w-4/5">
+              <HeaderHomeComponent @search="onSearch"/>
+              <smallTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task"/>
+          </main>
+        </div>
+      </div>
+      <MainFooter/>
     </div>
 </template>
 
@@ -15,12 +20,14 @@ import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue
 import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
 import smallTaskCard from '@/components/cards/smallTaskCard.vue'
 import TasksDataService from '../TasksDataService'
+import MainFooter from '@/components/MainFooter.vue'
 
 export default {
   components: {
     MenuHomeComponent,
     HeaderHomeComponent,
-    smallTaskCard
+    smallTaskCard,
+    MainFooter
   },
   data () {
     return {

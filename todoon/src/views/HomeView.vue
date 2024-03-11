@@ -1,29 +1,33 @@
 <template>
-  <div class="flex">
-    <aside class="w-1/5">
-      <MenuHomeComponent/>
-  </aside>
-    <main class="w-4/5 pl-5">
-      <HeaderHomeComponent/>
+  <div class="flex flex-col min-h-screen">
+    <div class="flex-grow">
       <div class="flex">
-        <div class="flex-grow text-4xl font-black">Accueil</div>
-        <div>
-          <div class="filter-container mr-5">
-            <button class="filter-button">Filter by: Date <i class="fa fa-caret-down"></i></button>
-            <div class="filter-menu">
-              <ul>
-                <li>Date</li>
-                <li>Price</li>
-                <li>Popularity</li>
-              </ul>
+        <aside class="w-1/5">
+          <MenuHomeComponent/>
+        </aside>
+        <main class="w-4/5 pl-5">
+          <HeaderHomeComponent/>
+          <div class="flex">
+            <div class="flex-grow text-4xl font-black">Accueil</div>
+            <div>
+              <div class="filter-container mr-5">
+                <button class="filter-button">Filter by: Date <i class="fa fa-caret-down"></i></button>
+                <div class="filter-menu">
+                  <ul>
+                    <li>Date</li>
+                    <li>Price</li>
+                    <li>Popularity</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <appleCarousel/>
+        </main>
       </div>
-      <appleCarousel/>
-    </main>
+    </div>
+    <MainFooter />
   </div>
-  <MainFooter/>
 </template>
 <style>
 template {
