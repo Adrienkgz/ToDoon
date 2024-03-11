@@ -33,7 +33,7 @@
               <div class="label">
                 <span class="label-text text-xl">Date Task</span>
               </div>
-              <input type="date" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="task.taskenddate" required/>
+              <input type="datetime-local" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="task.taskenddate" required/>
             </label>
             <label class="form-control w-full max-w-xs">
               <div class="label">
