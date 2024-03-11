@@ -69,7 +69,6 @@ export default {
     }
   },
   mounted () {
-    this.itemsIsHovered()
     this.mutableTask = { ...this.task }
     const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
     console.log('dateString', dateString)
