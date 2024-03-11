@@ -122,8 +122,7 @@ export default {
   },
   methods: {
     addTask () {
-      // format the input (temp )
-      console.log(this.task)
+      // format the input (temp)
       this.task.taskenddate = new Date(this.task.taskenddate).toISOString()
       const modal = document.querySelector('#my_modal_1')
       TasksDataService.create(this.task)

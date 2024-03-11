@@ -65,8 +65,9 @@ export default {
     // Read the data
     const token = localStorage.getItem('token')
     console.log('token:', token)
-    TasksDataService.getAll()
+    TasksDataService.getAllByUser()
       .then(response => {
+        console.log('response:', response)
         this.tasks = response.data
         console.log(response.data)
       })

@@ -9,7 +9,7 @@
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
             <li><a>Profile</a></li>
             <li><a>Settings</a></li>
-            <li><a class="hover:underline">Deconnexion</a></li>
+            <li><a class="hover:underline" @click="logout">Deconnexion</a></li>
         </ul>
     </div>
 
@@ -25,6 +25,13 @@ a {
 export default {
   name: 'ProfilIconComponent',
   props: {
+  },
+  methods: {
+    logout () {
+      // on renvoie vers la page index
+      localStorage.removeItem('token')
+      this.$router.push('/')
+    }
   }
 }
 </script>

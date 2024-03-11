@@ -21,7 +21,15 @@ exports.create = (req, res) => {
        })
        return;
    }
-   Task.create(req.body)
+    const newtask = {
+         taskname: req.body.taskname,
+         taskdescription: req.body.taskdescription,
+         taskstatus: req.body.taskstatus,
+         taskenddate: req.body.taskenddate,
+         iduser: req.user.id
+    }
+
+   Task.create(newtask)
    .then(data => {
        res.send(data)
    })
@@ -85,6 +93,21 @@ exports.delete = (req, res) => {
                message: 'Product not found'
            })
        }
+   })
+   .catch(err => {
+       res.status(500).send({
+           message:
+           err.message || 'Some error occured'
+       })
+   })
+}
+
+exports.findAllByUser = (req, res) => {
+   const id = req.user.id
+   console.log(req.user.id)
+   Task.findAll({where: {iduser: id}})
+   .then(data => {
+       res.send(data)
    })
    .catch(err => {
        res.status(500).send({

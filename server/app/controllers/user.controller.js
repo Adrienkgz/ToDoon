@@ -7,7 +7,7 @@ require('dotenv').config();
 exports.signup = (req, res) => {
   try {
     // Vérifie si l'utilisateur existe
-    const {firstName, lastName, email, password, birthdate} = req.body
+    const {firstName, lastName, email, password} = req.body
     
     User.findOne({ where: { email: email } })
     .then(existingUser => {
