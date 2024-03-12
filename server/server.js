@@ -19,7 +19,7 @@ app.listen(PORT, () => {
 const db = require('./app/models')
 db.connex.sync()
 
-require('./app/routes/task.route')(app)
-require('./app/routes/user.route')(app)
+require('./app/routes/tasks.route')(app)
+require('./app/routes/users.route')(app)
 
 

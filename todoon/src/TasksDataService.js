@@ -2,27 +2,27 @@ import http from './http-common'
 
 class TasksDataService {
   getAll () {
-    return http.get('/task')
+    return http.get('/tasks')
   }
 
   create (data) {
-    return http.post('/task', data)
+    return http.post('/tasks', data)
   }
 
   get (id) {
-    return http.get(`/task/${id}`)
+    return http.get(`/tasks/${id}`)
   }
 
   update (id, data) {
-    return http.put(`/task/${id}`, data)
+    return http.put(`/tasks/${id}`, data)
   }
 
   delete (id) {
-    return http.delete(`/task/${id}`)
+    return http.delete(`/tasks/${id}`)
   }
 
   getAllByUser (userId) {
-    return http.get(`/task/${userId}`)
+    return http.get(`/tasks/${userId}`)
   }
 }
 export default new TasksDataService()

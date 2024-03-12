@@ -9,5 +9,5 @@ module.exports = app => {
     router.get('/:id', task.findOne)
     router.delete('/:id', task.delete)
     router.put('/:id', task.update)
-    app.use('/api/task', router)
+    app.use('/api/tasks', router)
 }

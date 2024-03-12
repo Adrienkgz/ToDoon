@@ -1,6 +1,8 @@
 const db = require('../models') 
 const Task = db.Tasks
 
+console.log(db.Tasks)
+
 exports.findAll = (req, res) => {
    Task.findAll()
    .then(data => {
@@ -26,7 +28,7 @@ exports.create = (req, res) => {
          taskdescription: req.body.taskdescription,
          taskstatus: req.body.taskstatus,
          taskenddate: req.body.taskenddate,
-         iduser: req.user.id
+         user_id: req.user.id
     }
 
    Task.create(newtask)
@@ -104,12 +106,14 @@ exports.delete = (req, res) => {
 
 exports.findAllByUser = (req, res) => {
    const id = req.user.id
-   console.log(req.user.id)
-   Task.findAll({where: {iduser: id}})
+   console.log(id)
+   console.log('user', req.user.id)
+   Task.findAll({where: {user_id: id}})
    .then(data => {
        res.send(data)
    })
    .catch(err => {
+        console.log(err)
        res.status(500).send({
            message:
            err.message || 'Some error occured'
