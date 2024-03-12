@@ -5,11 +5,11 @@
             <router-link to="/" class="font-black hover:text-gray-600">Home</router-link>
             <router-link to="/about" class="font-black hover:text-gray-600">About</router-link>
             <router-link to="/contact" class="font-black hover:text-gray-600">Contact</router-link>
-            <router-link to="/home" class="font-black">Page 2(temp)</router-link>
         </nav>
         <div class="flex justify-end flex-grow space-x-4 ">
-            <button class="ui-btn" @click="openSignPopUp"><span>Join_ToDOON</span></button>
-            <button class="button" @click="openPopup">Login</button>
+            <button class="ui-btn" @click="openSignPopUp" v-if="token === null"><span>Join_ToDOON</span></button>
+            <button class="button" @click="openPopupIfNotLog" v-if="token === null">Login</button>
+            <ProfilIconComponent v-else />
         </div>
   </header>
   <Teleport to="body">
@@ -28,12 +28,14 @@ header {
 <script>
 import Modal from '../indexcomponent/LoginPopUp.vue'
 import ModalSign from '../indexcomponent/SignInPopUp.vue'
+import ProfilIconComponent from '../homecomponent/ProfilIconComponent.vue'
 
 import { ref } from 'vue'
 export default {
   components: {
     Modal,
-    ModalSign
+    ModalSign,
+    ProfilIconComponent
   },
   name: 'HeaderComponent',
   props: {
@@ -41,6 +43,7 @@ export default {
   setup () {
     const showModal = ref(false)
     const showModalSign = ref(false)
+    const token = localStorage.getItem('token')
 
     const openPopup = () => {
       showModal.value = true
@@ -53,8 +56,18 @@ export default {
     return {
       showModal,
       showModalSign,
+      token,
       openPopup,
       openSignPopUp
+    }
+  },
+  methods: {
+    openPopupIfNotLog () {
+      if (localStorage.getItem('token') === null) {
+        this.openPopup()
+      } else {
+        this.$router.push('/home')
+      }
     }
   }
 }

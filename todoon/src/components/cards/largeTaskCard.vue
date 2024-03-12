@@ -110,7 +110,7 @@
           <form method="dialog" ref="modal-backdrop">
               <button class="btn" @click="cancelFunction()">Cancel</button>
           </form>
-          <button type="submit" class="btn bg-secondary hover:bg-secondary">Modify</button>
+          <button type="submit" class="btn bg-secondary hover:bg-secondary" @click="modifyTask()">Modify</button>
         </div>
       </div>
     </dialog>
@@ -154,7 +154,7 @@ export default {
     }
   },
   mounted () {
-    this.newTask = this.task
+    this.newTask = { ...this.task }
     const isoDate = new Date(this.newTask.taskenddate)
     this.newTask.taskenddate = isoDate.toISOString().slice(0, 16)
     console.log('Task: ', this.task)
@@ -242,8 +242,17 @@ export default {
     },
     modifyTask () {
       console.log('modifyTask')
-      const modal = document.querySelector('#my_modal_5')
-      modal.close()
+      TasksDataService.update(this.task.id, this.newTask)
+        .then(response => {
+          console.log(response.data)
+          this.newTask = { ...this.task }
+          const modal = document.querySelector('#my_modal_5_' + this.task.id)
+          modal.close()
+          window.location.reload()
+        })
+        .catch(e => {
+          console.log(e)
+        })
     },
     updateTaskDescription (event) {
       this.newTask.taskdescription = event.target.value
@@ -272,7 +281,7 @@ export default {
     },
     cancelFunction () {
       console.log('cancel Modify Task Function')
-      this.newTask = this.task
+      this.newTask = { ...this.task }
       const modal = document.querySelector('#my_modal_5_' + this.task.id)
       modal.close()
     }
