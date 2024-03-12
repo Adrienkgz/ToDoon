@@ -33,8 +33,6 @@ exports.create = (req, res) => {
          priority: req.body.priority,
          category_id: req.body.category_id
     }
-    console.log(req.body)
-    console.log(newtask)
    Task.create(newtask)
    .then(data => {
        res.send(data)

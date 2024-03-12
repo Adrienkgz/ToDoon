@@ -128,12 +128,10 @@ export default {
   methods: {
     addTask () {
       // format the input (temp )
-      console.log(this.task)
       this.task.taskenddate = new Date(this.task.taskenddate).toISOString()
       const modal = document.querySelector('#my_modal_1')
       TasksDataService.create(this.task)
         .then(response => {
-          console.log(this.tasks)
           this.$refs.form.reset()
           this.$refs.closeform.querySelector('#closebutton').click()
           modal.showModal()

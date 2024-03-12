@@ -41,37 +41,57 @@
         </ul>
         <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
             <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
-            <li v-for="category in list_category" :key="category.id">
-                <a>{{ category.name }}</a>
+            <li>
+                <details open>
+                <summary>Categories</summary>
+                <ul>
+                    <li class="flex-item" v-for="category in list_category" :key="category.id">
+                        <div class="flex-container">
+                            <img :src="require(`@/assets/img/imgcategory/${category.icon}.png`)" class="flex-item" style="width: 20px; height: 20px; border-radius: 0%;">
+                            <a class="flex-item">{{ category.name }}</a>
+                        </div>
+                    </li>
+                </ul>
+                </details>
             </li>
         </ul>
         <!-- Pop up pour créer une tâche -->
-            <dialog id="add_category_modal" class="modal">
-        <div class="modal-box w-11/12 max-w-5xl">
+        <dialog id="add_category_modal" class="modal">
+            <form ref="formcategory" @submit.prevent="addCategory()">
+            <div class="modal-box w-11/12 max-w-5xl">
                 <div class="flex justify-center">
-                    <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Task !</span></h3>
+                    <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Category !</span></h3>
                 </div>
                 <div class="flex space-x-5 mt-5">
                     <label class="form-control w-full max-w-xs">
                         <div class="label">
-                            <span class="label-text text-xl">Name Task</span>
+                            <span class="label-text text-xl">Name Category</span>
                         </div>
-                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id = 'name' v-model="newcategory.name" required/>
+                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id = 'name' v-model="this.newcategory.name" required/>
                     </label>
                 </div>
                 <label class="form-control w-full mt-5">
                     <div class="label">
-                        <span class="label-text text-xl">Task Description</span>
+                        <span class="label-text text-xl">Icons</span>
                     </div>
-                    <textarea class="textarea textarea-bordered resize-none" placeholder="Description" id='description' v-model="newcategory.icon"></textarea>
+                    <div class="flex flex-wrap h-48 overflow-y-auto" id="scrollbaricon">
+                        <ul class="flex flex-col w-1/5 p-2" v-for="image in this.icons" :key="image">
+                            <li>
+                            <a @click="getActive(image)">
+                                <img :src="require(`@/assets/img/imgcategory/${image}.png`)" class="category-image" :id="image">
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
                 </label>
                 <div class="flex justify-end mt-5 space-x-5">
                     <form method="dialog" ref="closeform">
                                     <button class="btn" id="closebutton">Close</button>
                     </form>
-                                <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
+                                <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Category</button>
                 </div>
         </div>
+        </form>
         </dialog>
     </div>
 </template>
@@ -88,32 +108,96 @@ export default {
   data () {
     return {
       newcategory: {
-        name: '',
-        icon: ''
+        name: ''
       },
+      icon_selected: 'icon-barcelona',
       list_category: [],
-      list_project: []
+      list_project: [],
+      icons: []
     }
   },
   mounted () {
+    const images = require.context('../../assets/img/imgcategory', false, /\.png$/)
+    images.keys().forEach(image => {
+      this.icons.push(image.replace('./', '').replace('.png', ''))
+    })
+
+    // Récupère les catégories
+    CategoryDataService.getAll()
+      .then(response => {
+        this.list_category = response.data
+        console.log(this.list_category)
+      })
+      .catch(e => {
+        console.log(e)
+      })
   },
   methods: {
     addCategory () {
-      console.log('Add Category')
-      CategoryDataService.create()
+      const newcategory = {
+        name: this.newcategory.name,
+        icon: this.icon_selected
+      }
+      CategoryDataService.create(newcategory)
         .then(response => {
           console.log(response)
+          // Animation réussite
+          window.location.reload()
         })
         .catch(e => {
           console.log(e)
         })
+    },
+    getActive (image) {
+      this.icon_selected = image
+      const images = document.querySelectorAll('.category-image')
+      console.log(images)
+      images.forEach((img) => {
+        img.classList.remove('active')
+      })
+      const img = document.querySelector('#' + image)
+      console.log(img)
+      img.classList.add('active')
     }
   }
 }
 </script>
 
 <style>
+.category-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 0%;
+  cursor: pointer;
+}
 
+.active {
+  border: 1px solid black;
+  border-radius: 20%;
+  transition: all 0.3s ease-out;
+}
+
+/* Scrollbar */
+
+#scrollbaricon::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+border-radius: 10px;
+background-color: #F5F5F5;
+}
+
+#scrollbaricon::-webkit-scrollbar
+{
+width: 12px;
+background-color: #F5F5F5;
+}
+
+#scrollbaricon::-webkit-scrollbar-thumb
+{
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #555;
+}
 </style>
 
 <!-- BEGIN: ed8c6549bwf9
