@@ -24,9 +24,12 @@
         <swiper-slide v-for="task in tasks" :key="task.name">
           <largeTaskCard :task="task"/>
         </swiper-slide>
+        <swiper-slide>
+          <largeTaskCardAdd/>
+        </swiper-slide>
       </swiper>
     </div>
-    <div v-if="loaded && !tasks.length">
+    <div v-if="loaded && !tasks.length" class="flex justify-center content-center">
       <hamsterWheel/>
     </div>
   </div>
@@ -39,6 +42,7 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import TasksDataService from '../../TasksDataService'
 import hamsterWheel from '../animation/hamsterAnimation.vue'
+import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
@@ -47,7 +51,8 @@ export default {
     largeTaskCard,
     Swiper,
     SwiperSlide,
-    hamsterWheel
+    hamsterWheel,
+    largeTaskCardAdd
   },
   setup () {
     return {

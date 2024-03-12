@@ -6,6 +6,7 @@ import ContactView from '../views/ContactView.vue'
 import ToDoView from '../views/ToDoView.vue'
 import DoingView from '../views/DoingView.vue'
 import DoneView from '../views/DoneView.vue'
+import ProfileView from '../views/ProfileView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/home/done',
     name: 'done',
     component: DoneView
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
   }
 ]
 

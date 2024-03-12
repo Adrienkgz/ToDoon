@@ -64,7 +64,7 @@ export default {
   --btn-default-bg: rgb(255, 255, 255);
   --btn-padding: 15px 20px;
   --btn-hover-bg: #FF4785;
-  --btn-transition: .3s;
+  --btn-transition: .1s;
   --btn-letter-spacing: .1rem;
   --btn-animation-duration: 1.2s;
   --btn-shadow-color: rgba(0, 0, 0, 0.137);
