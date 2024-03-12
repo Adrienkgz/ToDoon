@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-300">
+  <div class="w-full h-500">
     <div v-if="loaded && tasks.length">
       <div class="pt-2">Today's Task</div>
       <swiper
@@ -29,8 +29,8 @@
         </swiper-slide>
       </swiper>
     </div>
-    <div v-if="loaded && !tasks.length" class="flex justify-center content-center">
-      <hamsterWheel/>
+    <div v-if="loaded && !tasks.length" class="flex md:flex-row sm:flex-col justify-center space-x-20">
+      <noTaskView/>
     </div>
   </div>
 </template>
@@ -41,8 +41,8 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import TasksDataService from '../../services/TasksDataService'
-import hamsterWheel from '../animation/hamsterAnimation.vue'
 import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
+import noTaskView from '../animation/noTaskViewHamster.vue'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
@@ -51,8 +51,8 @@ export default {
     largeTaskCard,
     Swiper,
     SwiperSlide,
-    hamsterWheel,
-    largeTaskCardAdd
+    largeTaskCardAdd,
+    noTaskView
   },
   setup () {
     return {
