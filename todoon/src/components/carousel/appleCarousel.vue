@@ -41,7 +41,6 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import TasksDataService from '../../services/TasksDataService'
-import hamsterWheel from '../animation/hamsterAnimation.vue'
 import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
 import noTaskView from '../animation/noTaskViewHamster.vue'
 // import required modules
