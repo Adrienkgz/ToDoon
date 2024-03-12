@@ -40,10 +40,83 @@
             </li>
         </ul>
         <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
-            <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" @click="addCategory">Add Category</a></li>
-            <li><a>Item 1</a></li>
+            <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
+            <li v-for="category in list_category" :key="category.id">
+                <a>{{ category.name }}</a>
+            </li>
         </ul>
-            <!-- BEGIN: ed8c6549bwf9
+        <!-- Pop up pour créer une tâche -->
+            <dialog id="add_category_modal" class="modal">
+        <div class="modal-box w-11/12 max-w-5xl">
+                <div class="flex justify-center">
+                    <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Task !</span></h3>
+                </div>
+                <div class="flex space-x-5 mt-5">
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text text-xl">Name Task</span>
+                        </div>
+                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id = 'name' v-model="newcategory.name" required/>
+                    </label>
+                </div>
+                <label class="form-control w-full mt-5">
+                    <div class="label">
+                        <span class="label-text text-xl">Task Description</span>
+                    </div>
+                    <textarea class="textarea textarea-bordered resize-none" placeholder="Description" id='description' v-model="newcategory.icon"></textarea>
+                </label>
+                <div class="flex justify-end mt-5 space-x-5">
+                    <form method="dialog" ref="closeform">
+                                    <button class="btn" id="closebutton">Close</button>
+                    </form>
+                                <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Task</button>
+                </div>
+        </div>
+        </dialog>
+    </div>
+</template>
+
+<script>
+import CategoryDataService from '@/services/CategoryDataService'
+
+export default {
+  name: 'MenuHomeComponent',
+  components: {
+  },
+  props: {
+  },
+  data () {
+    return {
+      newcategory: {
+        name: '',
+        icon: ''
+      },
+      list_category: [],
+      list_project: []
+    }
+  },
+  mounted () {
+  },
+  methods: {
+    addCategory () {
+      console.log('Add Category')
+      CategoryDataService.create()
+        .then(response => {
+          console.log(response)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
+
+<!-- BEGIN: ed8c6549bwf9
             <li>
                 <details close>
                 <summary>Parent</summary>
@@ -64,41 +137,3 @@
             </li>
             <li><a>Item 3</a></li>
             END: ed8c6549bwf9 -->
-    </div>
-</template>
-
-<script>
-import CategoryDataManager from '@/services/CategoryDataManager'
-
-export default {
-  name: 'MenuHomeComponent',
-  props: {
-  },
-  data() {
-    return {
-        list_category: [],
-        list_project: []
-    }
-  },
-  mounted() {
-    
-  },
-  methods: {
-    addCategory() {
-      console.log('Add Category')
-      CategoryDataManager.addCategory()
-        .then(response => {
-          console.log(response)
-          
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    }
-  }
-}
-</script>
-
-<style>
-
-</style>

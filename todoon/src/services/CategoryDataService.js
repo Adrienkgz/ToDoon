@@ -1,8 +1,12 @@
 import http from './http-common'
 
 class CategoryDataService {
+  create (data) {
+    return http.post('/category', data)
+  }
+
   getAll () {
-    return http.get('/tasks')
+    return http.get('/category')
   }
 
   getAllByUser (userId) {
