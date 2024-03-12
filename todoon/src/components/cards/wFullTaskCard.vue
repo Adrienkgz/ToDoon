@@ -122,7 +122,7 @@
     </dialog>
 </template>
 <script>
-import TasksDataService from '@/TasksDataService'
+import TasksDataService from '@/services/TasksDataService'
 export default {
   name: 'smallTaskCard',
   props: {

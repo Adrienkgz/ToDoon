@@ -30,7 +30,7 @@
   </transition>
 </template>
 <script>
-import UsersDataService from '@/UsersDataService'
+import UsersDataService from '@/services/UsersDataService'
 
 export default {
   data () {

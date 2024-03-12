@@ -40,7 +40,10 @@
             </li>
         </ul>
         <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
+            <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" @click="addCategory">Add Category</a></li>
             <li><a>Item 1</a></li>
+        </ul>
+            <!-- BEGIN: ed8c6549bwf9
             <li>
                 <details close>
                 <summary>Parent</summary>
@@ -60,14 +63,38 @@
                 </details>
             </li>
             <li><a>Item 3</a></li>
-        </ul>
+            END: ed8c6549bwf9 -->
     </div>
 </template>
 
 <script>
+import CategoryDataManager from '@/services/CategoryDataManager'
+
 export default {
   name: 'MenuHomeComponent',
   props: {
+  },
+  data() {
+    return {
+        list_category: [],
+        list_project: []
+    }
+  },
+  mounted() {
+    
+  },
+  methods: {
+    addCategory() {
+      console.log('Add Category')
+      CategoryDataManager.addCategory()
+        .then(response => {
+          console.log(response)
+          
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
   }
 }
 </script>

@@ -105,7 +105,7 @@ button {
 }
 </style>
 <script>
-import TasksDataService from '../../TasksDataService'
+import TasksDataService from '../../services/TasksDataService'
 
 export default {
   name: 'AddTaskComponent',
