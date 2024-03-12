@@ -27,8 +27,8 @@ export default {
 .wheel-and-hamster {
   --dur: 1s;
   position: relative;
-  width: 12em;
-  height: 12em;
+  width: 18em;
+  height: 18em;
   font-size: 14px;
 }
 
@@ -44,8 +44,8 @@ export default {
   border-radius: 50%;
   top: 0;
   left: 0;
-  width: 140%;
-  height: 140%;
+  width: 100%;
+  height: 100%;
 }
 
 .wheel {
@@ -55,10 +55,10 @@ export default {
 
 .hamster {
   animation: hamster var(--dur) ease-in-out infinite;
-  top: 70%;
-  left: calc(75% - 3.5em);
+  top: 52%;
+  left: calc(75% - 6.6em);
   width: 6em;
-  height: 3.25em;
+  height: 3em;
   transform: rotate(4deg) translate(-0.8em,1.85em);
   transform-origin: 50% 0;
   z-index: 1;

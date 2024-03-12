@@ -1,10 +1,10 @@
 <template>
     <div class="card h-48 w-96 p-4">
-      <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3" onclick="my_modal_4.showModal()" title="Add New">
+      <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3 mt-5" onclick="my_modal_4.showModal()" title="Add New">
         <svg
           class="stroke-pinky fill-none group-hover:fill-pinky-100 group-active:stroke-pink-300 group-active:fill-pink-500 group-active:duration-0 duration-300"
           viewBox="0 0 24 24"
-          height="50px"
+          height="75px"
           width="100%"
           xmlns="http://www.w3.org/2000/svg"
         >
