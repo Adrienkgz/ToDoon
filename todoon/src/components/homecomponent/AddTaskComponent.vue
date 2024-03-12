@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="addTask" ref="form">
     <!-- You can open the modal using ID.showModal() method -->
-    <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3" onclick="my_modal_4.showModal()" title="Add New">
+    <button class="mt-4 group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3" onclick="my_modal_4.showModal()" title="Add New">
       <svg
         class="stroke-pinky fill-none group-hover:fill-pinky-100 group-active:stroke-pink-300 group-active:fill-pink-500 group-active:duration-0 duration-300"
         viewBox="0 0 24 24"
@@ -196,7 +196,7 @@ export default {
       content: "";
       height: 100px;
       position: absolute;
-      background: #ffffff;
+      background: #ffffff00;
       transform: rotate(-45deg);
     }
 
@@ -245,7 +245,7 @@ export default {
       height: 85px;
       position: absolute;
       transform: rotate(-45deg);
-      background-color: #ffffff;
+      background-color: #ffffff00;
     }
   }
 }

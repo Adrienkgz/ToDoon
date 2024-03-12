@@ -1,6 +1,6 @@
 <template>
     <header class="flex items-center justify-between py-2 px-5">
-        <img src="../../assets/img/logo-pasteque-bg-removed.png" alt="Logo" class="w-151 h-104">
+        <img src="../../assets/img/logo-pasteque-bg-removed.png" alt="Logo" class="w-auto h-full">
         <nav class="hidden md:flex sm:space-x-10 md:space-x-20">
             <router-link to="/" class="font-black hover:text-gray-600">Home</router-link>
             <router-link to="/about" class="font-black hover:text-gray-600">About</router-link>

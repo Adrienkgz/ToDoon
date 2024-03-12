@@ -1,52 +1,83 @@
 <template>
-    <!--Logo Part-->
-    <div class="flex justify-center  items-center">
-        <router-link to="/">
-            <img src="../../assets/img/logo-pasteque-bg-removed.png">
-        </router-link>
-        <h1 class="w-2/3 text-4xl font-bold text-right px-8" style="font-size: 2vw;">ToDOON</h1>
-    </div>
-    <div class="flex-col justify-center text-center mt-5 space-y-10" >
-        <ul class="m-auto menu menu-vertical bg-gray-300 w-56 rounded-box text-xl" id="div-parts">
-            <li>
-                <router-link to="/home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="red"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-                Home
-                </router-link>
-            </li>
-            <li>
-                <a>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Today
-                </a>
-            </li>
-            <li>
-                <router-link to="/home/todo">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                To Do
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/home/doing">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                Doing
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/home/done">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                Done
-                </router-link>
-            </li>
-        </ul>
-        <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
-            <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
-            <li v-for="category in list_category" :key="category.id">
-                <a>{{ category.name }}</a>
-            </li>
-        </ul>
+    <div class="flex-col justify-center text-center space-y-10" >
+        <nav id="menu-horizontal" v-if="windowWidth >= 550">
+            <ul class="m-auto menu menu-vertical bg-gray-300 w-4/5 rounded-box text-xl" id="menu-vertical-liste" >
+                <li>
+                    <router-link to="/home">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="red"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    <div class="menuTitle">home</div>
+                    </router-link>
+                </li>
+                <li>
+                    <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <div class="menuTitle">Today</div>
+                    </a>
+                </li>
+                <li>
+                    <router-link to="/home/todo">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    <div class="menuTitle">To DO</div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/home/doing">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    <div class="menuTitle">Doing</div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/home/done">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    <div class="menuTitle">Done</div>
+                    </router-link>
+                </li>
+            </ul>
+            <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
+                <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
+                <li v-for="category in list_category" :key="category.id">
+                    <a>{{ category.name }}</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Menu Horizontal -->
+        <nav id="menu-horizontal" v-else-if="windowWidth <= 550">
+            <ul class="flex-none align-items-center m-auto menu menu-horizontal bg-gray-300 w-4/5 rounded-box text-xl">
+                <li>
+                    <router-link to="/home">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="red"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    </router-link>
+                </li>
+                <li>
+                    <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </a>
+                </li>
+                <li>
+                    <router-link to="/home/todo">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/home/doing">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/home/done">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    </router-link>
+                </li>
+            </ul>
+            <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
+                <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
+                <li v-for="category in list_category" :key="category.id">
+                    <a>{{ category.name }}</a>
+                </li>
+            </ul>
+        </nav>
         <!-- Pop up pour créer une tâche -->
-            <dialog id="add_category_modal" class="modal">
+        <dialog id="add_category_modal" class="modal">
         <div class="modal-box w-11/12 max-w-5xl">
                 <div class="flex justify-center">
                     <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Task !</span></h3>
@@ -92,10 +123,13 @@ export default {
         icon: ''
       },
       list_category: [],
-      list_project: []
+      list_project: [],
+      windowWidth: 0
     }
   },
   mounted () {
+    this.windowWidth = window.innerWidth
+    window.addEventListener('resize', this.handleResize)
   },
   methods: {
     addCategory () {
@@ -107,13 +141,34 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    beforeDestroy () {
+      window.removeEventListener('resize', this.handleResize)
+    },
+    handleResize () {
+      this.windowWidth = window.innerWidth
     }
   }
 }
 </script>
 
 <style>
-
+@media only screen and (max-width: 860px) {
+  .menuTitle {
+    display: none;
+  }
+  #menu-vertical-liste {
+    width: 5rem;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .menuTitle {
+    display: none;
+  }
+  #menu-horizontal-liste {
+    width: 100%;
+  }
+}
 </style>
 
 <!-- BEGIN: ed8c6549bwf9

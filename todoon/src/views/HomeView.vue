@@ -1,15 +1,15 @@
 <template>
   <div class="flex flex-col min-h-screen">
+    <HeaderHomeComponent/>
     <div class="flex-grow">
-      <div class="flex">
-        <aside class="w-1/5">
+      <div class="flex" id="homeFlex">
+        <aside class="w-1/5" id="aside">
           <MenuHomeComponent/>
         </aside>
         <main class="w-4/5 pl-5">
-          <HeaderHomeComponent/>
-          <div class="flex">
+          <div class="flex" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Accueil</div>
-            <div>
+            <div class="flex items-center">
               <div class="filter-container mr-5">
                 <button class="filter-button">Filter by: Date <i class="fa fa-caret-down"></i></button>
                 <div class="filter-menu">
@@ -33,6 +33,11 @@
 template {
   background-color: aqua;
 }
+@media only screen and (max-width: 500px) {
+  #homeFlex {
+    flex-direction: column;
+  }
+}
 </style>
 <script>
 import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
@@ -51,17 +56,16 @@ export default {
 </script>
 <style>
 .filter-container {
-  position: relative;
+  position: static;
   display: inline-block;
 }
 
 .filter-button {
   background-color: #ffffff00;
   color: #FF4785;
-  padding: 10px 20px;
   border: none;
   cursor: pointer;
-  position: relative;
+  position: static;
   display: flex;
   align-items: center;
 }
@@ -97,5 +101,16 @@ export default {
 
 .filter-button:focus + .filter-menu {
   display: block;
+}
+@media only screen and (max-width: 600px) {
+  #accueilFilter {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #aside {
+    width: 100%;
+  }
 }
 </style>

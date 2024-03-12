@@ -1,9 +1,15 @@
 <template>
-    <div class="flex items-center">
+    <div class="flex items-center m-3">
+        <div class="flex justify-center items-center w-1/5">
+          <router-link to="/">
+              <img src="../../assets/img/logo-pasteque-bg-removed.png" class="w-full h-50">
+          </router-link>
+          <h1 class="text-2vw font-bold text-right px-8" id="title" style="font-size: 2vw;">ToDOON</h1>
+        </div>
         <div class="2/5 px-5">
             <SearchBarComponent @search="onSearch"/>
         </div>
-        <div class="flex-grow flex justify-end p-5">
+        <div class="flex-grow flex justify-end items-center p-1">
             <AddTaskComponent/>
             <ProfilIconComponent/>
         </div>
@@ -29,3 +35,10 @@ export default {
   }
 }
 </script>
+<style>
+@media only screen and (max-width: 800px) {
+  #title {
+    display: none;
+  }
+}
+</style>

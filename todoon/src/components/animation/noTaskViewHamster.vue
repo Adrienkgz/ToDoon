@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center place-items-center text-2xl font-black">Not<span class="mx-2 text-pinky text-4xl">Task</span>yet ...</div>
       <div class="flex justify-center"><hamsterWheel/></div>
-      <div class="flex md:flex-row sm:flex-col place-items-center justify-center items-center text-2xl font-black">Click on
+      <div class="flex lg:flex-row md:flex-col place-items-center justify-center items-center text-2xl font-black">Click on
         <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3 mt-5" onclick="my_modal_4.showModal()" title="Add New">
           <svg
             class="stroke-pinky fill-none group-hover:fill-pinky-100 group-active:stroke-pink-300 group-active:fill-pink-500 group-active:duration-0 duration-300"

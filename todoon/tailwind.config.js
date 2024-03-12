@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       colors: {
         'pinky': '#FF4785',
+      },
+      spacing: {
+        '128': '32rem',
       }
     },
   },

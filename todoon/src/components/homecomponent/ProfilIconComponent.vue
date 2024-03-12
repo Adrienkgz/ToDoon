@@ -2,7 +2,7 @@
 
     <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="avatar m-1">
-            <div class="w-12 h-12 rounded-full ring ring-primary hover:ring-pink-600 ring-offset-base-100 ring-offset-2">
+            <div class="w-12 h-12 rounded-full ring ring-pinky hover:ring-pink-600 ring-offset-base-100 ring-offset-2">
                 <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
             </div>
         </div>

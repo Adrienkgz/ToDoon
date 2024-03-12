@@ -29,7 +29,7 @@
         </swiper-slide>
       </swiper>
     </div>
-    <div v-if="loaded && !tasks.length" class="flex md:flex-row sm:flex-col justify-center space-x-20">
+    <div v-if="loaded && !tasks.length" class="flex lg:flex-row md:flex-col sm:flex-col justify-center md:space-x-20" id="noTask">
       <noTaskView/>
     </div>
   </div>
@@ -41,7 +41,6 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import TasksDataService from '../../services/TasksDataService'
-import hamsterWheel from '../animation/hamsterAnimation.vue'
 import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
 import noTaskView from '../animation/noTaskViewHamster.vue'
 // import required modules
@@ -96,5 +95,11 @@ export default {
 .swiper-slide {
   background-position: center;
   background-size: cover;
+}
+@media only screen and (max-width: 640px) {
+  #noTask {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
