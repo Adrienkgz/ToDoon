@@ -1,8 +1,6 @@
 const db = require('../models') 
 const Task = db.Tasks
 
-console.log(db.Tasks)
-
 exports.findAll = (req, res) => {
    Task.findAll()
    .then(data => {

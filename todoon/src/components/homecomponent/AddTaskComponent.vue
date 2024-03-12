@@ -17,6 +17,7 @@
         <path stroke-width="1.5" d="M12 16V8"></path>
       </svg>
     </button>
+    <!-- Pop Up pour créer une tâche -->
     <dialog id="my_modal_4" class="modal">
       <div class="modal-box w-11/12 max-w-5xl">
           <div class="flex justify-center">
@@ -79,6 +80,7 @@
         <button>close</button>
       </dialog>
   </form>
+  <!-- Pop up pour dire que la tâche est bien ajoutée -->
   <dialog id="my_modal_1" class="modal">
     <div class="modal-box">
       <h3 class="font-bold text-lg">The task is correctly added</h3>
@@ -105,7 +107,7 @@ button {
 }
 </style>
 <script>
-import TasksDataService from '../../TasksDataService'
+import TasksDataService from '../../services/TasksDataService'
 
 export default {
   name: 'AddTaskComponent',

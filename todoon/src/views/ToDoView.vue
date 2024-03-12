@@ -19,7 +19,7 @@
 <script>
 import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
 import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
-import TasksDataService from '../TasksDataService'
+import TasksDataService from '../services/TasksDataService'
 import MainFooter from '@/components/MainFooter.vue'
 import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
 

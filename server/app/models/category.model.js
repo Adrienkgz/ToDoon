@@ -1,7 +1,6 @@
 module.exports = (connex, Sequelize) => {
     const Category = connex.define('Category', {
       name: Sequelize.STRING,
-      description: Sequelize.STRING,
       icon: Sequelize.STRING,
       user_id: {
         type: Sequelize.INTEGER
