@@ -149,6 +149,8 @@ export default {
     }
   },
   mounted () {
+    this.windowWidth = window.innerWidth
+    window.addEventListener('resize', this.handleResize)
     const images = require.context('../../assets/img/imgcategory', false, /\.png$/)
     images.keys().forEach(image => {
       console.log(image)
@@ -164,6 +166,9 @@ export default {
       .catch(e => {
         console.log(e)
       })
+  },
+  beforeUnmount () {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     addCategory () {
@@ -191,9 +196,6 @@ export default {
       const img = document.querySelector('#' + image)
       console.log(img)
       img.classList.add('active')
-    },
-    beforeDestroy () {
-      window.removeEventListener('resize', this.handleResize)
     },
     handleResize () {
       this.windowWidth = window.innerWidth
