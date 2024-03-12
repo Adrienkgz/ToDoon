@@ -30,6 +30,7 @@ export default {
       // on renvoie vers la page index
       localStorage.removeItem('token')
       this.$router.push('/')
+      window.location.reload()
     }
   }
 }
