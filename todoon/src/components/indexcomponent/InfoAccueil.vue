@@ -41,7 +41,7 @@ export default {
     return {
       showModal,
       openPopup,
-      tokenx
+      token
     }
   },
   methods: {
