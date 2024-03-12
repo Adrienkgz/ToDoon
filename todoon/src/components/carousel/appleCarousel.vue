@@ -29,7 +29,7 @@
         </swiper-slide>
       </swiper>
     </div>
-    <div v-if="loaded && !tasks.length">
+    <div v-if="loaded && !tasks.length" class="flex justify-center content-center">
       <hamsterWheel/>
     </div>
   </div>

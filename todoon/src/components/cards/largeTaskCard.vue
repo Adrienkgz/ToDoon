@@ -64,7 +64,7 @@
             <div class="label">
               <span class="label-text text-xl">Name Task</span>
             </div>
-            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id = 'name' v-model="newTask.taskname" required/>
+            <input type="text" class="input input-bordered w-full max-w-xs" id = 'name' v-model="newTask.taskname" required/>
           </label>
           <label class="form-control w-full max-w-xs">
             <div class="label">
@@ -104,11 +104,11 @@
           <div class="label">
             <span class="label-text text-xl">Task Description</span>
           </div>
-          <textarea class="textarea textarea-bordered resize-none" value ="je suis une description" :placeholder="this.task.description" id='description' v-model="newTask.taskdescription"></textarea>
+          <textarea class="textarea textarea-bordered resize-none" value ="je suis une description" id='description' v-model="newTask.taskdescription"></textarea>
         </label>
         <div class="modal-action">
           <form method="dialog" ref="modal-backdrop">
-              <button class="btn" >Cancel</button>
+              <button class="btn" @click="cancelFunction()">Cancel</button>
           </form>
           <button type="submit" class="btn bg-secondary hover:bg-secondary">Modify</button>
         </div>
@@ -154,7 +154,10 @@ export default {
     }
   },
   mounted () {
-    console.log('Task Name: ', this.task.taskname)
+    this.newTask = this.task
+    const isoDate = new Date(this.newTask.taskenddate)
+    this.newTask.taskenddate = isoDate.toISOString().slice(0, 16)
+    console.log('Task: ', this.task)
     this.itemsIsHovered()
     this.mutableTask = { ...this.task }
     const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
@@ -266,6 +269,12 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    cancelFunction () {
+      console.log('cancel Modify Task Function')
+      this.newTask = this.task
+      const modal = document.querySelector('#my_modal_5_' + this.task.id)
+      modal.close()
     }
   }
 }
