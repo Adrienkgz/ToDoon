@@ -23,14 +23,20 @@ exports.create = (req, res) => {
        })
        return;
    }
+   if (req.body.category_id == '') {
+        req.body.category_id = null
+   }
     const newtask = {
          taskname: req.body.taskname,
          taskdescription: req.body.taskdescription,
          taskstatus: req.body.taskstatus,
          taskenddate: req.body.taskenddate,
-         user_id: req.user.id
+         user_id: req.user.id,
+         priority: req.body.priority,
+         category_id: req.body.category_id
     }
-
+    console.log(req.body)
+    console.log(newtask)
    Task.create(newtask)
    .then(data => {
        res.send(data)

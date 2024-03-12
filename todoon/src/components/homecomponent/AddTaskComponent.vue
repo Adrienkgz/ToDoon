@@ -39,14 +39,14 @@
               <div class="label">
                 <span class="label-text text-xl">Type of Task</span>
               </div>
-              <select class="select select-bordered w-full max-w-xs">
-                <option disabled selected>Type of Task?</option>
-                <option>Work</option>
-                <option>Personal</option>
-                <option>Family</option>
-                <option>Friends</option>
-                <option>Home</option>
-                <option>Other</option>
+              <select class="select select-bordered w-full max-w-xs" v-model="task.category">
+                <option disabled selected value="">Type of Task?</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Family">Family</option>
+                <option value="Friends">Friends</option>
+                <option value="Home">Home</option>
+                <option value="Other">Other</option>
               </select>
             </label>
           </div>
@@ -54,7 +54,7 @@
             <div class="label">
               <span class="label-text text-xl">Priority Level</span>
             </div>
-            <input type="range" min="0" max="100" value="25" class="range" step="25" />
+            <input type="range" min="0" max="4" value="2" class="range" step="1" v-model="task.priority"/>
             <div class="w-full flex justify-between text-xs px-2">
               <span>|</span>
               <span>|</span>
@@ -117,7 +117,9 @@ export default {
         taskname: '',
         taskdescription: '',
         taskstatus: 0,
-        taskenddate: ''
+        taskenddate: '',
+        priority: -1,
+        category: ''
       }
     }
   },
