@@ -6,15 +6,22 @@
         <div class="flex w-full">
           <div class="flex flex-col flex-grow items-start">
             <div class="h-30"></div>
-              <div class="align-start" v-if="!timeUp">
-                  <span class="countdown font-mono text-xl">
-                      <span ref="days"></span>D-
-                      <span ref="hours"></span>:
-                      <span ref="minutes"></span>:
-                      <span ref="seconds"></span>
-                  </span>
+              <div class="align-start" v-if="!timeUp && this.task.taskenddate != ''">
+                <span class="countdown font-mono text-xl">
+                  <span ref="days"></span>D-
+                  <span ref="hours"></span>:
+                  <span ref="minutes"></span>:
+                  <span ref="seconds"></span>
+                </span>
               </div>
-              <div class="align-center" v-else>Time's Up !</div>
+              <div class="align-start" v-else-if="timeUp">
+                <span>
+                  Time's Up!
+                </span>
+              </div>
+              <div class="align-center" v-else>
+                <br>
+              </div>
               <div class="mt-2 h-1/2 max-w-56 break-words">
                   <div v-if="task.taskdescription" id="description">
                       <div class="text-sm font-normal">{{ task.taskdescription }}</div>
@@ -53,9 +60,9 @@
             </div>
         </div>
     </div>
+    <!--Pop up modifié-->
     <dialog :id="'my_modal_5_' + task.id" class="modal">
       <div class="modal-box w-4/5 max-w-6xl">
-        <!--Contenu du pop-up-->
         <div class="flex justify-center">
           <h3 class="font-bold text-xl">Modify The <span class="text-pinky text-2xl">Task !</span></h3>
         </div>
@@ -114,6 +121,8 @@
         </div>
       </div>
     </dialog>
+
+    <!-- Pop up confirmation suppression tâche -->
     <dialog :id="'deleteModal_' + task.id" class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Are You Sure ?</h3>
@@ -154,17 +163,16 @@ export default {
     }
   },
   mounted () {
-    this.newTask = { ...this.task }
-    const isoDate = new Date(this.newTask.taskenddate)
-    this.newTask.taskenddate = isoDate.toISOString().slice(0, 16)
-    console.log('Task: ', this.task)
-    this.itemsIsHovered()
-    this.mutableTask = { ...this.task }
-    const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
-    console.log('dateString', dateString)
-    const dateObject = Date.parse(dateString)
-    console.log('dateObject', dateObject)
-    this.updateCountdown(dateObject)
+    if (this.task.taskenddate !== '') {
+      this.newTask = { ...this.task }
+      const isoDate = new Date(this.newTask.taskenddate)
+      this.newTask.taskenddate = isoDate.toISOString().slice(0, 16)
+      this.itemsIsHovered()
+      this.mutableTask = { ...this.task }
+      const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
+      const dateObject = Date.parse(dateString)
+      this.updateCountdown(dateObject)
+    }
   },
   beforeUnmount () {
     clearInterval(this.countdownInterval)

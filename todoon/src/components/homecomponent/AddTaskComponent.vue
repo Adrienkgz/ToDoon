@@ -34,20 +34,17 @@
               <div class="label">
                 <span class="label-text text-xl">Date Task</span>
               </div>
-              <input type="datetime-local" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="task.taskenddate" required/>
+              <input type="datetime-local" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="task.taskenddate"/>
             </label>
             <label class="form-control w-full max-w-xs">
               <div class="label">
-                <span class="label-text text-xl">Type of Task</span>
+                <span class="label-text text-xl">Category</span>
               </div>
               <select class="select select-bordered w-full max-w-xs" v-model="task.category">
-                <option disabled selected value="">Type of Task?</option>
-                <option value="Work">Work</option>
-                <option value="Personal">Personal</option>
-                <option value="Family">Family</option>
-                <option value="Friends">Friends</option>
-                <option value="Home">Home</option>
-                <option value="Other">Other</option>
+                <option disabled selected value="">
+                  {{ list_categories.length > 0 ? 'Select a category' : 'You didn\'t have any category' }}
+                </option>
+                <option v-for="category in list_categories" :key="category.id" :value="category.id">{{ category.name }}</option>
               </select>
             </label>
           </div>
@@ -108,6 +105,7 @@ button {
 </style>
 <script>
 import TasksDataService from '../../services/TasksDataService'
+import CategoryDataService from '@/services/CategoryDataService'
 
 export default {
   name: 'AddTaskComponent',
@@ -122,13 +120,27 @@ export default {
         taskenddate: '',
         priority: -1,
         category: ''
-      }
+      },
+      list_categories: []
     }
+  },
+  mounted () {
+    CategoryDataService.getAll()
+      .then(response => {
+        this.list_categories = response.data
+      })
+      .catch(e => {
+        console.log(e)
+      })
   },
   methods: {
     addTask () {
       // format the input (temp )
-      this.task.taskenddate = new Date(this.task.taskenddate).toISOString()
+      if (this.task.taskenddate !== '') {
+        this.task.taskenddate = new Date(this.task.taskenddate).toISOString()
+      } else {
+        this.task.taskenddate = ''
+      }
       const modal = document.querySelector('#my_modal_1')
       TasksDataService.create(this.task)
         .then(response => {
