@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-500">
+  <div class="w-full h-500 m-2">
     <div v-if="loaded && tasks.length">
       <div class="pt-2">Today's Task</div>
       <swiper
@@ -29,7 +29,7 @@
         </swiper-slide>
       </swiper>
     </div>
-    <div v-if="loaded && !tasks.length" class="flex lg:flex-row md:flex-col sm:flex-col justify-center md:space-x-20" id="noTask">
+    <div v-if="loaded && !tasks.length" class="flex lg:flex-row flex-col justify-center md:space-x-20" id="noTask">
       <noTaskView/>
     </div>
   </div>
@@ -96,10 +96,9 @@ export default {
   background-position: center;
   background-size: cover;
 }
-@media only screen and (max-width: 640px) {
+@media screen and (max-width: 1015) {
   #noTask {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 </style>

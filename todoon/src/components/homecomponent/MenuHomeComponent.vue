@@ -1,6 +1,6 @@
 <template>
     <div class="flex-col justify-center text-center mt-5 space-y-10" >
-        <nav id="menu-horizontal" v-if="windowWidth >= 550">
+        <nav id="menu-vertical" v-if="windowWidth >= 550">
             <ul class="m-auto menu menu-vertical bg-gray-300 w-4/5 rounded-box text-xl" id="menu-vertical-liste" >
                 <li>
                     <router-link to="/home">
@@ -33,12 +33,6 @@
                     </router-link>
                 </li>
             </ul>
-            <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
-                <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
-                <li v-for="category in list_category" :key="category.id">
-                    <a>{{ category.name }}</a>
-                </li>
-            </ul>
         </nav>
         <!-- Menu Horizontal -->
         <nav id="menu-horizontal" v-else-if="windowWidth <= 550">
@@ -69,24 +63,24 @@
                     </router-link>
                 </li>
             </ul>
-            <ul class="m-auto menu bg-gray-300 w-56 rounded-box">
-                <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
-                <li>
-                    <details open>
-                    <summary>Categories</summary>
-                    <ul>
-                        <li class="flex-item" v-for="category in list_category" :key="category.id">
-                            <div class="flex-container">
-                                <img :src="require(`@/assets/img/imgcategory/${category.icon}.png`)" class="flex-item" style="width: 20px; height: 20px; border-radius: 0%;">
-                                <a class="flex-item">{{ category.name }}</a>
-                            </div>
-                        </li>
-                    </ul>
-                    </details>
-                </li>
-            </ul>
         </nav>
-        <!-- Pop up pour créer une tâche -->
+        <ul class="m-auto menu bg-gray-300 w-56 rounded-box mt-5">
+            <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200" onclick="add_category_modal.showModal()">Add Category</a></li>
+            <li>
+                <details open>
+                <summary>Categories</summary>
+                <ul>
+                    <li class="flex-item" v-for="category in list_category" :key="category.id">
+                        <div class="flex-container">
+                            <img :src="require(`@/assets/img/imgcategory/${category.icon}.png`)" class="flex-item" style="width: 20px; height: 20px; border-radius: 0%;">
+                            <a class="flex-item">{{ category.name }}</a>
+                        </div>
+                    </li>
+                </ul>
+                </details>
+            </li>
+        </ul>
+        <!-- Pop up pour créer une categorie -->
             <dialog id="add_category_modal" class="modal">
                 <form ref="formcategory" @submit.prevent="addCategory">
         <div class="modal-box w-11/12 max-w-5xl">

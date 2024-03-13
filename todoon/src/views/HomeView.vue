@@ -6,7 +6,7 @@
         <aside class="w-1/5" id="aside">
           <MenuHomeComponent/>
         </aside>
-        <main class="w-4/5 pl-5">
+        <main class="w-4/5 pl-5" id="homeView">
           <div class="flex" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Accueil</div>
             <div class="flex items-center">
@@ -36,6 +36,12 @@ template {
 @media only screen and (max-width: 500px) {
   #homeFlex {
     flex-direction: column;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #homeView {
+    margin-top: 5px;
+    width: 100%;
   }
 }
 </style>
