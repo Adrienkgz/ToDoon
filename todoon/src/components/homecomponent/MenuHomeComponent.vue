@@ -173,7 +173,6 @@ export default {
       }
       CategoryDataService.create(newcategory)
         .then(response => {
-          console.log(response)
           // Animation réussite
           window.location.reload()
         })
@@ -184,17 +183,14 @@ export default {
     getActive (image) {
       this.icon_selected = image
       const images = document.querySelectorAll('.category-image')
-      console.log(images)
       images.forEach((img) => {
         img.classList.remove('active')
       })
       const img = document.querySelector('#' + image)
-      console.log(img)
       img.classList.add('active')
     },
     handleResize () {
       this.windowWidth = window.innerWidth
-      console.log(this.windowWidth)
     }
   }
 }

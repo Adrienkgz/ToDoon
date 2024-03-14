@@ -116,7 +116,6 @@ export default {
         })
     },
     closeModal () {
-      console.log('close')
       this.$emit('close')
     },
     checkPasswordRequirements () {

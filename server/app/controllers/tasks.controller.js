@@ -108,8 +108,6 @@ exports.delete = (req, res) => {
 
 exports.findAllByUser = (req, res) => {
    const id = req.user.id
-   console.log(id)
-   console.log('user', req.user.id)
    Task.findAll({where: {user_id: id}})
    .then(data => {
        res.send(data)

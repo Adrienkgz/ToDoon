@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     login () {
-      console.log('bhdh')
       const user = {
         email: this.email,
         password: this.password
@@ -65,7 +64,6 @@ export default {
         })
     },
     closeModal () {
-      console.log('close')
       this.$emit('close')
     }
   }

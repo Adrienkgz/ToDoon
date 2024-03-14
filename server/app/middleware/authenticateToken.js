@@ -13,14 +13,12 @@ function authenticateToken(req, res, next) {
     return res.status(401).send('Access denied')
   }
 
-  console.log('testback', token)
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
       console.log(err)
       return res.status(403).send('Invalid token')
     }
     req.user = user
-    console.log('user', user)
     next()
   })
 }

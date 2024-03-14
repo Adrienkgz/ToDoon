@@ -21,9 +21,6 @@ exports.create = (req, res) => {
         user_id: req.user.id
     }
 
-    console.log(category)
-    console.log(req.user)
-    console.log(req.body)
     Category.create(category)
     .then(data => {
         res.send(data)

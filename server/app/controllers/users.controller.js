@@ -7,7 +7,6 @@ require('dotenv').config();
 exports.signup = (req, res) => {
   try {
     // Vérifie si l'utilisateur existe
-    console.log('backend', req.body)
     const {firstName, lastName, email, password, avatar, birthday} = req.body
     
     User.findOne({ where: { email: email } })
@@ -102,7 +101,6 @@ exports.getUser = (req, res) => {
         if (!user) {
           return res.status(404).send({ message: 'Utilisateur non trouvé' })
         }
-        console.log('userget', user)
         res.status(200).send({
           id: user.id,
           firstName: user.firstName,
@@ -121,7 +119,6 @@ exports.getUser = (req, res) => {
 exports.updateUser = (req, res) => {
   try {
     const id = req.user.id
-    console.log(req.body, id)
     const { firstName, lastName, email, avatar, birthday } = req.body
     User.update(
       { firstName, lastName, email, avatar, birthday },

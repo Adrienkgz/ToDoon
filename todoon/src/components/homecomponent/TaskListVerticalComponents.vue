@@ -26,7 +26,6 @@ export default {
     TasksDataService.getAll()
       .then(response => {
         this.tasks = response.data.filter(task => task.taskstatus === this.number)
-        console.log(this.tasks)
       })
       .catch(e => {
         console.log(e)
@@ -34,11 +33,7 @@ export default {
   },
   methods: {
     handleDeleteItem(taskId) {
-    console.log('b');
-    console.log(this.tasks);
-    console.log(taskId);
     this.tasks = this.tasks.filter((task_list) => task_list.id !== taskId);
-    console.log(this.tasks);
   },
   },
 }

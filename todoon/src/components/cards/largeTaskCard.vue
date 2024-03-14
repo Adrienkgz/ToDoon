@@ -217,7 +217,6 @@ export default {
       this.mutableTask.taskstatus = newstatus
       TasksDataService.update(this.mutableTask.id, this.mutableTask)
         .then(response => {
-          console.log(response.data)
           this.status = newstatus
           if (this.status === 0) {
             parentLi.querySelector('a').classList.add('todo')
@@ -239,7 +238,6 @@ export default {
         element.addEventListener(
           'mouseenter',
           function (event) {
-            console.log('mouseenter')
             this.itemsHovered = true // Utilisez this.itemsHovered à la place de itemsHovered
           }.bind(this), // Ajoutez .bind(this) pour conserver le contexte correct de "this"
           false
@@ -248,7 +246,6 @@ export default {
         element.addEventListener(
           'mouseleave',
           function (event) {
-            console.log('mouseleave')
             this.itemsHovered = false // Utilisez this.itemsHovered à la place de itemsHovered
           }.bind(this), // Ajoutez .bind(this) pour conserver le contexte correct de "this"
           false
@@ -256,12 +253,10 @@ export default {
       })
     },
     modifyTask () {
-      console.log('modifyTask')
       TasksDataService.update(this.task.id, this.newTask)
         .then(response => {
           const modal = document.querySelector('#my_modal_5_' + this.task.id)
           modal.close()
-          console.log(this.newTask)
           this.$emit('taskModified', this.newTask)
         })
         .catch(e => {
@@ -280,7 +275,6 @@ export default {
       modal.showModal()
     },
     deleteTask () {
-      console.log('deleteTask')
       TasksDataService.delete(this.task.id)
         .then(response => {
           this.$emit('taskDeleted', this.task)
@@ -292,7 +286,6 @@ export default {
         })
     },
     cancelFunction () {
-      console.log('cancel Modify Task Function')
       this.newTask = { ...this.task }
       const modal = document.querySelector('#my_modal_5_' + this.task.id)
       modal.close()

@@ -32,10 +32,7 @@ export default {
   mounted () {
     UsersDataService.getUser()
       .then(response => {
-        console.log('user')
-        console.log(response)
         this.user = response.data
-        console.log('user', this.user)
       })
       .catch(error => {
         console.log('Error fetching user:', error)
