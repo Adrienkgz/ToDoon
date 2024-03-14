@@ -28,6 +28,11 @@ export default {
     AddTaskComponent,
     ProfilIconComponent
   },
+  data () {
+    return {
+      emits: ['search', 'newcardadded']
+    }
+  },
   methods: {
     onSearch (value) {
       this.$emit('search', value)

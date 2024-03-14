@@ -68,6 +68,7 @@ export default {
   },
   data () {
     return {
+      emits: ['delete-item'],
       mutableTask: null,
       status: this.task.taskstatus
     }

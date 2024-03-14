@@ -55,7 +55,8 @@ export default {
   },
   setup () {
     return {
-      modules: [EffectCoverflow, Pagination]
+      modules: [EffectCoverflow, Pagination],
+      emits: ['taskDeleted', 'taskModified']
     }
   },
   props: {

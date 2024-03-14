@@ -121,7 +121,8 @@ export default {
         priority: -1,
         category: ''
       },
-      list_categories: []
+      list_categories: [],
+      emits: ['newcardadded']
     }
   },
   mounted () {
