@@ -46,7 +46,7 @@
                     <button
                         class="inline-flex text-sm font-semibold text-blue-600 underline decoration-2">Change</button>
                 </div>
-                <form @submit.prevent="changePassword">
+                <form @submit.prevent="changePassword" ref="formchangepassword">
                 <hr class="mt-4 mb-8" />
                 <p class="py-2 text-xl font-semibold">Password</p>
                 <div class="flex items-center">
@@ -136,6 +136,7 @@ export default {
       UsersDataService.changePassword(this.oldpassword, this.newpassword)
         .then(response => {
           console.log('password changed', response)
+          this.$refs.formchangepassword.reset()
         })
         .catch(error => {
           console.log('Error changing password:', error)
