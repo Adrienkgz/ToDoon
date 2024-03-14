@@ -86,7 +86,7 @@ export default {
         lastName: this.lastName,
         email: this.email,
         password: this.password,
-        avatar: 'avatar-bluebird.png',
+        avatar: 'avatar-bluebird',
         birthday: this.birthday
       }
       if (!this.checkPassword()) {
