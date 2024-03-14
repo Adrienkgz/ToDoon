@@ -153,6 +153,7 @@ export default {
           setTimeout(function () {
             modal.close()
           }, 2000)
+          this.task.id = response.data.id
           this.$emit('newcardadded', this.task)
           this.task = {
             taskname: '',

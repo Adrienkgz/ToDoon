@@ -21,8 +21,8 @@
         :loop="false"
         class="mySwiper"
       >
-        <swiper-slide v-for="task in tasks" :key="task.name">
-          <largeTaskCard :task="task" @taskDeleted="suppCard"/>
+        <swiper-slide v-for="task in tasks" :key="task.id">
+          <largeTaskCard :task="task" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
         <swiper-slide>
           <largeTaskCardAdd/>
@@ -75,6 +75,9 @@ export default {
   methods: {
     suppCard (task) {
       this.$emit('taskDeleted', task)
+    },
+    modifTask (task) {
+      this.$emit('taskModified', task)
     }
   }
 }

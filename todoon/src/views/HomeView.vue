@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <appleCarousel :tasks="tasks" @taskDeleted="deleteTask"/>
+          <appleCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
       </div>
     </div>
@@ -69,6 +69,10 @@ export default {
     },
     deleteTask (task) {
       this.tasks = this.tasks.filter(t => t.id !== task.id)
+    },
+    modifTask (task) {
+      const index = this.tasks.findIndex(t => t.id === task.id)
+      this.tasks[index] = task
     }
   }
 }
