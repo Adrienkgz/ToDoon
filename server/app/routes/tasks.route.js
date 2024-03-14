@@ -9,5 +9,6 @@ module.exports = app => {
     router.get('/:id', task.findOne)
     router.delete('/:id', task.delete)
     router.put('/:id', task.update)
+    router.delete('/', authenticateToken, task.deleteAllTasksFromThisUser)
     app.use('/api/tasks', router)
 }

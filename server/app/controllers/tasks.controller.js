@@ -120,3 +120,25 @@ exports.findAllByUser = (req, res) => {
        })
    })
 }
+
+exports.deleteAllTasksFromThisUser = (req, res) => {
+   const id = req.user.id
+   Task.destroy({where: {user_id: id}})
+   .then(num => {
+       if (num > 0){
+           res.send({
+               message: 'All tasks deleted'
+           })
+       }else{
+           res.send({
+               message: 'No tasks found'
+           })
+       }
+   })
+   .catch(err => {
+       res.status(500).send({
+           message:
+           err.message || 'Some error occured'
+       })
+   })
+}

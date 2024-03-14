@@ -8,5 +8,6 @@ module.exports = app => {
     router.get('/getUser', authenticateToken, user.getUser)
     router.post('/updateUser', authenticateToken, user.updateUser)
     router.post('/changePassword', authenticateToken, user.changePassword)
+    router.delete('/deleteUser', authenticateToken, user.deleteUser)
     app.use('/api/user', router)
   }

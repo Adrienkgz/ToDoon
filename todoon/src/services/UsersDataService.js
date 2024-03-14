@@ -20,6 +20,10 @@ class UserDataService {
   changePassword (oldPassword, newPassword) {
     return http.post('/user/changePassword', { oldPassword, newPassword })
   }
+
+  deleteUser () {
+    return http.delete('/user/deleteUser')
+  }
 }
 
 export default new UserDataService()

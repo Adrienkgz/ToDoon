@@ -167,3 +167,21 @@ exports.changePassword = (req, res) => {
     res.status(500).send({ message: e.message })
   }
 }
+
+exports.deleteUser = (req, res) => {
+  try {
+    const id = req.user.id
+    User.destroy({ where: { id: id } })
+    .then(num => {
+      if (num == 1) {
+        res.status(200).send({ message: 'Utilisateur supprimé avec succès' })
+      } else {
+        res.status(404).send({ message: 'Utilisateur non trouvé' })
+      }
+    })
+  }
+  catch (e) {
+    console.log(e)
+    res.status(500).send({ message: e.message })
+  }
+}

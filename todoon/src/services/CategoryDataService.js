@@ -12,5 +12,9 @@ class CategoryDataService {
   getAllByUser (userId) {
     return http.get(`/tasks/${userId}`)
   }
+
+  deleteAllCategoriesFromThisUser () {
+    return http.delete('/category')
+  }
 }
 export default new CategoryDataService()

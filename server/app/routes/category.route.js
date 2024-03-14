@@ -6,6 +6,6 @@ module.exports = app => {
     router.get('/', category.getAll)
     router.post('/', authenticateToken, category.create)
     router.get('/user', authenticateToken, category.getAllByUser)
-    router.delete('/:id', authenticateToken, category.delete)
+    router.delete('/', authenticateToken, category.deleteAllCategoriesFromThisUser)
     app.use('/api/category', router)
 }

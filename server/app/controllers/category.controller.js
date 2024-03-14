@@ -67,3 +67,17 @@ exports.delete = (req, res) => {
         })
     })
 }
+
+exports.deleteAllCategoriesFromThisUser = (req, res) => {
+    Category.destroy({where: {user_id: req.user.id}})
+    .then(num => {
+        res.send({
+            message: `${num} Categories were deleted successfully`
+        })
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: 'Error deleting Categories'
+        })
+    })
+}
