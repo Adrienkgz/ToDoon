@@ -391,7 +391,7 @@ export default {
   width: 120px;
   border-radius: 50px;
   transition-duration: 0.3s;
-  background-color: rgb(255, 69, 69);
+  background-color: #FF4785;
   align-items: center;
 }
 
