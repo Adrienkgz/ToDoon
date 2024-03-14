@@ -161,7 +161,7 @@ export default {
             taskdescription: '',
             taskstatus: 0,
             taskenddate: '',
-            priority: -1,
+            priority: 0,
             category: ''
           }
         })

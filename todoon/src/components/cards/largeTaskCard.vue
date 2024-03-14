@@ -1,7 +1,8 @@
 <template>
     <div class="card h-48 w-96 p-4">
-        <div class="flex justify-start w-full">
-                <h1 class="flex text-pinky text-2xl mr-2">{{ task.taskname }}</h1>
+        <div class="flex justify-start w-full items-center space-x-2">
+          <priorityToolTips :priority="task.priority"/>
+          <h1 class="flex text-pinky text-2xl mr-2">{{ task.taskname }}</h1>
         </div>
         <div class="flex w-full">
           <div class="flex flex-col flex-grow items-start">
@@ -139,6 +140,7 @@
 </template>
 <script>
 import TasksDataService from '@/services/TasksDataService'
+import priorityToolTips from '../tooltips/priorityToolTips.vue'
 export default {
   name: 'smallTaskCard',
   props: {
@@ -146,6 +148,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  components: {
+    priorityToolTips
   },
   data () {
     return {
@@ -340,7 +345,7 @@ export default {
   height: 350px;
   background: rgba(217, 217, 217, 0.58);
   border: 1px solid white;
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  box-shadow: 12px 17px 51px rgba(255, 0, 0, 0.22);
   backdrop-filter: blur(6px);
   border-radius: 17px;
   text-align: center;
@@ -361,7 +366,7 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgb(20, 20, 20);
+  background-color: #FF4785;
   border: none;
   font-weight: 600;
   display: flex;
@@ -452,7 +457,7 @@ export default {
   width: 90px;
   border-radius: 50px;
   transition-duration: 0.3s;
-  background-color: rgb(255, 69, 69);
+  background-color: rgb(0, 0, 0);
   align-items: center;
 }
 
