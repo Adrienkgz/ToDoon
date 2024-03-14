@@ -8,6 +8,14 @@ class UserDataService {
   login (data) {
     return http.post('/user/login', data)
   }
+
+  getUser () {
+    return http.get('/user/getUser')
+  }
+
+  updateUser (data) {
+    return http.post('/user/updateUser', data)
+  }
 }
 
 export default new UserDataService()

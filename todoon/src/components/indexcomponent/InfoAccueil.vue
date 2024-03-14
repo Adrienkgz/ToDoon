@@ -12,7 +12,7 @@
         </div>
         <div class="flex justify-center mt-4">
             <button @click="scrollToTop" class="image-button" id="buttonToDown">
-                <img src="../../assets/img/chevron_down.svg" alt="Button Image" class="h-6">
+                <img src="../../assets/img/chevrons/chevron_down.svg" alt="Button Image" class="h-6">
             </button>
         </div>
     </div>

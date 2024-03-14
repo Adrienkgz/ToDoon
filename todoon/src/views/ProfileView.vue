@@ -1,12 +1,18 @@
 <template>
-    <social-vue v-if="socialView" @change-view="changeView" />
-    <profile-info-vue v-if="profileView" @change-view="changeView" />
-    <settings-vue v-if="settingsView" @change-view="changeView" />
+  <router-link to='/home'>
+    <div class='absolute m-7 right-0'>
+      <img src="../assets/img/xmark.svg" class='w-6 h-6' alt="x"/>
+    </div>
+  </router-link>
+  <social-vue v-if='socialView' @change-view='changeView' :user="user"/>
+  <profile-info-vue v-if='profileView' @change-view='changeView' :user="user"/>
+  <settings-vue v-if='settingsView' @change-view='changeView' :user="user"/>
 </template>
 <script>
-import profileInfoVue from '@/components/profileComponent/profileInfoVue.vue'
-import settingsVue from '@/components/profileComponent/settingsVue.vue'
-import socialVue from '@/components/profileComponent/socialVue.vue'
+import profileInfoVue from './profileviews/profileInfoVue.vue'
+import settingsVue from './profileviews/settingsVue.vue'
+import socialVue from './profileviews/socialVue.vue'
+import UsersDataService from '@/services/UsersDataService'
 
 export default {
   components: {
@@ -19,7 +25,8 @@ export default {
       profileView: true,
       settingsView: false,
       socialView: false,
-      isHidden: true
+      isHidden: true,
+      user: null
     }
   },
   mounted () {
@@ -29,6 +36,16 @@ export default {
     console.log('profileView', this.profileView)
     this.settingsView = false
     console.log('settingsView', this.settingsView)
+
+    // Retrieve user information
+    UsersDataService.getUser()
+      .then(response => {
+        console.log('user', response.data)
+        this.user = response.data
+      })
+      .catch(error => {
+        console.log('Error fetching user:', error)
+      })
   },
   methods: {
     changeView (view) {

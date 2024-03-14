@@ -14,7 +14,7 @@
             <!-- A changer niveau style -->
           <input type="text" id="firstName" aria-label="First Name" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0" placeholder="First Name" v-model="firstName" required>
           <input type="text" id="lastName" aria-label="Last Name" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0" placeholder="Last Name" v-model="lastName" required>
-          <input type="date" id="BirthDate" aria-label="Birth Date" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0" placeholder="Birth Date" v-model="birthDate" required>
+          <input type="date" id="BirthDate" aria-label="Birth Date" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0" placeholder="Birth Date" v-model="birthday" required>
           <div class="block relative">
               <label for="email" class="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">Email</label>
               <input type="text" id="email" aria-label="Email" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0" v-model="email" required>
@@ -40,9 +40,10 @@ export default {
     return {
       firstName: '',
       lastName: '',
-      birthDate: '',
+      birthday: '',
       email: '',
-      password: ''
+      password: '',
+      avatar: 'default'
     }
   },
   props: {
@@ -59,7 +60,9 @@ export default {
         lastName: this.lastName,
         birthDate: this.birthDate,
         email: this.email,
-        password: this.password
+        password: this.password,
+        avatar: 'avatar-bluebird.png',
+        birthday: this.birthday
       }
       UsersDataService.signup(newuser)
         .then(response => {

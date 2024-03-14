@@ -7,7 +7,8 @@ require('dotenv').config();
 exports.signup = (req, res) => {
   try {
     // Vérifie si l'utilisateur existe
-    const {firstName, lastName, email, password} = req.body
+    console.log('backend', req.body)
+    const {firstName, lastName, email, password, avatar, birthday} = req.body
     
     User.findOne({ where: { email: email } })
     .then(existingUser => {
@@ -24,7 +25,9 @@ exports.signup = (req, res) => {
           firstName,
           lastName,
           email,
-          password: hashedPassword
+          password: hashedPassword,
+          avatar,
+          birthday
         })
         .then(newUser => {
           // Crée un token
@@ -37,7 +40,9 @@ exports.signup = (req, res) => {
               id: newUser.id,
               firstName: newUser.firstName,
               lastName: newUser.lastName,
-              email: newUser.email
+              email: newUser.email,
+              avatar: newUser.avatar,
+              birthday: newUser.birthday
             },
             token: token
           })
@@ -72,7 +77,6 @@ exports.login = async (req, res) => {
     const token = await jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: 86400 // 24 heures
     })
-    console.log(token)
     res.status(200).send({
       message: { message: 'Utilisateur connecté avec succès'},
       user: {
@@ -90,15 +94,49 @@ exports.login = async (req, res) => {
   }
 }
 
+exports.getUser = (req, res) => {
+  try {
+    const id = req.user.id
+      User.findByPk(id, { attributes: { exclude: ['password'] } })
+      .then(user => {
+        if (!user) {
+          return res.status(404).send({ message: 'Utilisateur non trouvé' })
+        }
+        console.log('userget', user)
+        res.status(200).send({
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          avatar: user.avatar,
+          birthday: user.birthday
+        })
+      })
+  } catch (e) {
+    console.log(e)
+    res.status(500).send({ message: e.message })
+  }
+}
 
-exports.findAll = (req, res) => {
-  User.findAll()
-    .then(data => {
-      res.send(data);
+exports.updateUser = (req, res) => {
+  try {
+    const id = req.user.id
+    console.log(req.body, id)
+    const { firstName, lastName, email, avatar, birthday } = req.body
+    User.update(
+      { firstName, lastName, email, avatar, birthday },
+      { where: { id: id } }
+    )
+    .then(num => {
+      if (num == 1) {
+        res.status(200).send({ message: 'Utilisateur mis à jour avec succès' })
+      } else {
+        res.status(404).send({ message: 'Utilisateur non trouvé' })
+      }
     })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || 'Une erreur est survenue'
-      });
-    });
+  }
+  catch (e) {
+    console.log(e)
+    res.status(500).send({ message: e.message })
+  }
 }

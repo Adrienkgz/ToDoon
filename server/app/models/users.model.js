@@ -14,6 +14,9 @@ module.exports = (connex, Sequelize) => {
       },
       avatar: {
         type: Sequelize.STRING
+      },
+      birthday: {
+        type: Sequelize.DATE
       }
     })
 

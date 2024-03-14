@@ -28,6 +28,8 @@ export default {
     AddTaskComponent,
     ProfilIconComponent
   },
+  props: {
+  },
   data () {
     return {
       emits: ['search', 'newcardadded']

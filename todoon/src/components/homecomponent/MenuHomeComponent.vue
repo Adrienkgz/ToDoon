@@ -145,6 +145,7 @@ export default {
   mounted () {
     this.windowWidth = window.innerWidth
     window.addEventListener('resize', this.handleResize)
+
     const images = require.context('../../assets/img/imgcategory', false, /\.png$/)
     images.keys().forEach(image => {
       console.log(image)
