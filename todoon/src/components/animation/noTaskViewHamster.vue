@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center place-items-center text-2xl font-black" id="noTaskLabel">Not<span class="mx-2 text-pinky text-4xl">Task</span>yet<span>...</span></div>
+    <div class="flex justify-center place-items-center text-2xl font-black" id="noTaskLabel">No<span class="mx-2 text-pinky text-4xl">Task</span>yet<span>...</span></div>
     <div class="flex justify-center"><hamsterWheel/></div>
     <div class="flex place-items-center justify-center items-center text-2xl font-black" id="addTaskLabel">Click on
       <button class="group cursor-pointer outline-none hover:rotate-90 duration-300 px-4 py-3 mt-5" onclick="my_modal_4.showModal()" title="Add New">

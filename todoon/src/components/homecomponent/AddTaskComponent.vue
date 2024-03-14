@@ -52,7 +52,7 @@
             <div class="label">
               <span class="label-text text-xl">Priority Level</span>
             </div>
-            <input type="range" min="0" max="4" value="2" class="range" step="1" v-model="task.priority"/>
+            <input type="range" min="0" max="4" value="2" v-model="task.priority" :style="{ accentColor: priorityColors[task.priority] }" class="bg-white"/>
             <div class="w-full flex justify-between text-xs px-2">
               <span>|</span>
               <span>|</span>
@@ -122,7 +122,15 @@ export default {
         category: ''
       },
       list_categories: [],
-      emits: ['newcardadded']
+      emits: ['newcardadded'],
+      priorityColors: {
+        '-1': '#198038',
+        0: '#198038',
+        1: '#f1c21b',
+        2: '#ff832b',
+        3: '#da1e28',
+        4: '#6b306c'
+      }
     }
   },
   mounted () {
@@ -161,7 +169,7 @@ export default {
             taskdescription: '',
             taskstatus: 0,
             taskenddate: '',
-            priority: -1,
+            priority: 0,
             category: ''
           }
         })

@@ -1,13 +1,12 @@
 <template>
     <div class="flex flex-col min-h-screen">
-      <!-- Add your main content here -->
+      <HeaderHomeComponent @search="onSearch" @newcardadded="addNewCard()"/>
       <div class="flex-grow">
         <div class="flex">
         <aside class="w-1/5">
             <MenuHomeComponent/>
         </aside>
         <main class="w-4/5">
-            <HeaderHomeComponent @search="onSearch"/>
             <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task"/>
         </main>
     </div>
@@ -38,6 +37,9 @@ export default {
     }
   },
   methods: {
+    addNewCard (newCard) {
+      this.tasks.push(newCard)
+    },
     onSearch (value) {
       this.searchValue = value
       this.tasks_to_show = this.tasks
