@@ -17,7 +17,10 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      requiresToken: true
+    }
   },
   {
     path: '/about',
@@ -32,28 +35,59 @@ const routes = [
   {
     path: '/home/todo',
     name: 'todo',
-    component: ToDoView
+    component: ToDoView,
+    meta: {
+      requiresToken: true
+    }
+
   },
   {
     path: '/home/doing',
     name: 'doing',
-    component: DoingView
+    component: DoingView,
+    meta: {
+      requiresToken: true
+    }
+
   },
   {
     path: '/home/done',
     name: 'done',
-    component: DoneView
+    component: DoneView,
+    meta: {
+      requiresToken: true
+    }
+
   },
   {
     path: '/profile',
     name: 'profile',
-    component: ProfileView
+    component: ProfileView,
+    meta: {
+      requiresToken: true
+    }
+
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // Vérifiez si la route requiert un token
+  const requiresToken = to.matched.some(record => record.meta.requiresToken)
+
+  // Vérifiez si l'utilisateur a un token
+  const hasToken = localStorage.getItem('token')
+
+  // Si la route requiert un token et que l'utilisateur n'en a pas, redirigez-le vers la page de connexion (ou une autre page appropriée)
+  if (requiresToken && !hasToken) {
+    next('/home') // Remplacez '/login' par la route appropriée pour votre page de connexion
+  } else {
+    next()
+  }
 })
 
 export default router
