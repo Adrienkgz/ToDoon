@@ -21,7 +21,9 @@
                 </span>
               </div>
               <div class="align-center" v-else>
-                <br>
+                <span>
+                  No Deadline !
+                </span>
               </div>
               <div class="mt-2 h-1/2 max-w-56 break-words">
                   <div v-if="task.taskdescription" id="description">
@@ -366,7 +368,7 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #FF4785;
+  background-color: rgb(20, 20, 20);
   border: none;
   font-weight: 600;
   display: flex;
