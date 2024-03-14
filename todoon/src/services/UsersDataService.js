@@ -16,6 +16,10 @@ class UserDataService {
   updateUser (data) {
     return http.post('/user/updateUser', data)
   }
+
+  changePassword (oldPassword, newPassword) {
+    return http.post('/user/changePassword', { oldPassword, newPassword })
+  }
 }
 
 export default new UserDataService()

@@ -7,5 +7,6 @@ module.exports = app => {
     router.post('/login', user.login)
     router.get('/getUser', authenticateToken, user.getUser)
     router.post('/updateUser', authenticateToken, user.updateUser)
+    router.post('/changePassword', authenticateToken, user.changePassword)
     app.use('/api/user', router)
   }

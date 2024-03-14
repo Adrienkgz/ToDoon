@@ -140,3 +140,33 @@ exports.updateUser = (req, res) => {
     res.status(500).send({ message: e.message })
   }
 }
+
+exports.changePassword = (req, res) => {
+  try {
+    const id = req.user.id
+    const { oldPassword, newPassword } = req.body
+    User.findByPk(id)
+    .then(user => {
+      const passwordIsValid = bcrypt.compareSync(oldPassword, user.password)
+      if (!passwordIsValid) {
+        return res.status(401).send({ message: 'Mot de passe invalide' })
+      }
+      const hashedPassword = bcrypt.hashSync(newPassword, 8)
+      User.update(
+        { password: hashedPassword },
+        { where: { id: id } }
+      )
+      .then(num => {
+        if (num == 1) {
+          res.status(200).send({ message: 'Mot de passe mis à jour avec succès' })
+        } else {
+          res.status(404).send({ message: 'Utilisateur non trouvé' })
+        }
+      })
+    })
+  }
+  catch (e) {
+    console.log(e)
+    res.status(500).send({ message: e.message })
+  }
+}

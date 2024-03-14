@@ -8,6 +8,7 @@
   <profile-info-vue v-if='profileView' @change-view='changeView' :user="user"/>
   <settings-vue v-if='settingsView' @change-view='changeView' :user="user"/>
 </template>
+
 <script>
 import profileInfoVue from './profileviews/profileInfoVue.vue'
 import settingsVue from './profileviews/settingsVue.vue'
@@ -22,30 +23,35 @@ export default {
   },
   data () {
     return {
-      profileView: true,
+      profileView: false,
       settingsView: false,
       socialView: false,
       isHidden: true,
       user: null
     }
   },
-  mounted () {
-    this.socialView = false
-    console.log('socialView', this.socialView)
-    this.profileView = true
-    console.log('profileView', this.profileView)
-    this.settingsView = false
-    console.log('settingsView', this.settingsView)
-
+  created () {
     // Retrieve user information
     UsersDataService.getUser()
       .then(response => {
-        console.log('user', response.data)
         this.user = response.data
+        console.log('profileview', this.user)
       })
       .catch(error => {
         console.log('Error fetching user:', error)
       })
+  },
+  computed: {
+    shouldInitializeViews () {
+      return this.user !== null
+    }
+  },
+  watch: {
+    shouldInitializeViews (value) {
+      if (value) {
+        this.profileView = true
+      }
+    }
   },
   methods: {
     changeView (view) {
