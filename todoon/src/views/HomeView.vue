@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <HeaderHomeComponent/>
+    <HeaderHomeComponent @newcardadded="addNewCard"/>
     <div class="flex-grow">
       <div class="flex" id="homeFlex">
         <aside class="w-1/5" id="aside">
@@ -22,13 +22,57 @@
               </div>
             </div>
           </div>
-          <appleCarousel/>
+          <appleCarousel :tasks="tasks" @taskDeleted="deleteTask"/>
         </main>
       </div>
     </div>
     <MainFooter />
   </div>
 </template>
+
+<script>
+import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
+import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
+import appleCarousel from '../components/carousel/appleCarousel.vue'
+import MainFooter from '../components/MainFooter.vue'
+import TasksDataService from '../services/TasksDataService'
+
+export default {
+  components: {
+    MenuHomeComponent,
+    HeaderHomeComponent,
+    appleCarousel,
+    MainFooter
+  },
+  data () {
+    return {
+      tasks: []
+    }
+  },
+  mounted () {
+    // Read the data
+    const token = localStorage.getItem('token')
+    console.log('token:', token)
+    TasksDataService.getAllByUser()
+      .then(response => {
+        console.log('response:', response)
+        this.tasks = response.data
+        console.log(response.data)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  },
+  methods: {
+    addNewCard (newCard) {
+      this.tasks.push(newCard)
+    },
+    deleteTask (task) {
+      this.tasks = this.tasks.filter(t => t.id !== task.id)
+    }
+  }
+}
+</script>
 <style>
 template {
   background-color: aqua;
@@ -44,23 +88,6 @@ template {
     width: 100%;
   }
 }
-</style>
-<script>
-import MenuHomeComponent from '../components/homecomponent/MenuHomeComponent.vue'
-import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent.vue'
-import appleCarousel from '../components/carousel/appleCarousel.vue'
-import MainFooter from '../components/MainFooter.vue'
-
-export default {
-  components: {
-    MenuHomeComponent,
-    HeaderHomeComponent,
-    appleCarousel,
-    MainFooter
-  }
-}
-</script>
-<style>
 .filter-container {
   position: static;
   display: inline-block;

@@ -277,11 +277,9 @@ export default {
       console.log('deleteTask')
       TasksDataService.delete(this.task.id)
         .then(response => {
-          this.$emit('taskDeleted', this.task.id)
+          this.$emit('taskDeleted', this.task)
           const modal = document.querySelector('#deleteModal_' + this.task.id)
           modal.close()
-          console.log('Wesh reload')
-          window.location.reload()
         })
         .catch(e => {
           console.log(e)

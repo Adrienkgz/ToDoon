@@ -22,7 +22,7 @@
         class="mySwiper"
       >
         <swiper-slide v-for="task in tasks" :key="task.name">
-          <largeTaskCard :task="task"/>
+          <largeTaskCard :task="task" @taskDeleted="suppCard"/>
         </swiper-slide>
         <swiper-slide>
           <largeTaskCardAdd/>
@@ -40,7 +40,6 @@ import largeTaskCard from '../cards/largeTaskCard.vue'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-import TasksDataService from '../../services/TasksDataService'
 import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
 import noTaskView from '../animation/noTaskViewHamster.vue'
 // import required modules
@@ -59,29 +58,24 @@ export default {
       modules: [EffectCoverflow, Pagination]
     }
   },
+  props: {
+    tasks: Array
+  },
   data () {
     return {
-      tasks: [],
       loaded: false,
       tasksKey: 0
     }
   },
   mounted () {
-    // Read the data
-    const token = localStorage.getItem('token')
-    console.log('token:', token)
-    TasksDataService.getAllByUser()
-      .then(response => {
-        console.log('response:', response)
-        this.tasks = response.data
-        console.log(response.data)
-      })
-      .catch(e => {
-        console.log(e)
-      })
     setTimeout(() => {
       this.loaded = true
     }, 200)
+  },
+  methods: {
+    suppCard (task) {
+      this.$emit('taskDeleted', task)
+    }
   }
 }
 </script>

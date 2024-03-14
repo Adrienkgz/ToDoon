@@ -10,7 +10,7 @@
             <SearchBarComponent @search="onSearch"/>
         </div>
         <div class="flex-grow flex justify-end items-center p-1">
-            <AddTaskComponent/>
+            <AddTaskComponent @newcardadded="emitCardAddedEvent"/>
             <ProfilIconComponent/>
         </div>
     </div>
@@ -31,8 +31,12 @@ export default {
   methods: {
     onSearch (value) {
       this.$emit('search', value)
+    },
+    emitCardAddedEvent (newCard) {
+      this.$emit('newcardadded', newCard)
     }
   }
+
 }
 </script>
 <style>

@@ -153,9 +153,15 @@ export default {
           setTimeout(function () {
             modal.close()
           }, 2000)
-          setTimeout(function () {
-            window.location.reload()
-          }, 2000)
+          this.$emit('newcardadded', this.task)
+          this.task = {
+            taskname: '',
+            taskdescription: '',
+            taskstatus: 0,
+            taskenddate: '',
+            priority: -1,
+            category: ''
+          }
         })
         .catch(e => {
           console.log(e)
