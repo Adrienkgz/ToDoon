@@ -163,8 +163,8 @@ export default {
     }
   },
   mounted () {
+    this.newTask = { ...this.task }
     if (this.task.taskenddate !== '') {
-      this.newTask = { ...this.task }
       const isoDate = new Date(this.newTask.taskenddate)
       this.newTask.taskenddate = isoDate.toISOString().slice(0, 16)
       this.itemsIsHovered()
@@ -252,11 +252,10 @@ export default {
       console.log('modifyTask')
       TasksDataService.update(this.task.id, this.newTask)
         .then(response => {
-          console.log(response.data)
-          this.newTask = { ...this.task }
           const modal = document.querySelector('#my_modal_5_' + this.task.id)
           modal.close()
-          window.location.reload()
+          console.log(this.newTask)
+          this.$emit('taskModified', this.newTask)
         })
         .catch(e => {
           console.log(e)
@@ -277,11 +276,9 @@ export default {
       console.log('deleteTask')
       TasksDataService.delete(this.task.id)
         .then(response => {
-          this.$emit('taskDeleted', this.task.id)
+          this.$emit('taskDeleted', this.task)
           const modal = document.querySelector('#deleteModal_' + this.task.id)
           modal.close()
-          console.log('Wesh reload')
-          window.location.reload()
         })
         .catch(e => {
           console.log(e)

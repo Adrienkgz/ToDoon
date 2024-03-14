@@ -121,7 +121,8 @@ export default {
         priority: -1,
         category: ''
       },
-      list_categories: []
+      list_categories: [],
+      emits: ['newcardadded']
     }
   },
   mounted () {
@@ -153,9 +154,16 @@ export default {
           setTimeout(function () {
             modal.close()
           }, 2000)
-          setTimeout(function () {
-            window.location.reload()
-          }, 2000)
+          this.task.id = response.data.id
+          this.$emit('newcardadded', this.task)
+          this.task = {
+            taskname: '',
+            taskdescription: '',
+            taskstatus: 0,
+            taskenddate: '',
+            priority: -1,
+            category: ''
+          }
         })
         .catch(e => {
           console.log(e)
