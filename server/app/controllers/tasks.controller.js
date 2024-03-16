@@ -60,6 +60,7 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
    const id = req.params.id
+   console.log(req.body)
    Task.update(req.body, {
        where: {id: id}
    })
