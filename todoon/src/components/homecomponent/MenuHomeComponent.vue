@@ -28,7 +28,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            <div class="menuTitle">Done</div>
+            <div class="menuTitle">To Do</div>
           </router-link>
         </li>
         <li>
@@ -48,7 +48,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            <div class="menuTitle">To Do</div>
+            <div class="menuTitle">Done</div>
           </router-link>
         </li>
       </ul>
@@ -122,16 +122,16 @@
     </ul>
     <ul class="m-auto menu bg-gray-300 w-56 rounded-box mt-5">
       <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200"
-          onclick="add_category_modal.showModal()">Add Category</a></li>
+          onclick="add_project_modal.showModal()">Add Project</a></li>
       <li>
         <details open>
-          <summary>Categories</summary>
+          <summary>Projecyy</summary>
           <ul>
-            <li class="flex-item" v-for="category in list_category" :key="category.id">
+            <li class="flex-item" v-for="project in list_projects" :key="project.id">
               <div class="flex-container">
-                <img :src="require(`@/assets/img/imgcategory/${category.icon}.png`)" class="flex-item"
+                <img :src="require(`@/assets/img/imgcategory/${project.icon}.png`)" class="flex-item"
                   style="width: 20px; height: 20px; border-radius: 0%;">
-                <a class="flex-item">{{ category.name }}</a>
+                <a class="flex-item">{{ project.name }}</a>
               </div>
             </li>
           </ul>
@@ -176,6 +176,9 @@
           </div>
         </div>
       </form>
+    </dialog>
+    <dialog id="add_project_modal" class="modal">
+      <createvueproject />
     </dialog>
   </div>
 </template>
