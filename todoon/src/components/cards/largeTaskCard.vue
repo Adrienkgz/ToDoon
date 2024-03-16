@@ -88,7 +88,7 @@
               </div>
               <select class="select select-bordered w-full max-w-xs" v-model="newTask.category">
                 <option disabled selected value="">
-                  {{ list_categories.length > 0 ? 'Select a category' : 'You didn\'t have any category' }}
+                  {{ this.list_categories.length > 0 ? 'Select a category' : 'You didn\'t have any category' }}
                 </option>
                 <option v-for="category in list_categories" :key="category.id" :value="category.id">{{ category.name }}</option>
               </select>
@@ -139,7 +139,6 @@
 </template>
 <script>
 import TasksDataService from '@/services/TasksDataService'
-import CategoryDataService from '@/services/CategoryDataService'
 import priorityToolTips from '../tooltips/priorityToolTips.vue'
 export default {
   name: 'smallTaskCard',
@@ -147,7 +146,8 @@ export default {
     task: {
       type: Object,
       required: true
-    }
+    },
+    list_categories: Array
   },
   components: {
     priorityToolTips
@@ -167,7 +167,6 @@ export default {
         priority: 0,
         category_id: null
       },
-      list_categories: [],
       emits: ['newcardadded'],
       priorityColors: {
         '-1': '#198038',
@@ -180,6 +179,7 @@ export default {
     }
   },
   mounted () {
+    console.log('category:', this.list_categories)
     this.newTask = { ...this.task }
     this.mutableTask = { ...this.task }
     if (this.task.taskenddate !== '') {
@@ -190,13 +190,6 @@ export default {
       const dateObject = Date.parse(dateString)
       this.updateCountdown(dateObject)
     }
-    CategoryDataService.getAll()
-      .then(response => {
-        this.list_categories = response.data
-      })
-      .catch(e => {
-        console.log(e)
-      })
   },
   beforeUnmount () {
     clearInterval(this.countdownInterval)

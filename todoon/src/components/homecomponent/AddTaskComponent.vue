@@ -139,7 +139,7 @@ export default {
     }
   },
   mounted () {
-    CategoryDataService.getAll()
+    CategoryDataService.getAllByUser()
       .then(response => {
         this.list_categories = response.data
       })

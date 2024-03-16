@@ -22,7 +22,7 @@
         class="mySwiper"
       >
         <swiper-slide v-for="task in tasks" :key="task.id">
-          <largeTaskCard :task="task" @taskDeleted="suppCard" @taskModified="modifTask"/>
+          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
         <swiper-slide>
           <largeTaskCardAdd/>
@@ -60,7 +60,8 @@ export default {
     }
   },
   props: {
-    tasks: Array
+    tasks: Array,
+    list_category: Array
   },
   data () {
     return {

@@ -5,12 +5,8 @@ class CategoryDataService {
     return http.post('/category', data)
   }
 
-  getAll () {
+  getAllByUser () {
     return http.get('/category')
-  }
-
-  getAllByUser (userId) {
-    return http.get(`/tasks/${userId}`)
   }
 
   deleteAllCategoriesFromThisUser () {

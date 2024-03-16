@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <appleCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+          <appleCarousel :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
           <div class="flex-grow text-4xl font-black">Next Week</div>
             <slideCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
@@ -47,6 +47,8 @@ import MainFooter from '../components/MainFooter.vue'
 import TasksDataService from '../services/TasksDataService'
 import slideCarousel from '@/components/carousel/slideCarousel.vue'
 import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
+import CategoryDataService from '@/services/CategoryDataService'
+import ProjectDataService from '@/services/ProjectDataService'
 
 export default {
   components: {
@@ -61,7 +63,8 @@ export default {
     return {
       tasks: [],
       tasks_to_show: [],
-      searchValue: ''
+      searchValue: '',
+      list_category: []
     }
   },
   mounted () {
@@ -72,6 +75,24 @@ export default {
       .then(response => {
         console.log('response:', response)
         this.tasks = response.data
+        console.log(response.data)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+
+    CategoryDataService.getAllByUser()
+      .then(response => {
+        this.list_category = response.data
+      })
+      .catch(e => {
+        console.log(e)
+      })
+
+    ProjectDataService.getAllByUser()
+      .then(response => {
+        console.log('response:', response)
+        this.projects = response.data
         console.log(response.data)
       })
       .catch(e => {

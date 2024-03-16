@@ -22,5 +22,6 @@ db.connex.sync()
 require('./app/routes/tasks.route')(app)
 require('./app/routes/users.route')(app)
 require('./app/routes/category.route')(app)
+require('./app/routes/projects.route')(app)
 
 
