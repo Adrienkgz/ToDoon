@@ -181,11 +181,11 @@ export default {
   },
   mounted () {
     this.newTask = { ...this.task }
+    this.mutableTask = { ...this.task }
     if (this.task.taskenddate !== '') {
       const isoDate = new Date(this.newTask.taskenddate)
       this.newTask.taskenddate = isoDate.toISOString().slice(0, 16)
       this.itemsIsHovered()
-      this.mutableTask = { ...this.task }
       const dateString = this.mutableTask.taskenddate // format "year-month-day:hour:min:sec"
       const dateObject = Date.parse(dateString)
       this.updateCountdown(dateObject)
@@ -232,6 +232,8 @@ export default {
       }
       const newstatus = parseInt(parentLi.id[parentLi.id.length - 1])
       this.mutableTask.taskstatus = newstatus
+      console.log('newstatus:', newstatus)
+      console.log('mutableTask:', this.mutableTask)
       TasksDataService.update(this.mutableTask.id, this.mutableTask)
         .then(response => {
           this.status = newstatus
