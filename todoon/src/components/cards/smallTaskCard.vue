@@ -34,7 +34,7 @@
     </div>
 </template>
 <script>
-import TasksDataService from '@/TasksDataService'
+import TasksDataService from '@/services/TasksDataService'
 export default {
   name: 'smallTaskCard',
   props: {
@@ -171,4 +171,3 @@ export default {
   transform: scale(0.95) rotateZ(1.7deg);
 }
 </style>
-@/services/TasksDataService

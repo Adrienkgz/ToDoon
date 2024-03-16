@@ -23,6 +23,8 @@
             </div>
           </div>
           <appleCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+          <div class="flex-grow text-4xl font-black">Next Week</div>
+            <slideCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
       </div>
     </div>
@@ -36,13 +38,15 @@ import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent
 import appleCarousel from '../components/carousel/appleCarousel.vue'
 import MainFooter from '../components/MainFooter.vue'
 import TasksDataService from '../services/TasksDataService'
+import slideCarousel from '@/components/carousel/slideCarousel.vue'
 
 export default {
   components: {
     MenuHomeComponent,
     HeaderHomeComponent,
     appleCarousel,
-    MainFooter
+    MainFooter,
+    slideCarousel
   },
   data () {
     return {
