@@ -1,7 +1,7 @@
 <template>
     <div class="card h-48 w-96 p-4">
         <div class="flex justify-start w-full items-center space-x-2">
-          <priorityToolTips :priority="task.priority"/>
+          <priorityToolTips :priority="this.newTask.priority"/>
           <h1 class="flex text-pinky text-2xl mr-2">{{ task.taskname }}</h1>
         </div>
         <div class="flex w-full">
@@ -83,33 +83,30 @@
             <input type="datetime-local" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="newTask.taskenddate" required/>
           </label>
           <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text text-xl">Type of Task</span>
-            </div>
-            <select class="select select-bordered w-full max-w-xs">
-              <option disabled selected>Type of Task?</option>
-              <option>Work</option>
-              <option>Personal</option>
-              <option>Family</option>
-              <option>Friends</option>
-              <option>Home</option>
-              <option>Other</option>
-            </select>
-          </label>
+              <div class="label">
+                <span class="label-text text-xl">Category</span>
+              </div>
+              <select class="select select-bordered w-full max-w-xs" v-model="newTask.category">
+                <option disabled selected value="">
+                  {{ list_categories.length > 0 ? 'Select a category' : 'You didn\'t have any category' }}
+                </option>
+                <option v-for="category in list_categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+              </select>
+            </label>
         </div>
         <label class="form-control w-full mt-5">
-          <div class="label">
-            <span class="label-text text-xl">Priority Level</span>
-          </div>
-          <input type="range" min="0" max="100" value="25" class="range" step="25" />
-          <div class="w-full flex justify-between text-xs px-2">
-            <span>|</span>
-            <span>|</span>
-            <span>|</span>
-            <span>|</span>
-            <span>|</span>
-          </div>
-        </label>
+            <div class="label">
+              <span class="label-text text-xl">Priority Level</span>
+            </div>
+            <input type="range" min="0" max="4" value="2" v-model="newTask.priority" :style="{ accentColor: priorityColors[newTask.priority] }" class="bg-white"/>
+            <div class="w-full flex justify-between text-xs px-2">
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+            </div>
+          </label>
         <label class="form-control w-full mt-5">
           <div class="label">
             <span class="label-text text-xl">Task Description</span>
@@ -142,6 +139,7 @@
 </template>
 <script>
 import TasksDataService from '@/services/TasksDataService'
+import CategoryDataService from '@/services/CategoryDataService'
 import priorityToolTips from '../tooltips/priorityToolTips.vue'
 export default {
   name: 'smallTaskCard',
@@ -165,7 +163,19 @@ export default {
         taskname: '',
         taskdescription: '',
         taskstatus: 0,
-        taskenddate: ''
+        taskenddate: '',
+        priority: 0,
+        category_id: null
+      },
+      list_categories: [],
+      emits: ['newcardadded'],
+      priorityColors: {
+        '-1': '#198038',
+        0: '#198038',
+        1: '#f1c21b',
+        2: '#ff832b',
+        3: '#da1e28',
+        4: '#6b306c'
       }
     }
   },
@@ -180,6 +190,13 @@ export default {
       const dateObject = Date.parse(dateString)
       this.updateCountdown(dateObject)
     }
+    CategoryDataService.getAll()
+      .then(response => {
+        this.list_categories = response.data
+      })
+      .catch(e => {
+        console.log(e)
+      })
   },
   beforeUnmount () {
     clearInterval(this.countdownInterval)

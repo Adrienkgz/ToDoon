@@ -7,11 +7,12 @@
             </div>
         </div>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a @click="openSocialModal">Social</a></li>
             <li><router-link :to="'/profile'">Profile</router-link></li>
             <li><a class="hover:underline" @click="logout">Deconnexion</a></li>
         </ul>
     </div>
-
+    <SocialModalComponent v-if="showSocialModal" :user="this.user" @closeSocialModal="closeSocialModal"/>
 </template>
 
 <style>
@@ -22,11 +23,17 @@ a {
 
 <script>
 import UsersDataService from '@/services/UsersDataService'
+import SocialModalComponent from './SocialModalComponent.vue'
+
 export default {
   name: 'ProfilIconComponent',
+  components: {
+    SocialModalComponent
+  },
   data () {
     return {
-      user: null
+      user: null,
+      showSocialModal: false
     }
   },
   mounted () {
@@ -43,6 +50,14 @@ export default {
       // on renvoie vers la page index
       localStorage.removeItem('token')
       this.$router.push('/')
+    },
+    openSocialModal () {
+      console.log('openSocialModal')
+      this.showSocialModal = true
+      console.log(this.showSocialModal)
+    },
+    closeSocialModal () {
+      this.showSocialModal = false
     }
   }
 }

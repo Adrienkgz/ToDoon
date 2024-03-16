@@ -6,7 +6,7 @@
         :effect="'coverflow'"
         :grabCursor="true"
         :centeredSlides="true"
-        :slidesPerView=4
+        :slidesPerView=5
         :autoplay="false"
         :mousewheel-force-to-axis="true"
         :coverflowEffect="{
