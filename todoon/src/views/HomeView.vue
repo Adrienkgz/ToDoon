@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <HeaderHomeComponent @newcardadded="addNewCard"/>
+    <HeaderHomeComponent @newcardadded="addNewCard" @search="onSearch"/>
     <div class="flex-grow">
       <div class="flex" id="homeFlex">
         <aside class="w-1/5" id="aside">
           <MenuHomeComponent/>
         </aside>
-        <main class="w-4/5 pl-5" id="homeView">
+        <main class="w-4/5 pl-5" id="homeView" v-if="searchValue.length === 0">
           <div class="flex" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Accueil</div>
             <div class="flex items-center">
@@ -26,6 +26,13 @@
           <div class="flex-grow text-4xl font-black">Next Week</div>
             <slideCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
+        <main v-else>
+          <div class="flex" id="accueilFilter">
+            <div class="flex-grow text-4xl font-black">Search results</div>
+          </div>
+          <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task" @taskDeleted="deleteTask"
+            @taskModified="modifTask" />
+        </main>
       </div>
     </div>
     <MainFooter />
@@ -39,6 +46,7 @@ import appleCarousel from '../components/carousel/appleCarousel.vue'
 import MainFooter from '../components/MainFooter.vue'
 import TasksDataService from '../services/TasksDataService'
 import slideCarousel from '@/components/carousel/slideCarousel.vue'
+import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
 
 export default {
   components: {
@@ -46,11 +54,14 @@ export default {
     HeaderHomeComponent,
     appleCarousel,
     MainFooter,
-    slideCarousel
+    slideCarousel,
+    wFullTaskCard
   },
   data () {
     return {
-      tasks: []
+      tasks: [],
+      tasks_to_show: [],
+      searchValue: ''
     }
   },
   mounted () {
@@ -68,6 +79,12 @@ export default {
       })
   },
   methods: {
+    onSearch (value) {
+      this.searchValue = value
+      console.log('searchValue:', this.searchValue)
+      console.log(this.tasks)
+      this.tasks_to_show = this.tasks.filter(task => task.taskname.toLowerCase().includes(value.toLowerCase()))
+    },
     addNewCard (newCard) {
       this.tasks.push(newCard)
     },
