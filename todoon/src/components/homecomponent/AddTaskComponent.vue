@@ -40,12 +40,17 @@
               <div class="label">
                 <span class="label-text text-xl">Category</span>
               </div>
-              <select class="select select-bordered w-full max-w-xs" v-model="task.category">
-                <option disabled selected value="">
-                  {{ list_categories.length > 0 ? 'Select a category' : 'You didn\'t have any category' }}
-                </option>
-                <option v-for="category in list_categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-              </select>
+              <div v-if="list_categories.length != 0">
+                <select class="select select-bordered w-full max-w-xs" v-model="task.category">
+                  <option disabled selected value="">
+                    {{ list_categories.length > 0 ? 'Select a category' : 'You didn\'t have any category' }}
+                  </option>
+                  <option v-for="category in list_categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                </select>
+              </div>
+              <div v-else>
+                <button onclick="add_category_modal.showModal()" class="border border-gray-300 rounded-md w-full max-w-xs h-[50px] p-2 mt-2 hover:bg-gray-300">Create First Category !</button>
+              </div>
             </label>
           </div>
           <label class="form-control w-full mt-5">
