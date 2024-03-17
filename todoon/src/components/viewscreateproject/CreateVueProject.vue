@@ -1,8 +1,11 @@
 <template>
     <form ref="formcategory" @submit.prevent="addProject">
         <div class="modal-box w-11/12 max-w-5xl">
-            <div class="flex justify-center">
+            <div v-if="this.status_modal == 'create'" class="flex justify-center">
                 <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Project !</span></h3>
+            </div>
+            <div v-else class="flex justify-center">
+                <h3 class="font-bold text-xl">Edit your <span class="text-pinky text-2xl">Project !</span></h3>
             </div>
             <div class="flex space-x-5 mt-5">
                 <label class="form-control w-full max-w-xs">
@@ -49,7 +52,8 @@ export default {
   name: 'CreateVueProject',
   props: {
     icons: Array,
-    new_project: Object
+    new_project: Object,
+    status_modal: String
   },
   created () {
     console.log('new_project', this.new_project)

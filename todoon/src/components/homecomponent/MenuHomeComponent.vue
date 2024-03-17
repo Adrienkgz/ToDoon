@@ -122,7 +122,7 @@
     </ul>
     <ul class="m-auto menu bg-gray-300 w-56 rounded-box mt-5">
       <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200"
-          onclick="add_project_modal.showModal()">Add Project</a></li>
+          @click="openCreateProjectModal()">Add Project</a></li>
       <li>
         <details open>
           <summary>Projects</summary>
@@ -192,26 +192,26 @@
             Create
           </a>
         </li>
+        <!-- <li>
+                  <a @click="changevue(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Tasks
+                    <span class="badge badge-sm badge-warning">NEW</span>
+                  </a>
+                </li> -->
         <li>
           <a @click="changevue(1)">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Tasks
-            <span class="badge badge-sm badge-warning">NEW</span>
-          </a>
-        </li>
-        <li>
-          <a @click="changevue(2)">
             Collaborators
           </a>
         </li>
       </ul>
-      <CollaboratorsVueProject v-if="this.projectvuetoshow == 2" :status_modal="'create'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
-      <TasksVueProject v-else-if="this.projectvuetoshow == 1" @addProject="addProject"/>
-      <CreateVueProject v-else :icons="this.icons" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
+      <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'create'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
+      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @addProject="addProject"/>
+      <CreateVueProject v-else :icons="this.icons" :status_modal="'create'" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
     </dialog>
     <!-- Pop up de confirmation du projet crée -->
     <dialog id="project-created-modal-animation" class="modal">
@@ -245,7 +245,7 @@
             Create
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a @click="changevue(1)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
@@ -255,16 +255,16 @@
             Tasks
             <span class="badge badge-sm badge-warning">NEW</span>
           </a>
-        </li>
+        </li> -->
         <li>
-          <a @click="changevue(2)">
+          <a @click="changevue(1)">
             Collaborators
           </a>
         </li>
       </ul>
-      <CollaboratorsVueProject v-if="this.projectvuetoshow == 2" :status_modal="'edit'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
-      <TasksVueProject v-else-if="this.projectvuetoshow == 1" @addProject="addProject"/>
-      <CreateVueProject v-else :icons="this.icons" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
+      <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'edit'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
+      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @addProject="addProject"/>
+      <CreateVueProject v-else :icons="this.icons" :status_modal="'edit'" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
     </dialog>
   </div>
 </template>
@@ -348,6 +348,21 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    openCreateProjectModal () {
+      const modal = document.querySelector('#add_project_modal')
+      this.project_selected = {
+        name: '',
+        description: '',
+        icon: 'icon-barcelona'
+      }
+      const user = this.user
+      user.role = 'Administrateur'
+      user.date = new Date().toISOString().split('T')[0]
+      this.list_collaborators = []
+      this.list_collaborators.push(user)
+
+      modal.showModal()
+    },
     openEditProjectModal (id) {
       this.list_collaborators = []
       const modal = document.querySelector('#edit_project_modal')
@@ -393,6 +408,7 @@ export default {
       CategoryDataService.create(newcategory)
         .then(response => {
           // Animation réussite
+          newcategory.id = response.data.id
           this.list_category.push(newcategory)
         })
         .catch(e => {
@@ -416,7 +432,7 @@ export default {
           setTimeout(function () {
             modal.close()
           }, 2000)
-          console.log('response', response)
+          this.project_selected.id = response.data.id
           this.list_projects.push(this.project_selected)
           const user = this.user
           user.role = 'Administrateur'
@@ -468,9 +484,11 @@ export default {
       this.windowWidth = window.innerWidth
     },
     changevue (vuetoshow) {
+      console.log(vuetoshow)
       this.projectvuetoshow = vuetoshow
       const ul = document.querySelector('#menu-modal-project')
       const li = ul.querySelectorAll('li')
+      console.log('li', li)
       li.forEach((li) => {
         li.classList.remove('navprojectactive')
       })

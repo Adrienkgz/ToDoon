@@ -107,7 +107,7 @@ export default {
       this.$emit('addProject')
     },
     addCollaborator (searchValue) {
-      this.$emit('addCollaborator', searchValue)
+      this.$emit('addCollaborator', searchValue, this.status_modal)
     },
     deleteCollaborator (id) {
       this.$emit('removeCollaborator', id)
