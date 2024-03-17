@@ -185,3 +185,27 @@ exports.deleteUser = (req, res) => {
     res.status(500).send({ message: e.message })
   }
 }
+
+exports.searchByEmail = (req, res) => {
+  try {
+    const email = req.params.email
+    User.findOne({ where: { email: email } })
+    .then(user => {
+      if (!user) {
+        return res.status(204).send({ message: 'Utilisateur non trouvé' })
+      }
+      res.status(200).send({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        avatar: user.avatar,
+        birthday: user.birthday
+      })
+    })
+  }
+  catch (e) {
+    console.log(e)
+    res.status(500).send({ message: e.message })
+  }
+}

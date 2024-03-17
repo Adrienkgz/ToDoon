@@ -9,6 +9,15 @@ module.exports = (connex, Sequelize) => {
         },
         user_id: {
             type: Sequelize.INTEGER
+        },
+        role: {
+            type: Sequelize.STRING
+        },
+        created_at: {
+            type: Sequelize.DATE
+        },
+        teams: {
+            type: Sequelize.STRING
         }
     });
   

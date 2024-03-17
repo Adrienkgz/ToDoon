@@ -24,6 +24,10 @@ class UserDataService {
   deleteUser () {
     return http.delete('/user/deleteUser')
   }
+
+  searchByEmail (email) {
+    return http.get(`/user/searchByEmail/${email}`)
+  }
 }
 
 export default new UserDataService()

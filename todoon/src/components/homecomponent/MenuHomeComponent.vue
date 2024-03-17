@@ -177,11 +177,12 @@
         </div>
       </form>
     </dialog>
+    <!-- Pop up pour créer un project -->
     <dialog id="add_project_modal" class="modal">
       <!-- Menu pour changer view dans creation project -->
       <ul class="menu bg-base-200 lg:menu-horizontal rounded-box" id="menu-modal-project">
         <li>
-          <a>
+          <a @click="changevue(0)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -191,7 +192,7 @@
           </a>
         </li>
         <li>
-          <a>
+          <a @click="changevue(1)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -202,27 +203,31 @@
           </a>
         </li>
         <li>
-          <a>
+          <a @click="changevue(2)">
             Collaborators
           </a>
         </li>
       </ul>
-      <CollaboratorVueProject v-if="this.projectvuetoshow == 1" @addProject="addProject" />
-      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @addProject="addProject" />
-      <CreateVueProject v-else :icons="this.icons" @addProject="addProject" />
+      <CollaboratorsVueProject v-if="this.projectvuetoshow == 2" :status_modal="'create'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
+      <TasksVueProject v-else-if="this.projectvuetoshow == 1" @addProject="addProject"/>
+      <CreateVueProject v-else :icons="this.icons" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
     </dialog>
   </div>
 </template>
 <script>
 import CategoryDataService from '@/services/CategoryDataService'
-// import ProjectDataService from '@/services/ProjectDataService'
 import CreateVueProject from '@/components/viewscreateproject/CreateVueProject'
+import TasksVueProject from '@/components/viewscreateproject/TasksVueProject'
+import CollaboratorsVueProject from '@/components/viewscreateproject/CollaboratorsVueProject'
 import ProjectDataService from '@/services/ProjectDataService'
+import UsersDataService from '@/services/UsersDataService'
 
 export default {
   name: 'MenuHomeComponent',
   components: {
-    CreateVueProject
+    CreateVueProject,
+    TasksVueProject,
+    CollaboratorsVueProject
   },
   props: {
   },
@@ -236,7 +241,14 @@ export default {
       list_projects: [],
       windowWidth: 0,
       icons: [],
-      projectvuetoshow: 0
+      projectvuetoshow: 0,
+      project_selected: {
+        name: '',
+        description: '',
+        icon: 'icon-barcelona'
+      },
+      list_collaborators: [],
+      user: null
     }
   },
   mounted () {
@@ -269,6 +281,16 @@ export default {
       .catch(e => {
         console.log(e)
       })
+
+    UsersDataService.getUser()
+      .then(response => {
+        console.log('response', response)
+        this.user = response.data
+        const user = response.data
+        user.role = 'Administrateur'
+        user.date = new Date().toISOString().split('T')[0]
+        this.list_collaborators.push(user)
+      })
   },
   beforeUnmount () {
     window.removeEventListener('resize', this.handleResize)
@@ -288,8 +310,15 @@ export default {
           console.log(e)
         })
     },
-    addProject (newproject) {
-      this.list_projects.push(newproject)
+    addProject () {
+      ProjectDataService.create(this.project_selected)
+        .then(response => {
+          console.log('response', response)
+          this.list_projects.push(this.project_selected)
+        })
+        .catch(error => {
+          console.log('Error adding project:', error)
+        })
     },
     getActive (image) {
       this.icon_selected = image
@@ -305,7 +334,54 @@ export default {
     },
     changevue (vuetoshow) {
       this.projectvuetoshow = vuetoshow
+      const ul = document.querySelector('#menu-modal-project')
+      const li = ul.querySelectorAll('li')
+      li.forEach((li) => {
+        li.classList.remove('navprojectactive')
+      })
+
+      li[vuetoshow].classList.add('navprojectactive')
+    },
+    setNameProject (name) {
+      this.project_selected.name = name
+      console.log('project_selected', this.project_selected)
+    },
+    setDescription (description) {
+      this.project_selected.description = description
+      console.log('project_selected', this.project_selected)
+    },
+    setIconSelected (icon) {
+      console.log('icon', icon)
+      this.project_selected.icon = icon
+      console.log('project_selected', this.project_selected)
+    },
+    addCollaborator (searchValue) {
+      UsersDataService.searchByEmail(searchValue)
+        .then(response => {
+          const user = response.data
+          user.role = 'Collaborator'
+          user.date = new Date().toISOString().split('T')[0]
+          const userId = user.id
+          if (this.list_collaborators.some(collaborator => collaborator.id === userId)) {
+            alert('This user is already in the list')
+          } else {
+            this.list_collaborators.push(user)
+          }
+          if (response.status === 204 || response.status === 404) {
+            alert('No user found')
+          }
+        })
+        .catch(error => {
+          alert('Error searching users')
+          console.log('Error searching users:', error)
+        })
+    },
+    removeCollaborator (collaborator) {
+      if (collaborator !== this.user.id) {
+        this.list_collaborators = this.list_collaborators.filter(collab => collab.id !== collaborator)
+      }
     }
+
   }
 }
 </script>
@@ -364,5 +440,11 @@ export default {
 #menu-modal-project {
   position: absolute;
   top: 1vw;
+}
+</style>
+
+<style scoped>
+.navprojectactive {
+  border-bottom: 1px solid #f00;
 }
 </style>

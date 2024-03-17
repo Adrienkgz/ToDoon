@@ -9,5 +9,6 @@ module.exports = app => {
     router.post('/updateUser', authenticateToken, user.updateUser)
     router.post('/changePassword', authenticateToken, user.changePassword)
     router.delete('/deleteUser', authenticateToken, user.deleteUser)
+    router.get('/searchByEmail/:email', authenticateToken, user.searchByEmail)
     app.use('/api/user', router)
   }

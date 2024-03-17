@@ -9,15 +9,15 @@
                     <div class="label">
                         <span class="label-text text-xl">Name this Projet</span>
                     </div>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='name' v-model="this.project_name"
-                      required @input="$emit('nameTyping', $event.target.value)"/>
+                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='name'
+                        v-model="this.new_project.name" required />
                 </label>
             </div>
             <label class="form-control w-full mt-5">
             <div class="label">
               <span class="label-text text-xl">Task Description</span>
             </div>
-            <textarea class="textarea textarea-bordered resize-none" placeholder="Description" id='description' @input="$emit('descTyping', $event.target.value)" v-model="this.project_description"></textarea>
+            <textarea class="textarea textarea-bordered resize-none" placeholder="Description" id='description' v-model="this.new_project.description"></textarea>
           </label>
             <label class="form-control w-full mt-5">
                 <div class="label">
@@ -45,32 +45,25 @@
 </template>
 
 <script>
+import ProjectDataService from '@/services/ProjectDataService'
 export default {
   name: 'CreateVueProject',
   props: {
-    icons: Array,
-    new_project: Object
-  },
-  mounted () {
-    this.project_name = this.new_project.name
-    this.project_description = this.new_project.description
-
-    this.$nextTick(() => {
-      // Rend actif l'icône sélectionnée
-      const img = document.querySelector('#project-' + this.new_project.icon)
-      img.classList.add('active')
-    })
+    icons: Array
   },
   data () {
     return {
-      icon_selected: 'icon-barcelona',
-      project_name: '',
-      project_description: ''
+      new_project: {
+        name: '',
+        description: ''
+      },
+      icon_selected: 'icon-barcelona'
     }
   },
   methods: {
     getActive (image) {
-      this.$emit('setIconSelected', image)
+      this.icon_selected = image
+      console.log('image', image)
       const images = document.querySelectorAll('.category-image')
       images.forEach((img) => {
         img.classList.remove('active')
@@ -84,7 +77,15 @@ export default {
         description: this.new_project.description,
         icon: this.icon_selected
       }
-      this.$emit('addProject', newproject)
+      console.log('newproject', newproject)
+      ProjectDataService.create(newproject)
+        .then(response => {
+          console.log('response', response)
+          this.$emit('addProject', newproject)
+        })
+        .catch(error => {
+          console.log('Error adding project:', error)
+        })
     }
   }
 }
