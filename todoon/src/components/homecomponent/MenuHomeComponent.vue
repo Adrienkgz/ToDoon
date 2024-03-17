@@ -127,11 +127,12 @@
         <details open>
           <summary>Projects</summary>
           <ul>
-            <li class="flex-item" v-for="project in list_projects" :key="project.id" :id="project.id">
+            <li class="flex-item" v-for="project in list_projects" :key="project.id" :id="project.id" @dblclick="openEditProjectModal(project.id)">
               <div class="flex-container">
                 <img :src="require(`@/assets/img/imgcategory/${project.icon}.png`)" class="flex-item"
                   style="width: 20px; height: 20px; border-radius: 0%;">
                 <a class="flex-item">{{ project.name }}</a>
+                <DeleteButtonComponent @clickButton="deleteProject(project.id)"/>
               </div>
             </li>
           </ul>
@@ -212,6 +213,59 @@
       <TasksVueProject v-else-if="this.projectvuetoshow == 1" @addProject="addProject"/>
       <CreateVueProject v-else :icons="this.icons" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
     </dialog>
+    <!-- Pop up de confirmation du projet crée -->
+    <dialog id="project-created-modal-animation" class="modal">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg">The project is correctly added</h3>
+      <div class="modal-action flex justify-center">
+        <form method="dialog">
+          <div class="success-checkmark">
+            <div class="check-icon" ref="checkIcon">
+              <span class="icon-line line-tip"></span>
+              <span class="icon-line line-long"></span>
+              <div class="icon-circle"></div>
+              <div class="icon-fix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+    <!-- Pop up pour edit un projet -->
+    <dialog id="edit_project_modal" class="modal">
+      <!-- Menu pour changer view dans creation project -->
+      <ul class="menu bg-base-200 lg:menu-horizontal rounded-box" id="menu-modal-project">
+        <li>
+          <a @click="changevue(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Create
+          </a>
+        </li>
+        <li>
+          <a @click="changevue(1)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Tasks
+            <span class="badge badge-sm badge-warning">NEW</span>
+          </a>
+        </li>
+        <li>
+          <a @click="changevue(2)">
+            Collaborators
+          </a>
+        </li>
+      </ul>
+      <CollaboratorsVueProject v-if="this.projectvuetoshow == 2" :status_modal="'edit'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
+      <TasksVueProject v-else-if="this.projectvuetoshow == 1" @addProject="addProject"/>
+      <CreateVueProject v-else :icons="this.icons" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
+    </dialog>
   </div>
 </template>
 <script>
@@ -221,13 +275,16 @@ import TasksVueProject from '@/components/viewscreateproject/TasksVueProject'
 import CollaboratorsVueProject from '@/components/viewscreateproject/CollaboratorsVueProject'
 import ProjectDataService from '@/services/ProjectDataService'
 import UsersDataService from '@/services/UsersDataService'
+import DeleteButtonComponent from '@/components/button/DeleteButton'
+import ProjectUsersDataService from '@/services/ProjectUsersDataService'
 
 export default {
   name: 'MenuHomeComponent',
   components: {
     CreateVueProject,
     TasksVueProject,
-    CollaboratorsVueProject
+    CollaboratorsVueProject,
+    DeleteButtonComponent
   },
   props: {
   },
@@ -284,18 +341,50 @@ export default {
 
     UsersDataService.getUser()
       .then(response => {
-        console.log('response', response)
         this.user = response.data
-        const user = response.data
-        user.role = 'Administrateur'
-        user.date = new Date().toISOString().split('T')[0]
-        this.list_collaborators.push(user)
       })
   },
   beforeUnmount () {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    openEditProjectModal (id) {
+      this.list_collaborators = []
+      const modal = document.querySelector('#edit_project_modal')
+      modal.showModal()
+      const project = this.list_projects.find(project => project.id === id)
+      if (project) {
+        this.project_selected = project
+        ProjectUsersDataService.getAllByProject(id)
+          .then(response => {
+            console.log('response', response)
+            for (const projectuser of response.data) {
+              console.log(projectuser)
+              UsersDataService.findOne(projectuser.user_id)
+                .then(response => {
+                  const collaborator = {
+                    avatar: response.data.avatar,
+                    birthday: response.data.birthday,
+                    date: projectuser.createdAt,
+                    email: response.data.email,
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    id: response.data.id,
+                    role: projectuser.role
+                  }
+                  this.list_collaborators.push(collaborator)
+                })
+            }
+            console.log('list_collaborators', this.list_collaborators)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+        console.log('project_selected', this.project_selected)
+      } else {
+        console.log('Project not found')
+      }
+    },
     addCategory () {
       const newcategory = {
         name: this.newcategory.name,
@@ -311,14 +400,60 @@ export default {
         })
     },
     addProject () {
+      if (this.project_selected.name === '') {
+        alert('Name is required')
+        return
+      }
+      const modal = document.querySelector('#project-created-modal-animation')
       ProjectDataService.create(this.project_selected)
         .then(response => {
+          const modalformcreateproject = document.querySelector('#add_project_modal')
+          modalformcreateproject.close()
+          modal.showModal()
+          setTimeout(() => {
+            this.restartAnimation()
+          }, 600)
+          setTimeout(function () {
+            modal.close()
+          }, 2000)
           console.log('response', response)
           this.list_projects.push(this.project_selected)
+          const user = this.user
+          user.role = 'Administrateur'
+          user.date = new Date().toISOString().split('T')[0]
+          ProjectUsersDataService.createCollaborator(response.data.id, this.user)
+            .then(response => {
+              this.list_collaborators.push(this.user)
+            })
+            .catch(error => {
+              console.log('Error adding collaborator:', error)
+            })
+          this.project_selected = {
+            name: '',
+            description: '',
+            icon: 'icon-barcelona'
+          }
+          this.list_collaborators = []
         })
         .catch(error => {
           console.log('Error adding project:', error)
         })
+    },
+    deleteProject (id) {
+      console.log(id)
+      ProjectDataService.delete(id)
+        .then(response => {
+          this.list_projects = this.list_projects.filter(project => project.id !== id)
+        })
+        .catch(error => {
+          console.log('Error deleting project:', error)
+        })
+    },
+    restartAnimation () {
+      this.$refs.checkIcon.style.display = 'none'
+      setTimeout(() => {
+        this.$refs.checkIcon.style.display = 'block'
+      }, 10)
     },
     getActive (image) {
       this.icon_selected = image
@@ -356,23 +491,29 @@ export default {
       console.log('project_selected', this.project_selected)
     },
     addCollaborator (searchValue) {
+      console.log('searchValue', searchValue)
       UsersDataService.searchByEmail(searchValue)
         .then(response => {
           const user = response.data
           user.role = 'Collaborator'
           user.date = new Date().toISOString().split('T')[0]
-          const userId = user.id
-          if (this.list_collaborators.some(collaborator => collaborator.id === userId)) {
+          if (this.list_collaborators.some(collaborator => collaborator.id === user.id)) {
             alert('This user is already in the list')
           } else {
             this.list_collaborators.push(user)
+            ProjectUsersDataService.createCollaborator(this.project_selected.id, user)
+              .then(response => {
+                console.log('response', response)
+              })
+              .catch(error => {
+                console.log('Error adding collaborator:', error)
+              })
           }
           if (response.status === 204 || response.status === 404) {
             alert('No user found')
           }
         })
         .catch(error => {
-          alert('Error searching users')
           console.log('Error searching users:', error)
         })
     },

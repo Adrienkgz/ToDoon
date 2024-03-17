@@ -30,6 +30,12 @@ connex.sync()
         model.associate(db);
       }
     });
+  })
+  .then(() => {
+    console.log('Associations successfully created.');
+  })
+  .catch((error) => {
+    console.error('Error creating associations:', error);
   });
 
 module.exports = db;

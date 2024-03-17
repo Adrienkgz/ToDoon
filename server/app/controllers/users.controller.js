@@ -209,3 +209,27 @@ exports.searchByEmail = (req, res) => {
     res.status(500).send({ message: e.message })
   }
 }
+
+exports.findOne = (req, res) => {
+  try {
+    const id = req.params.id
+    User.findByPk(id, { attributes: { exclude: ['password'] } })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: 'Utilisateur non trouvé' })
+      }
+      res.status(200).send({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        avatar: user.avatar,
+        birthday: user.birthday
+      })
+    })
+  }
+  catch (e) {
+    console.log(e)
+    res.status(500).send({ message: e.message })
+  }
+}

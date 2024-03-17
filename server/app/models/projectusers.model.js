@@ -12,12 +12,6 @@ module.exports = (connex, Sequelize) => {
         },
         role: {
             type: Sequelize.STRING
-        },
-        created_at: {
-            type: Sequelize.DATE
-        },
-        teams: {
-            type: Sequelize.STRING
         }
     });
   

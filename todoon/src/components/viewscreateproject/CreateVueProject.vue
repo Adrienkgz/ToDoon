@@ -51,7 +51,11 @@ export default {
     icons: Array,
     new_project: Object
   },
+  created () {
+    console.log('new_project', this.new_project)
+  },
   mounted () {
+    console.log('new_project', this.new_project)
     this.project_name = this.new_project.name
     this.project_description = this.new_project.description
 

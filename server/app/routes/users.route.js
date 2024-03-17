@@ -10,5 +10,6 @@ module.exports = app => {
     router.post('/changePassword', authenticateToken, user.changePassword)
     router.delete('/deleteUser', authenticateToken, user.deleteUser)
     router.get('/searchByEmail/:email', authenticateToken, user.searchByEmail)
+    router.get('/:id', authenticateToken, user.findOne)
     app.use('/api/user', router)
   }

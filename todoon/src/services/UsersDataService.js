@@ -28,6 +28,10 @@ class UserDataService {
   searchByEmail (email) {
     return http.get(`/user/searchByEmail/${email}`)
   }
+
+  findOne (id) {
+    return http.get(`/user/${id}`)
+  }
 }
 
 export default new UserDataService()

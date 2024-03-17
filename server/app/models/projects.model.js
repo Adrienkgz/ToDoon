@@ -1,16 +1,27 @@
 module.exports = (connex, Sequelize) => {
     const Projects = connex.define('Projects', {
       name: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.TEXT
+      type: Sequelize.TEXT
       },
       icon: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING
       },
       user_id: {
-        type: Sequelize.INTEGER
+      type: Sequelize.INTEGER
+      }
+    }, {
+      hooks: {
+        beforeBulkDestroy: async (options) => {
+          const projectId = options.where.id;
+          const ProjectUsers = connex.models.ProjectUsers;
+          const projectUsers = await ProjectUsers.findAll({ where: { project_id: projectId } });
+          for (const projectUser of projectUsers) {
+            await projectUser.destroy();
+          }
+      }
       }
     });
 
