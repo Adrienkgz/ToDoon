@@ -1,7 +1,6 @@
 <template>
   <div class="w-full h-500 m-2">
     <div v-if="loaded && tasks.length">
-      <div class="pt-2">Today's Task</div>
       <swiper
         :slidesPerView="4"
         :spaceBetween="30"
@@ -12,16 +11,10 @@
         :modules="modules"
         class="mySwiper"
       >
-        <swiper-slide v-for="task in tasks" :key="task.id">
-          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
-        </swiper-slide>
-        <swiper-slide>
-          <largeTaskCardAdd/>
+        <swiper-slide v-for="task in filterAndSortTasks()" :key="task.id">
+            <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
       </swiper>
-    </div>
-    <div v-if="loaded && !tasks.length" class="flex lg:flex-row flex-col justify-center md:space-x-20" id="noTask">
-      <noTaskView/>
     </div>
   </div>
 </template>
@@ -31,8 +24,6 @@ import largeTaskCard from '../cards/largeTaskCard.vue'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
-import noTaskView from '../animation/noTaskViewHamster.vue'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
@@ -40,9 +31,7 @@ export default {
   components: {
     largeTaskCard,
     Swiper,
-    SwiperSlide,
-    largeTaskCardAdd,
-    noTaskView
+    SwiperSlide
   },
   setup () {
     return {
@@ -71,6 +60,18 @@ export default {
     },
     modifTask (task) {
       this.$emit('taskModified', task)
+    },
+    filterAndSortTasks () {
+      console.log('filterAndSortTasks')
+      const currentDate = new Date()
+      const nextWeek = new Date(currentDate.getTime() + 38 * 24 * 60 * 60 * 1000)
+      const task = this.tasks
+        .filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
+        .sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
+      console.log('task filtered:', task)
+      return this.tasks
+        .filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
+        .sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
     }
   }
 }
