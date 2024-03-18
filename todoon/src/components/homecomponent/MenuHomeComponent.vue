@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col justify-center text-center mt-5 space-y-10">
+  <div class="flex-col justify-center text-center space-y-10">
     <nav id="menu-vertical" v-if="windowWidth >= 550">
       <ul class="m-auto menu menu-vertical bg-gray-300 w-4/5 rounded-box text-xl" id="menu-vertical-liste">
         <li>
@@ -102,11 +102,11 @@
         </li>
       </ul>
     </nav>
-    <ul class="m-auto menu bg-gray-300 w-56 rounded-box mt-5">
-      <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200"
+    <ul class="m-auto menu bg-gray-300 w-4/5 rounded-box mt-2">
+      <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200 w-full"
           onclick="add_category_modal.showModal()">Add Category</a></li>
-      <li>
-        <details open>
+      <li open v-if="list_category.length != 0">
+        <details>
           <summary>Categories</summary>
           <ul>
             <li class="flex-item" v-for="category in list_category" :key="category.id" :id="category.id">
@@ -120,7 +120,7 @@
         </details>
       </li>
     </ul>
-    <ul class="m-auto menu bg-gray-300 w-56 rounded-box mt-5">
+    <ul class="m-auto menu bg-gray-300 w-4/5 rounded-box mt-2">
       <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200"
           @click="openCreateProjectModal()">Add Project</a></li>
       <li>
@@ -320,7 +320,7 @@ export default {
   mounted () {
     this.windowWidth = window.innerWidth
     window.addEventListener('resize', this.handleResize)
-
+    console.log('category', this.list_category)
     const images = require.context('../../assets/img/imgcategory', false, /\.png$/)
     images.keys().forEach(image => {
       console.log(image)

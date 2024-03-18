@@ -1,42 +1,69 @@
 <template>
-    <swiper
-      :slidesPerView="5"
-      :spaceBetween="5"
-      :pagination="{
-        clickable: true,
-      }"
-      :modules="modules"
-      class="mySwiper"
-    >
+  <div class="w-full h-500 m-2">
+    <div v-if="loaded && tasks.length">
+      <div class="pt-2">Today's Task</div>
+      <swiper
+        :slidesPerView="4"
+        :spaceBetween="30"
+        :centeredSlides="true"
+        :pagination="{
+          clickable: true,
+        }"
+        :modules="modules"
+        class="mySwiper"
+      >
         <swiper-slide v-for="task in tasks" :key="task.id">
-            <smallTaskCard :task="task" @taskDeleted="suppCard" @taskModified="modifTask"/>
+          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
-    </swiper>
+        <swiper-slide>
+          <largeTaskCardAdd/>
+        </swiper-slide>
+      </swiper>
+    </div>
+    <div v-if="loaded && !tasks.length" class="flex lg:flex-row flex-col justify-center md:space-x-20" id="noTask">
+      <noTaskView/>
+    </div>
+  </div>
 </template>
 <script>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import smallTaskCard from '../cards/smallTaskCard.vue'
-
-// Import Swiper styles
+import largeTaskCard from '../cards/largeTaskCard.vue'
 import 'swiper/css'
+import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-
+import largeTaskCardAdd from '../cards/largeTaskCardAdd.vue'
+import noTaskView from '../animation/noTaskViewHamster.vue'
 // import required modules
-import { Pagination } from 'swiper/modules'
+import { EffectCoverflow, Pagination } from 'swiper/modules'
 export default {
+  name: 'appleCarousel',
   components: {
+    largeTaskCard,
     Swiper,
     SwiperSlide,
-    smallTaskCard
-  },
-  props: {
-    tasks: Array
+    largeTaskCardAdd,
+    noTaskView
   },
   setup () {
     return {
-      modules: [Pagination]
+      modules: [EffectCoverflow, Pagination],
+      emits: ['taskDeleted', 'taskModified']
     }
+  },
+  props: {
+    tasks: Array,
+    list_category: Array
+  },
+  data () {
+    return {
+      loaded: false,
+      tasksKey: 0
+    }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.loaded = true
+    }, 200)
   },
   methods: {
     suppCard (task) {
@@ -48,3 +75,20 @@ export default {
   }
 }
 </script>
+<style>
+.swiper {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+@media screen and (max-width: 1015) {
+  #noTask {
+    flex-direction: row;
+  }
+}
+</style>
