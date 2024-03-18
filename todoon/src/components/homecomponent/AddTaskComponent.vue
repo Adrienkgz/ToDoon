@@ -21,7 +21,7 @@
     <dialog id="my_modal_4" class="modal">
       <div class="modal-box w-11/12 max-w-5xl">
           <div class="flex justify-center">
-            <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Task !</span></h3>
+            <h3 class="font-bold text-xl">Create A <span class="text-pinky text-2xl">Task !</span> for your project {{ this.project.name }}</h3>
           </div>
           <div class="flex space-x-5 mt-5">
             <label class="form-control w-full max-w-xs">
@@ -115,6 +115,7 @@ import CategoryDataService from '@/services/CategoryDataService'
 export default {
   name: 'AddTaskComponent',
   props: {
+    project: Object
   },
   data () {
     return {
@@ -124,7 +125,8 @@ export default {
         taskstatus: 0,
         taskenddate: '',
         priority: -1,
-        category: ''
+        category: '',
+        project_id: this.project.id
       },
       list_categories: [],
       emits: ['newcardadded'],
@@ -175,7 +177,8 @@ export default {
             taskstatus: 0,
             taskenddate: '',
             priority: 0,
-            category: ''
+            category: '',
+            project_id: this.project.id
           }
         })
         .catch(e => {

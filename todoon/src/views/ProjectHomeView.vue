@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col min-h-screen">
-      <HeaderHomeComponent @newcardadded="addNewCard" @search="onSearch"/>
+      <HeaderHomeComponent @newcardadded="addNewCard" @search="onSearch" :project="this.project"/>
       <div class="flex-grow">
         <div class="flex" id="homeFlex">
           <aside class="w-1/5" id="aside">
@@ -84,8 +84,8 @@ export default {
         ProjectUsersDataService.getAllByProject(this.$route.params.id)
           .then(response => {
             this.list_collaborators = response.data
-            if (!this.list_collaborators.includes(this.user.id)) {
-              this.$router.push('/home')
+            if (!this.list_collaborators.some(collaborator => collaborator.id === this.user.id)) {
+              console.log('not a collaborator')
             }
           })
           .catch(e => {

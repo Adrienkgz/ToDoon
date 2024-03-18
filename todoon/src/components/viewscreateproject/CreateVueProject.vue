@@ -41,7 +41,8 @@
                 <form method="dialog" ref="closeform">
                     <button class="btn" id="closebutton">Close</button>
                 </form>
-                <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Category</button>
+                <button v-if="status_modal == 'create'" type="submit" class="btn bg-secondary hover:bg-secondary">Add Project</button>
+                <button v-else type="submit" class="btn bg-secondary hover:bg-secondary" @click="$emit('deleteProject')">Delete</button>
             </div>
         </div>
     </form>

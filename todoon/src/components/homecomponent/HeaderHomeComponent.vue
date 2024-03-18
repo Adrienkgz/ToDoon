@@ -10,7 +10,7 @@
             <SearchBarComponent @search="onSearch"/>
         </div>
         <div class="flex-grow flex justify-end items-center p-1">
-            <AddTaskComponent @newcardadded="emitCardAddedEvent"/>
+            <AddTaskComponent @newcardadded="emitCardAddedEvent" :project="this.project"/>
             <ProfilIconComponent/>
         </div>
     </div>
@@ -29,6 +29,7 @@ export default {
     ProfilIconComponent
   },
   props: {
+    project: Object
   },
   data () {
     return {
