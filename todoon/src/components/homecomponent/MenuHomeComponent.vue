@@ -134,7 +134,7 @@
                   style="width: 20px; height: 20px; border-radius: 0%; margin-right: 10px;" alt="">
                 <span class="">{{ project.name }}</span>
               </router-link>
-              <a @click="openEditProjectModal(project.id)" class="flex-item flex-end hover:none absolute left-32" style="margin-left: auto;">
+              <a @click="openEditProjectModal(project.id)" class="flex-item flex-end hover:none absolute right-2" style="margin-left: auto;">
                 <img src="@/assets/img/pencil.png" style="width: 20px; height: 20px; border-radius: 0%;">
               </a>
             </li>
