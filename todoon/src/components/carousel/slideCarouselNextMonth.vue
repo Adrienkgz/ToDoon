@@ -73,14 +73,12 @@ export default {
     filterAndSortTasks () {
       console.log('filterAndSortTasks')
       const currentDate = new Date()
-      const nextWeek = new Date(currentDate.getTime() + 38 * 24 * 60 * 60 * 1000)
-      const task = this.tasks
-        .filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
-        .sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
-      console.log('task filtered:', task)
-      return this.tasks
-        .filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
-        .sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
+      const nextMonthFirstDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+      const nextMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0)
+      const filteredTasks = this.tasks.filter(task => new Date(task.taskenddate) <= nextMonthLastDay && new Date(task.taskenddate) >= nextMonthFirstDay)
+      const sortedTasks = filteredTasks.sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
+      console.log('tasks filtered:', filteredTasks)
+      return sortedTasks
     }
   }
 }
