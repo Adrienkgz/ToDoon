@@ -29,7 +29,10 @@ export default {
     ProfilIconComponent
   },
   props: {
-    project: Object
+    project: {
+      type: Object,
+      default: null
+    }
   },
   data () {
     return {
