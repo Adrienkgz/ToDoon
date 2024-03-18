@@ -177,6 +177,7 @@ export default {
             modal.close()
           }, 2000)
           this.task.id = response.data.id
+          console.log('AddTaskView Task:', this.task)
           this.$emit('newcardadded', this.task)
           this.task = {
             taskname: '',
@@ -184,8 +185,7 @@ export default {
             taskstatus: 0,
             taskenddate: '',
             priority: 0,
-            category: '',
-            project_id: this.project.id
+            category: ''
           }
         })
         .catch(e => {

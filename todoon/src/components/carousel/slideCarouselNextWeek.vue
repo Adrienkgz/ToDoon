@@ -77,13 +77,9 @@ export default {
       console.log('filterAndSortTasksNextWeek')
       const currentDate = new Date()
       const nextWeek = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000)
-      const task = this.tasks
-        .filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
-        .sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
-      console.log('task filtered:', task)
-      return this.tasks
-        .filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
-        .sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
+      console.log('No filtered Task Week', this.tasks)
+      const task = [...this.tasks]
+      return task.filter(task => new Date(task.taskenddate) <= nextWeek && new Date(task.taskenddate) >= currentDate)
     }
   }
 }

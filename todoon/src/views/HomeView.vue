@@ -23,8 +23,8 @@
             </div>
           </div>
           <appleCarousel :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
-          <slideCarouselNextWeek :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
-          <slideCarouselNextMonth :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+            <slideCarouselNextWeek :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+            <slideCarouselNextMonth :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
         <main v-else>
           <div class="flex" id="accueilFilter">

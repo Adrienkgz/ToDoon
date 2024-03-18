@@ -75,10 +75,11 @@ export default {
       const currentDate = new Date()
       const nextMonthFirstDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
       const nextMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0)
-      const filteredTasks = this.tasks.filter(task => new Date(task.taskenddate) <= nextMonthLastDay && new Date(task.taskenddate) >= nextMonthFirstDay)
-      const sortedTasks = filteredTasks.sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
+      const task = [...this.tasks]
+      const filteredTasks = task.filter(task => new Date(task.taskenddate) <= nextMonthLastDay && new Date(task.taskenddate) >= nextMonthFirstDay)
       console.log('tasks filtered:', filteredTasks)
-      return sortedTasks
+      console.log('tasks:', task)
+      return filteredTasks
     }
   }
 }
