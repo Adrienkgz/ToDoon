@@ -49,7 +49,11 @@ export default {
     logout () {
       // on renvoie vers la page index
       localStorage.removeItem('token')
-      this.$router.push('/')
+      if (this.$route.path === '/') {
+        location.reload()
+      } else {
+        this.$router.push('/')
+      }
     },
     openSocialModal () {
       console.log('openSocialModal')

@@ -45,17 +45,17 @@
             <div class="flex">
                 <ul class="menu justify-center bg-gray-300 rounded-box">
                     <li id="status0" class="hover:bg-[#ff0000] hover:rounded-lg duration-200">
-                        <a @click="toggleActive($event)" class="items" :class="{ 'todo': (status === 0 && itemsHovered === false), 'todoWaiting': (status === 0 && itemsHovered === true) }">
+                        <a @click="toggleActive($event)" class="items" :id="'itemsMenu' + task.id" :class="{ 'todo': (status === 0 && itemsHovered === false), 'todoWaiting': (status === 0 && itemsHovered === true) }">
                         <img src="../../assets/img/toDoPasteque.png" style="width: 25px; height: 25px;"/>
                         </a>
                     </li>
                     <li id="status1" class="hover:bg-[#ffa500] hover:rounded-lg duration-200">
-                        <a @click="toggleActive($event)" class="items" :class="{ 'doing': (status === 1  && itemsHovered === false), 'doingWaiting': (status === 1 && itemsHovered === true) }">
+                        <a @click="toggleActive($event)" class="items" :id="'itemsMenu' + task.id" :class="{ 'doing': (status === 1  && itemsHovered === false), 'doingWaiting': (status === 1 && itemsHovered === true) }">
                         <img src="../../assets/img/doingPasteque.png" style="width: 25px; height: 25px;"/>
                         </a>
                     </li>
                     <li id="status2" class="hover:bg-[#008000] hover:rounded-lg duration-200">
-                        <a @click="toggleActive($event)" class="items" :class="{ 'done': (status === 2  && itemsHovered === false), 'doneWaiting': (status === 2 && itemsHovered === true) }">
+                        <a @click="toggleActive($event)" class="items" :id="'itemsMenu' + task.id" :class="{ 'done': (status === 2  && itemsHovered === false), 'doneWaiting': (status === 2 && itemsHovered === true) }">
                         <img src="../../assets/img/donePasteque.png" alt="" style="width: 25px; height: 25px;">
                         </a>
                     </li>
@@ -245,7 +245,7 @@ export default {
         })
     },
     itemsIsHovered () {
-      const myElements = document.querySelectorAll('.items')
+      const myElements = document.querySelectorAll('#itemsMenu' + this.task.id)
       myElements.forEach((element) => {
         element.addEventListener(
           'mouseenter',
