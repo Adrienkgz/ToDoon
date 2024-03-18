@@ -271,10 +271,10 @@
       </ul>
       <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'edit'"
         :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator"
-        @removeCollaborator="removeCollaborator" />
-      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @deleteTask="deleteProject(this.project_selected.id)" />
+        @removeCollaborator="removeCollaborator" @deleteProject= "deleteProject(this.project_selected.id)"/>
+      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @deleteProject="deleteProject(this.project_selected.id)" />
       <CreateVueProject v-else :icons="this.icons" :status_modal="'edit'" :new_project="project_selected"
-        @deleteTask="deleteProject(this.project_selected.id)" @nameTyping="setNameProject" @descTyping="setDescription"
+        @deleteProject="deleteProject(this.project_selected.id)" @nameTyping="setNameProject" @descTyping="setDescription"
         @setIconSelected="setIconSelected" />
     </dialog>
   </div>
@@ -469,6 +469,8 @@ export default {
       ProjectDataService.delete(id)
         .then(response => {
           this.list_projects = this.list_projects.filter(project => project.id !== id)
+          const modal = document.querySelector('#edit_project_modal')
+          modal.close()
         })
         .catch(error => {
           console.log('Error deleting project:', error)
