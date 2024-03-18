@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-500 m-2" v-if="filterAndSortTasks().length > 0">
+  <div class="w-full h-500 m-2" v-if="filterAndSortTasksNextWeek().length > 0">
     <div class="flex-grow text-4xl font-black">Next Week - <span class="text-pinky text-3xl">{{ nextWeekRange }}</span></div>
     <div v-if="loaded && tasks.length">
       <swiper
@@ -12,7 +12,7 @@
         :modules="modules"
         class="mySwiper"
       >
-        <swiper-slide v-for="task in filterAndSortTasks()" :key="task.id">
+        <swiper-slide v-for="task in filterAndSortTasksNextWeek()" :key="task.id">
             <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
       </swiper>
@@ -73,8 +73,8 @@ export default {
     modifTask (task) {
       this.$emit('taskModified', task)
     },
-    filterAndSortTasks () {
-      console.log('filterAndSortTasks')
+    filterAndSortTasksNextWeek    () {
+      console.log('filterAndSortTasksNextWeek')
       const currentDate = new Date()
       const nextWeek = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000)
       const task = this.tasks

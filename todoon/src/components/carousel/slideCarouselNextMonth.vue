@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-500 m-2" v-if="filterAndSortTasks().length > 0">
+  <div class="w-full h-500 m-2" v-if="filterAndSortTasksNextMonth().length > 0">
     <div class="flex-grow text-4xl font-black" id="nextMonth">Next Month - <span class="text-pinky text-3xl">{{ nextMonthName }}</span></div>
     <div v-if="loaded && tasks.length">
       <swiper
@@ -12,7 +12,7 @@
         :modules="modules"
         class="mySwiper"
       >
-        <swiper-slide v-for="task in filterAndSortTasks()" :key="task.id">
+        <swiper-slide v-for="task in filterAndSortTasksNextMonth()" :key="task.id">
             <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
       </swiper>
@@ -70,8 +70,8 @@ export default {
     modifTask (task) {
       this.$emit('taskModified', task)
     },
-    filterAndSortTasks () {
-      console.log('filterAndSortTasks')
+    filterAndSortTasksNextMonth () {
+      console.log('filterAndSortTasksNextMonth')
       const currentDate = new Date()
       const nextMonthFirstDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
       const nextMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0)
