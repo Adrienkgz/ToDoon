@@ -28,5 +28,9 @@ class TasksDataService {
   deleteAllTasksFromThisUser () {
     return http.delete('/tasks')
   }
+
+  getAllByProject (projectId) {
+    return http.get(`/tasks/project/${projectId}`)
+  }
 }
 export default new TasksDataService()

@@ -90,3 +90,17 @@ exports.deleteAllProjectsFromThisUser = (req, res) => {
         })
     })
 }
+
+exports.findOne = (req, res) => {
+    const id = req.params.id
+
+    Projects.findByPk(id)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: `Error retrieving Project with id=${id}`
+        })
+    })
+}
