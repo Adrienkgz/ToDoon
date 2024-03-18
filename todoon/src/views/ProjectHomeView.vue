@@ -24,7 +24,7 @@
             </div>
             <appleCarousel :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
             <div class="flex-grow text-4xl font-black">Next Week</div>
-              <slideCarousel :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+              <slideCarouselNextWeek :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
           </main>
           <main v-else>
             <div class="flex" id="accueilFilter">
@@ -45,7 +45,7 @@ import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent
 import appleCarousel from '../components/carousel/appleCarousel.vue'
 import MainFooter from '../components/MainFooter.vue'
 import TasksDataService from '../services/TasksDataService'
-import slideCarousel from '@/components/carousel/slideCarousel.vue'
+import slideCarouselNextWeek from '@/components/carousel/slideCarouselNextWeek.vue'
 import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
 import CategoryDataService from '@/services/CategoryDataService'
 import ProjectDataService from '@/services/ProjectDataService'
@@ -58,7 +58,7 @@ export default {
     HeaderHomeComponent,
     appleCarousel,
     MainFooter,
-    slideCarousel,
+    slideCarouselNextWeek,
     wFullTaskCard
   },
   data () {
