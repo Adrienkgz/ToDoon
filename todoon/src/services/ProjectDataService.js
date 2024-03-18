@@ -20,5 +20,9 @@ class ProjectDataService {
   deleteAllProjectsFromThisUser () {
     return http.delete('/projects')
   }
+
+  findOne (id) {
+    return http.get(`/projects/${id}`)
+  }
 }
 export default new ProjectDataService()

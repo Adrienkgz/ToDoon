@@ -143,3 +143,17 @@ exports.deleteAllTasksFromThisUser = (req, res) => {
        })
    })
 }
+
+exports.findAllByProject = (req, res) => {
+   const id = req.params.projectId
+   Task.findAll({where: {project_id: id}})
+   .then(data => {
+       res.send(data)
+   })
+   .catch(err => {
+       res.status(500).send({
+           message:
+           err.message || 'Some error occured'
+       })
+   })
+}

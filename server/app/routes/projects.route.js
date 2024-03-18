@@ -8,5 +8,6 @@ module.exports = app => {
     router.get('/', authenticateToken, projects.getAllByUser)
     router.delete('/:id', authenticateToken, projects.delete)
     router.delete('/', authenticateToken, projects.deleteAllProjectsFromThisUser)
+    router.get('/:id', authenticateToken, projects.findOne)
     app.use('/api/projects', router)
 }

@@ -7,6 +7,7 @@ import ToDoView from '../views/ToDoView.vue'
 import DoingView from '../views/DoingView.vue'
 import DoneView from '../views/DoneView.vue'
 import ProfileView from '../views/ProfileView.vue'
+import ProjectHomeView from '@/views/ProjectHomeView.vue'
 
 const routes = [
   {
@@ -66,7 +67,14 @@ const routes = [
     meta: {
       requiresToken: true
     }
-
+  },
+  {
+    path: '/project/:id',
+    name: 'project',
+    component: ProjectHomeView,
+    meta: {
+      requiresToken: true
+    }
   }
 ]
 

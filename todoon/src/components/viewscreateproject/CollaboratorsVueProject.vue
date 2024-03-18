@@ -50,26 +50,18 @@
                             </th>
                         </tr>
                     </tbody>
-                    <!-- foot -->
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th colspan="3" class="border-t border-gray-300 m-2">
-                                <SearchBarComponent2 @searchUsers="addCollaborator"/>
-                            </th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
             <div class="flex justify-center">
-                <button class="btn hover:bg-secondary h-6">Apply change</button>
+                <SearchBarComponent2 @searchUsers="addCollaborator"/>
             </div>
 
             <div class="flex justify-end mt-5 space-x-5">
                 <form method="dialog" ref="closeform">
                     <button class="btn" id="closebutton">Close</button>
                 </form>
-                <button type="submit" class="btn bg-secondary hover:bg-secondary">Add Category</button>
+                <button v-if="status_modal == 'create'" type="submit" class="btn bg-secondary hover:bg-secondary">Add Project</button>
+                <button v-else type="submit" class="btn bg-secondary hover:bg-secondary" @click="deleteTask">Delete</button>
             </div>
         </div>
     </form>

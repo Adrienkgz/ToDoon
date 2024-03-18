@@ -127,13 +127,16 @@
         <details open>
           <summary>Projects</summary>
           <ul>
-            <li class="flex-item" v-for="project in list_projects" :key="project.id" :id="project.id" @dblclick="openEditProjectModal(project.id)">
-              <div class="flex-container">
-                <img :src="require(`@/assets/img/imgcategory/${project.icon}.png`)" class="flex-item"
-                  style="width: 20px; height: 20px; border-radius: 0%;">
-                <a class="flex-item">{{ project.name }}</a>
-                <DeleteButtonComponent @clickButton="deleteProject(project.id)"/>
-              </div>
+            <li v-for="project in list_projects" :key="project.id" :id="project.id"
+              @dblclick="openEditProjectModal(project.id)">
+              <router-link :to="`/project/${project.id}`" class="flex-item" style="display: flex; align-items: center;">
+                <img :src="require(`@/assets/img/imgcategory/${project.icon}.png`)"
+                  style="width: 20px; height: 20px; border-radius: 0%; margin-right: 10px;" alt="">
+                <span class="">{{ project.name }}</span>
+              </router-link>
+              <a @click="openEditProjectModal(project.id)" class="flex-item flex-end hover:none absolute left-32" style="margin-left: auto;">
+                <img src="@/assets/img/pencil.png" style="width: 20px; height: 20px; border-radius: 0%;">
+              </a>
             </li>
           </ul>
         </details>
@@ -209,28 +212,32 @@
           </a>
         </li>
       </ul>
-      <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'create'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
-      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @addProject="addProject"/>
-      <CreateVueProject v-else :icons="this.icons" :status_modal="'create'" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
+      <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'create'"
+        :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator"
+        @removeCollaborator="removeCollaborator" />
+      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @addProject="addProject" />
+      <CreateVueProject v-else :icons="this.icons" :status_modal="'create'" :new_project="project_selected"
+        @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription"
+        @setIconSelected="setIconSelected" />
     </dialog>
     <!-- Pop up de confirmation du projet crée -->
     <dialog id="project-created-modal-animation" class="modal">
-    <div class="modal-box">
-      <h3 class="font-bold text-lg">The project is correctly added</h3>
-      <div class="modal-action flex justify-center">
-        <form method="dialog">
-          <div class="success-checkmark">
-            <div class="check-icon" ref="checkIcon">
-              <span class="icon-line line-tip"></span>
-              <span class="icon-line line-long"></span>
-              <div class="icon-circle"></div>
-              <div class="icon-fix"></div>
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">The project is correctly added</h3>
+        <div class="modal-action flex justify-center">
+          <form method="dialog">
+            <div class="success-checkmark">
+              <div class="check-icon" ref="checkIcon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-  </dialog>
+    </dialog>
     <!-- Pop up pour edit un projet -->
     <dialog id="edit_project_modal" class="modal">
       <!-- Menu pour changer view dans creation project -->
@@ -262,9 +269,13 @@
           </a>
         </li>
       </ul>
-      <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'edit'" :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator" @removeCollaborator="removeCollaborator"/>
-      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @addProject="addProject"/>
-      <CreateVueProject v-else :icons="this.icons" :status_modal="'edit'" :new_project="project_selected" @addProject="addProject" @nameTyping="setNameProject" @descTyping="setDescription" @setIconSelected="setIconSelected"/>
+      <CollaboratorsVueProject v-if="this.projectvuetoshow == 1" :status_modal="'edit'"
+        :list_collaborators="this.list_collaborators" @addProject="addProject" @addCollaborator="addCollaborator"
+        @removeCollaborator="removeCollaborator" />
+      <TasksVueProject v-else-if="this.projectvuetoshow == 2" @deleteTask="deleteProject(this.project_selected.id)" />
+      <CreateVueProject v-else :icons="this.icons" :status_modal="'edit'" :new_project="project_selected"
+        @deleteTask="deleteProject(this.project_selected.id)" @nameTyping="setNameProject" @descTyping="setDescription"
+        @setIconSelected="setIconSelected" />
     </dialog>
   </div>
 </template>
@@ -275,7 +286,6 @@ import TasksVueProject from '@/components/viewscreateproject/TasksVueProject'
 import CollaboratorsVueProject from '@/components/viewscreateproject/CollaboratorsVueProject'
 import ProjectDataService from '@/services/ProjectDataService'
 import UsersDataService from '@/services/UsersDataService'
-import DeleteButtonComponent from '@/components/button/DeleteButton'
 import ProjectUsersDataService from '@/services/ProjectUsersDataService'
 
 export default {
@@ -283,8 +293,7 @@ export default {
   components: {
     CreateVueProject,
     TasksVueProject,
-    CollaboratorsVueProject,
-    DeleteButtonComponent
+    CollaboratorsVueProject
   },
   props: {
   },
