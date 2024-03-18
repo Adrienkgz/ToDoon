@@ -1,5 +1,6 @@
 <template>
-  <div class="w-full h-500 m-2">
+  <div class="w-full h-500 m-2" v-if="filterAndSortTasks().length > 0">
+    <div class="flex-grow text-4xl font-black">Next Week - <span class="text-pinky text-3xl">{{ nextWeekRange }}</span></div>
     <div v-if="loaded && tasks.length">
       <swiper
         :slidesPerView="4"
@@ -53,6 +54,17 @@ export default {
     setTimeout(() => {
       this.loaded = true
     }, 200)
+  },
+  computed: {
+    nextWeekRange () {
+      const today = new Date()
+      const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+      const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 6)
+      const options = { weekday: 'long', day: 'numeric' }
+      const startDay = startDate.toLocaleString('default', options).charAt(0).toUpperCase() + startDate.toLocaleString('default', options).slice(1)
+      const endDay = endDate.toLocaleString('default', options).charAt(0).toUpperCase() + endDate.toLocaleString('default', options).slice(1)
+      return startDay + ' - ' + endDay
+    }
   },
   methods: {
     suppCard (task) {

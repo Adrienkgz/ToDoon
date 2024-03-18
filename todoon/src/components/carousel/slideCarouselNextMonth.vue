@@ -1,5 +1,6 @@
 <template>
-  <div class="w-full h-500 m-2">
+  <div class="w-full h-500 m-2" v-if="filterAndSortTasks().length > 0">
+    <div class="flex-grow text-4xl font-black" id="nextMonth">Next Month - <span class="text-pinky text-3xl">{{ nextMonthName }}</span></div>
     <div v-if="loaded && tasks.length">
       <swiper
         :slidesPerView="4"
@@ -53,6 +54,14 @@ export default {
     setTimeout(() => {
       this.loaded = true
     }, 200)
+  },
+  computed: {
+    nextMonthName () {
+      const today = new Date()
+      const nextMonth = today.getMonth() === 11 ? 0 : today.getMonth() + 1
+      const monthName = new Date(today.getFullYear(), nextMonth).toLocaleString('default', { month: 'long' })
+      return monthName.charAt(0).toUpperCase() + monthName.slice(1)
+    }
   },
   methods: {
     suppCard (task) {

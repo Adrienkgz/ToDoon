@@ -23,9 +23,7 @@
             </div>
           </div>
           <appleCarousel :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
-          <div class="flex-grow text-4xl font-black">Next Week</div>
           <slideCarouselNextWeek :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
-          <div class="flex-grow text-4xl font-black">Next Month</div>
           <slideCarouselNextMonth :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
         <main v-else>
