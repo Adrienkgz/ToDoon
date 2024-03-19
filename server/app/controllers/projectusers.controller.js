@@ -20,7 +20,6 @@ exports.createCollaborator = (req, res) => {
 }
 
 exports.getAllByProject = (req, res) => {
-    console.log(req.params.id)
     const id = req.params.id;
     ProjectUsers.findAll({ where: { project_id: id } })
         .then(data => {
@@ -34,7 +33,8 @@ exports.getAllByProject = (req, res) => {
 }
 
 exports.getAllByUser = (req, res) => {
-    const id = req.params.id;
+    const id = req.user.id;
+    console.log('id', id)
     ProjectUsers.findAll({ where: { user_id: id } })
         .then(data => {
             res.send(data);
