@@ -328,13 +328,29 @@ export default {
         console.log(e)
       })
 
-    // Récupère les projets
+    // Récupère les projets de l'utilisateur
     ProjectDataService.getAllByUser()
       .then(response => {
         this.list_projects = response.data
         console.log('project', this.list_projects)
       })
       .catch(e => {
+        console.log(e)
+      })
+
+    // Récupère les projets où l'utilisateur est collaborateur
+    ProjectUsersDataService.getAllByUser()
+      .then(response => {
+        console.log('response project ou il est collab', response.data)
+        for (const projectuser of response.data) {
+          ProjectDataService.findOne(projectuser.project_id)
+            .then(response => {
+              this.list_projects.push(response.data)
+            })
+        }
+      })
+      .catch(e => {
+        console.log('probleme pour recuperer les projets ou il est collaborateur')
         console.log(e)
       })
 

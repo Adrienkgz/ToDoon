@@ -5,8 +5,8 @@ class ProjectUsersDataService {
     return http.get(`/project-users/project/${idproject}`)
   }
 
-  getAllByUser (iduser) {
-    return http.get(`/project-users/user/${iduser}`)
+  getAllByUser () {
+    return http.get('/project-users/user/')
   }
 
   createCollaborator (idproject, collaborator) {
