@@ -545,6 +545,7 @@ export default {
   }
 }
 </script>
+
 <style>
 @media only screen and (max-width: 860px) {
   .menuTitle {

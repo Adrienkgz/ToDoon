@@ -31,8 +31,10 @@ exports.create = (req, res) => {
          taskenddate: req.body.taskenddate,
          user_id: req.user.id,
          priority: req.body.priority,
-         category_id: req.body.category_id
+         category_id: req.body.category_id,
+         project_id: req.body.project_id
     }
+
    Task.create(newtask)
    .then(data => {
        res.send(data)
