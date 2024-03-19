@@ -27,13 +27,13 @@
           <div class="flex space-x-5 mt-5">
             <label class="form-control w-full max-w-xs">
               <div class="label">
-                <span class="label-text text-xl">Name Task</span>
+                <span class="label-text text-xl">Task Title</span>
               </div>
               <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" id = 'name' v-model="task.taskname" required/>
             </label>
             <label class="form-control w-full max-w-xs">
               <div class="label">
-                <span class="label-text text-xl">Date Task</span>
+                <span class="label-text text-xl">Task Date</span>
               </div>
               <input type="datetime-local" placeholder="Type here" class="input input-bordered w-full max-w-xs" id='date' v-model="task.taskenddate"/>
             </label>
@@ -152,9 +152,6 @@ export default {
       .catch(e => {
         console.log(e)
       })
-    if (this.project != null) {
-      this.task.project_id = this.project.id
-    }
   },
   methods: {
     addTask () {
@@ -165,6 +162,9 @@ export default {
         this.task.taskenddate = ''
       }
       const modal = document.querySelector('#my_modal_1')
+      if (this.project != null) {
+        this.task.project_id = this.project.id
+      }
       TasksDataService.create(this.task)
         .then(response => {
           this.$refs.form.reset()
@@ -177,7 +177,6 @@ export default {
             modal.close()
           }, 2000)
           this.task.id = response.data.id
-          console.log('AddTaskView Task:', this.task)
           this.$emit('newcardadded', this.task)
           this.task = {
             taskname: '',
