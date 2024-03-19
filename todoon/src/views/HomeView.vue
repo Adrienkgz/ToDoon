@@ -8,7 +8,7 @@
         </aside>
         <main class="w-4/5 pl-5" id="homeView" v-if="searchValue.length === 0">
           <div class="flex p-2" id="accueilFilter">
-            <div class="flex-grow text-4xl font-black">Accueil</div>
+            <div class="flex-grow text-4xl font-black">Home</div>
             <div class="flex items-center">
               <label class="text-pinky text-lg" for="filterBy">Sort by :</label>
               <select class="mr-2 text-pinky border-none bg-transparent text-lg focus:outline-none focus:border-transparent" name="FilterBy" id="FilterBy" @change="filterTasks">
