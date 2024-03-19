@@ -6,7 +6,7 @@
         <aside class="w-1/5" id="aside">
           <MenuHomeComponent/>
         </aside>
-        <main class="w-4/5 pl-5 mr-5" id="homeView">
+        <main class="w-4/5 pl-5 mr-10" id="homeView">
         <div class="flex" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Tasks Done</div>
         </div>

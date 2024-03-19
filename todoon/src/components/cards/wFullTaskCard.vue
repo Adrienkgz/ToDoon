@@ -130,7 +130,7 @@
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
-          <button class="btn">Cancel</button>
+          <button class="btn mr-2">Cancel</button>
           <button class="btn btn-error" @click="deleteTask()">Delete</button>
         </form>
       </div>

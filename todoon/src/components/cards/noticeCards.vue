@@ -7,11 +7,11 @@
               <p>My Feedback</p>
           </div>
           <div class="backSide">
-              <div class="flex">
-                <img :src="image" alt="userImg">
+              <div class="">
+                <img class="w-24 h-24 rounded-lg" src='@/assets/img/noticeUser/user1.png' alt="userImg">
                 <p class="title">{{name}}</p>
               </div>
-              <p style="font-size: 0.5vw;">{{feedback}}</p>
+              <p class="text-4xl">{{feedback}}</p>
           </div>
       </div>
     </div>
@@ -120,7 +120,15 @@ export default {
     feedback: {
       type: Number,
       required: true
+    },
+    image: {
+      type: String,
+      required: true
     }
+  },
+  mounted () {
+    console.log(this.name)
+    console.log('link:', this.image)
   }
 }
 </script>
