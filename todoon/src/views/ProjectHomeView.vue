@@ -8,23 +8,11 @@
           </aside>
           <main class="w-4/5 pl-5" id="homeView" v-if="searchValue.length === 0">
             <div class="flex" id="accueilFilter">
-              <div class="flex-grow text-4xl font-black">Home for the project : {{ this.project.name }}</div>
-              <div class="flex items-center">
-                <div class="filter-container mr-5">
-                  <button class="filter-button">Filter by: Date <i class="fa fa-caret-down"></i></button>
-                  <div class="filter-menu">
-                    <ul>
-                      <li>Date</li>
-                      <li>Price</li>
-                      <li>Popularity</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <div class="flex-grow text-4xl font-black">Project : <span class="text-pinky">{{ this.project.name }}</span></div>
             </div>
             <appleCarousel :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
-            <div class="flex-grow text-4xl font-black">Next Week</div>
-              <slideCarouselNextWeek :tasks="tasks" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+            <slideCarouselNextWeek :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+            <slideCarouselNextMonth :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
           </main>
           <main v-else>
             <div class="flex" id="accueilFilter">
@@ -45,12 +33,13 @@ import HeaderHomeComponent from '../components/homecomponent/HeaderHomeComponent
 import appleCarousel from '../components/carousel/appleCarousel.vue'
 import MainFooter from '../components/MainFooter.vue'
 import TasksDataService from '../services/TasksDataService'
-import slideCarouselNextWeek from '@/components/carousel/slideCarouselNextWeek.vue'
 import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
 import CategoryDataService from '@/services/CategoryDataService'
 import ProjectDataService from '@/services/ProjectDataService'
 import UsersDataService from '@/services/UsersDataService'
 import ProjectUsersDataService from '@/services/ProjectUsersDataService'
+import slideCarouselNextWeek from '@/components/carousel/slideCarouselNextWeek.vue'
+import slideCarouselNextMonth from '@/components/carousel/slideCarouselNextMonth.vue'
 
 export default {
   components: {
@@ -58,8 +47,9 @@ export default {
     HeaderHomeComponent,
     appleCarousel,
     MainFooter,
+    wFullTaskCard,
     slideCarouselNextWeek,
-    wFullTaskCard
+    slideCarouselNextMonth
   },
   data () {
     return {

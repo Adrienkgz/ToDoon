@@ -123,7 +123,7 @@
     <ul class="m-auto menu bg-gray-300 w-4/5 rounded-box mt-2">
       <li><a class="border-pinky bg-pinky border-2 radius-4xl hover:bg-gray-300 transition duration-200"
           @click="openCreateProjectModal()">Add Project</a></li>
-      <li>
+      <li open v-if="list_projects.length != 0">
         <details open>
           <summary>Projects</summary>
           <ul>

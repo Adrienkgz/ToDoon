@@ -60,11 +60,12 @@ export default {
       const today = new Date()
       const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
       const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 6)
-      const options = { weekday: 'long', day: 'numeric' }
-      const startDay = startDate.toLocaleString('default', options).charAt(0).toUpperCase() + startDate.toLocaleString('default', options).slice(1)
-      const endDay = endDate.toLocaleString('default', options).charAt(0).toUpperCase() + endDate.toLocaleString('default', options).slice(1)
-      return startDay + ' - ' + endDay
+      const options = { weekday: 'long', day: 'numeric', month: 'long' }
+      const startFormatted = startDate.toLocaleDateString('en-US', options).replace(/\b\w/g, c => c.toUpperCase())
+      const endFormatted = endDate.toLocaleDateString('en-US', options).replace(/\b\w/g, c => c.toUpperCase())
+      return `${startFormatted} - ${endFormatted}`
     }
+
   },
   methods: {
     suppCard (task) {
