@@ -22,7 +22,7 @@
         class="mySwiper"
       >
         <swiper-slide v-for="task in tasks" :key="task.id">
-          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask" @taskStatusChanged="modifStatut"/>
+          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
         </swiper-slide>
         <swiper-slide>
           <largeTaskCardAdd/>
@@ -81,9 +81,6 @@ export default {
     },
     modifTask (task) {
       this.$emit('taskModified', task)
-    },
-    modifStatut (task) {
-      this.$emit('statutModified', task)
     }
   }
 }

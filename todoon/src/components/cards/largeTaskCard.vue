@@ -352,7 +352,6 @@ export default {
   height: 350px;
   background: rgba(217, 217, 217, 0.58);
   border: 1px solid white;
-  box-shadow: 12px 17px 51px rgba(255, 0, 0, 0.22);
   backdrop-filter: blur(6px);
   border-radius: 17px;
   text-align: center;

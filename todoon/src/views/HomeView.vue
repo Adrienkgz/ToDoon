@@ -10,7 +10,7 @@
           <div class="flex p-2" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Accueil</div>
             <div class="flex items-center">
-              <label class="text-pinky text-lg" for="filterBy">Filter by :</label>
+              <label class="text-pinky text-lg" for="filterBy">Sort by :</label>
               <select class="mr-2 text-pinky border-none bg-transparent text-lg focus:outline-none focus:border-transparent" name="FilterBy" id="FilterBy" @change="filterTasks">
                 <option value="Pertinence">Pertinence</option>
                 <option value="Date">Date</option>
@@ -23,12 +23,11 @@
             <slideCarouselNextWeek :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
             <slideCarouselNextMonth :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
-        <main v-else>
+        <main class="w-4/5 pl-5 mr-5" v-else>
           <div class="flex" id="accueilFilter">
-            <div class="flex-grow text-4xl font-black">Search results</div>
+            <div class="flex-grow text-4xl font-black mb-3">Search results</div>
           </div>
-          <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task" @taskDeleted="deleteTask"
-            @taskModified="modifTask" />
+          <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task" @taskDeleted="deleteTask" @taskModified="modifTask" />
         </main>
       </div>
     </div>
