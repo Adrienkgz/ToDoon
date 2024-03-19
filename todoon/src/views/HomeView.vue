@@ -27,7 +27,7 @@
           <div class="flex" id="accueilFilter">
             <div class="flex-grow text-4xl font-black mb-3">Search results</div>
           </div>
-          <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :task="task" @taskDeleted="deleteTask" @taskModified="modifTask" />
+          <wFullTaskCard v-for="task in tasks_to_show" :key="task.name" :list_categories="list_category" :task="task" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
       </div>
     </div>
@@ -123,7 +123,7 @@ export default {
         this.tasks = this.tasks.sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
       } else if (filterBy === 'Priority') {
         console.log('filterBy:', filterBy)
-        this.tasks = this.tasks.sort((a, b) => a.priority - b.priority)
+        this.tasks = this.tasks.sort((b, a) => a.priority - b.priority)
       } else if (filterBy === 'Todo') {
         console.log('filterBy:', filterBy)
         this.tasks = this.tasks.filter(task => !task.done)
