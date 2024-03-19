@@ -57,7 +57,7 @@
             <div class="grid border-b py-6 sm:grid-cols-2">
                 <div class="">
                 <h2 class="text-lg font-semibold leading-4 text-slate-700">Reminders</h2>
-                <p class="font- text-slate-600">Lorem ipsum dolor, Alias eligendi laboriosam magni reiciendis neque.</p>
+                <p class="font- text-slate-600">Receive reminders about your tasks.</p>
                 </div>
                 <div class="mt-4 flex items-center sm:justify-end">
                 <div class="flex flex-col gap-3">
@@ -82,7 +82,7 @@
             <div class="grid border-b py-6 sm:grid-cols-2">
                 <div class="">
                 <h2 class="text-lg font-semibold leading-4 text-slate-700">Updates</h2>
-                <p class="font- text-slate-600">Lorem ipsum dolor, Alias eligendi laboriosam magni reiciendis neque.</p>
+                <p class="font- text-slate-600">Receive information on the latest updates.</p>
                 </div>
                 <div class="mt-4 flex items-center sm:justify-end">
                 <div class="flex flex-col gap-3">
