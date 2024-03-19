@@ -353,6 +353,11 @@ export default {
         this.user = response.data
       })
   },
+  computed: {
+    buttonClass() {
+      return this.$route.path === '/home/doing' ? 'button-doing' : 'button-default';
+    }
+  },
   beforeUnmount () {
     window.removeEventListener('resize', this.handleResize)
   },

@@ -117,7 +117,7 @@
           <form method="dialog" ref="modal-backdrop">
               <button class="btn" @click="cancelFunction()">Cancel</button>
           </form>
-          <button type="submit" class="btn bg-secondary hover:bg-secondary" @click="modifyTask()">Modify</button>
+          <button type="submit" class="btn bg-secondary hover:bg-secondary" @click="modifyTask(newTask)">Modify</button>
         </div>
       </div>
     </dialog>
@@ -264,8 +264,8 @@ export default {
         )
       })
     },
-    modifyTask () {
-      TasksDataService.update(this.task.id, this.newTask)
+    modifyTask (newTask) {
+      TasksDataService.update(this.task.id, newTask)
         .then(response => {
           const modal = document.querySelector('#my_modal_5_' + this.task.id)
           modal.close()

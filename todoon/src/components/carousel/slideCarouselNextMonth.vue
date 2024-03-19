@@ -3,7 +3,7 @@
     <div class="flex-grow text-4xl font-black" id="nextMonth">Next Month - <span class="text-pinky text-3xl">{{ nextMonthName }}</span></div>
     <div v-if="loaded && tasks.length">
       <swiper
-        :slidesPerView="4"
+        :slidesPerView="3"
         :spaceBetween="30"
         :centeredSlides="true"
         :pagination="{

@@ -22,7 +22,7 @@
         class="mySwiper"
       >
         <swiper-slide v-for="task in tasks" :key="task.id">
-          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
+          <largeTaskCard :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask" @taskStatusChanged="modifStatut"/>
         </swiper-slide>
         <swiper-slide>
           <largeTaskCardAdd/>
@@ -70,6 +70,7 @@ export default {
     }
   },
   mounted () {
+    console.log('Apple Carousel Task', this.tasks)
     setTimeout(() => {
       this.loaded = true
     }, 200)
@@ -80,6 +81,9 @@ export default {
     },
     modifTask (task) {
       this.$emit('taskModified', task)
+    },
+    modifStatut (task) {
+      this.$emit('statutModified', task)
     }
   }
 }

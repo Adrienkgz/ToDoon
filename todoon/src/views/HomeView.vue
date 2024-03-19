@@ -7,22 +7,19 @@
           <MenuHomeComponent/>
         </aside>
         <main class="w-4/5 pl-5" id="homeView" v-if="searchValue.length === 0">
-          <div class="flex" id="accueilFilter">
+          <div class="flex p-2" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Accueil</div>
             <div class="flex items-center">
-              <div class="filter-container mr-5">
-                <button class="filter-button">Filter by: Date <i class="fa fa-caret-down"></i></button>
-                <div class="filter-menu">
-                  <ul>
-                    <li>Date</li>
-                    <li>Price</li>
-                    <li>Popularity</li>
-                  </ul>
-                </div>
-              </div>
+              <label class="text-pinky text-lg" for="filterBy">Filter by :</label>
+              <select class="mr-2 text-pinky border-none bg-transparent text-lg focus:outline-none focus:border-transparent" name="FilterBy" id="FilterBy" @change="filterTasks">
+                <option value="Pertinence">Pertinence</option>
+                <option value="Date">Date</option>
+                <option value="Priority">Priority</option>
+                <option value="Todo">To Do</option>
+              </select>
             </div>
           </div>
-          <appleCarousel :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
+          <appleCarousel :tasks="tasks" :list_category="list_category" :key="taskKey" @taskDeleted="deleteTask" @taskModified="modifTask"/>
             <slideCarouselNextWeek :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
             <slideCarouselNextMonth :tasks="tasks" :list_category="list_category" @taskDeleted="deleteTask" @taskModified="modifTask"/>
         </main>
@@ -66,7 +63,8 @@ export default {
       tasks: [],
       tasks_to_show: [],
       searchValue: '',
-      list_category: []
+      list_category: [],
+      taskKey: 0
     }
   },
   mounted () {
@@ -117,6 +115,21 @@ export default {
     modifTask (task) {
       const index = this.tasks.findIndex(t => t.id === task.id)
       this.tasks[index] = task
+    },
+    filterTasks () {
+      const filterBy = document.getElementById('FilterBy').value
+
+      if (filterBy === 'Date') {
+        console.log('filterBy:', filterBy)
+        this.tasks = this.tasks.sort((a, b) => new Date(a.taskenddate) - new Date(b.taskenddate))
+      } else if (filterBy === 'Priority') {
+        console.log('filterBy:', filterBy)
+        this.tasks = this.tasks.sort((a, b) => a.priority - b.priority)
+      } else if (filterBy === 'Todo') {
+        console.log('filterBy:', filterBy)
+        this.tasks = this.tasks.filter(task => !task.done)
+      }
+      this.taskKey += 1
     }
   }
 }
@@ -193,5 +206,8 @@ template {
   #aside {
     width: 100%;
   }
+}
+select:focus {
+    outline: none;
 }
 </style>
