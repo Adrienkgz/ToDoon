@@ -6,7 +6,7 @@
 
                 <div class="w-full lg:w-5/12 flex flex-col justify-center">
                     <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">About Us</h1>
-                    <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">Fondée en 2024, ToDOON est née de l'ambition de simplifier la gestion des tâches quotidiennes pour les individus et les équipes du monde entier. Notre vision était claire : créer un outil flexible, intuitif et puissant qui s'adapte non seulement aux besoins professionnels mais aussi personnels de gestion des tâches.</p>
+                    <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">Founded in 2024, ToDOON was born out of the ambition to simplify daily task management for individuals and teams around the world. Our vision was clear: to create a flexible, intuitive and powerful tool that adapts not only to professional but also to personal task management needs.</p>
                 </div>
 
                 <div class="w-full lg:w-8/12">
@@ -17,8 +17,8 @@
             <div class="flex lg:flex-row flex-col justify-between gap-8 pt-12 mt-16">
 
                 <div class="w-full lg:w-5/12 flex flex-col justify-center">
-                    <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Notre Mission: Simplifier Votre Vie</h1>
-                    <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">Chez ToDOON, nous croyons que la clé d'une productivité accrue réside dans la simplicité et la clarté. Notre mission est de vous aider à clarifier vos idées, à structurer vos projets et à franchir la ligne d'arrivée de chaque tâche avec aisance et confiance. Que vous soyez un freelance, une petite entreprise ou une grande corporation, ToDOON est là pour transformer votre manière de travailler.</p>
+                    <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Our Mission: Simplify Your Life</h1>
+                    <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">At ToDOON, we believe that the key to increased productivity lies in simplicity and clarity. Our mission is to help you clarify your ideas, structure your projects and cross the finish line of every task with ease and confidence. Whether you're a freelancer, a small business or a large corporation, ToDOON is here to transform the way you work.</p>
                 </div>
                 <div class="w-full lg:w-8/12 lg:pt-8">
 
@@ -43,12 +43,6 @@
 
                 </div>
             </div>
-
-            <div class="flex flex-col items-center mt-16">
-                <h2 class="text-2xl lg:text-3xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Rejoindre notre aventure</h2>
-                <button class="button-about"> Click me!</button>
-            </div>
-
         </div>
     </body>
 
