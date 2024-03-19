@@ -10,8 +10,12 @@
         <div class="flex" id="accueilFilter">
             <div class="flex-grow text-4xl font-black">Tasks Doing</div>
         </div>
-        <wFullTaskCard v-for="task in tasks_to_show" :key="task.id" :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
-    </main>
+        <div v-if="tasks_to_show.length > 0">
+          <wFullTaskCard v-for="task in tasks_to_show" :key="task.id" :task="task" :list_categories="list_category" @taskDeleted="suppCard" @taskModified="modifTask"/>
+        </div>
+        <div v-else>
+          <noTaskViewHamster/>
+        </div>    </main>
       </div>
     </div>
     <MainFooter />
@@ -25,13 +29,15 @@ import MainFooter from '../components/MainFooter.vue'
 import TasksDataService from '@/services/TasksDataService'
 import wFullTaskCard from '@/components/cards/wFullTaskCard.vue'
 import CategoryDataService from '@/services/CategoryDataService'
+import noTaskViewHamster from '@/components/animation/noTaskViewHamster.vue'
 
 export default {
   components: {
     MenuHomeComponent,
     HeaderHomeComponent,
     MainFooter,
-    wFullTaskCard
+    wFullTaskCard,
+    noTaskViewHamster
   },
   data () {
     return {
